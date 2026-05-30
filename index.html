@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizPro | Test Your Knowledge Instantly</title>
+    <meta name="description" content="A professional and responsive online MCQ testing platform. Test your knowledge across various categories.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="QuizPro | Online MCQ Test Platform">
+    <meta property="og:description" content="Test your knowledge with our professional MCQ platform. Free, fast, and responsive.">
+    
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showView('home')">Quiz<span>Pro</span></a>
+            <div class="nav-links">
+                <a href="#" onclick="showView('home')">Home</a>
+                <a href="#" onclick="showView('test-selection')">Tests</a>
+                <a href="#" class="btn-nav" onclick="startTest(0)">Start Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- 1. Home Page -->
+        <section id="home-view" class="view active">
+            <div class="hero">
+                <h1>Test Your Knowledge Instantly</h1>
+                <p>Empower your learning journey with our professionally curated assessments. Challenge yourself and track your progress in real-time.</p>
+                <div class="hero-btns">
+                    <button class="btn-primary" onclick="showView('test-selection')">Start Test</button>
+                    <button class="btn-secondary" onclick="scrollToElement('features')">Learn More</button>
+                </div>
+            </div>
+
+            <div id="features" class="features">
+                <div class="feature-card">
+                    <div class="icon">⏱️</div>
+                    <h3>Timed Tests</h3>
+                    <p>Simulate real exam environments with our countdown timers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📊</div>
+                    <h3>Instant Results</h3>
+                    <p>Get detailed performance analysis immediately after submission.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📱</div>
+                    <h3>Fully Responsive</h3>
+                    <p>Take tests on any device - mobile, tablet, or desktop.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Test Selection -->
+        <section id="test-selection-view" class="view">
+            <h2 class="section-title">Available Assessments</h2>
+            <div class="test-grid" id="test-list">
+                <!-- Test cards will be injected here -->
+            </div>
+        </section>
+
+        <!-- 3. Quiz Interface -->
+        <section id="quiz-view" class="view">
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <span id="current-test-name">General Knowledge</span>
+                    <span id="question-counter">Question 1 of 20</span>
+                </div>
+                <div class="timer-box">
+                    <span id="timer-icon">⏳</span>
+                    <span id="timer-text">00:00</span>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <div class="question-container">
+                <h3 id="question-text">Loading question...</h3>
+                <div class="options-grid" id="options-grid">
+                    <!-- Options injected here -->
+                </div>
+            </div>
+
+            <div class="quiz-footer">
+                <button id="prev-btn" class="btn-outline" onclick="prevQuestion()">Previous</button>
+                <div class="footer-right">
+                    <button id="next-btn" class="btn-primary" onclick="nextQuestion()">Next</button>
+                    <button id="finish-btn" class="btn-accent hide" onclick="showSubmitScreen()">Review & Submit</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Submit Screen -->
+        <section id="submit-view" class="view">
+            <div class="submit-card">
+                <h2>Ready to Submit?</h2>
+                <p>Please review your progress before finishing the test.</p>
+                <div class="summary-stats">
+                    <div class="stat">
+                        <span class="stat-label">Total Questions</span>
+                        <span class="stat-value" id="total-q-count">20</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Answered</span>
+                        <span class="stat-value text-success" id="answered-count">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Remaining</span>
+                        <span class="stat-value text-warning" id="remaining-count">20</span>
+                    </div>
+                </div>
+                <div class="submit-actions">
+                    <button class="btn-outline" onclick="showView('quiz')">Back to Quiz</button>
+                    <button class="btn-primary" onclick="submitQuiz()">Submit Test Now</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Results Page -->
+        <section id="result-view" class="view">
+            <div class="result-container">
+                <div class="result-header">
+                    <div class="score-circle">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle" id="result-progress" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <text x="18" y="20.35" class="percentage" id="result-percentage">0%</text>
+                        </svg>
+                    </div>
+                    <div id="pass-fail-badge" class="badge">Passed</div>
+                </div>
+
+                <div class="result-stats">
+                    <div class="res-stat">
+                        <span id="res-correct">0</span>
+                        <p>Correct</p>
+                    </div>
+                    <div class="res-stat">
+                        <span id="res-wrong">0</span>
+                        <p>Wrong</p>
+                    </div>
+                    <div class="res-stat">
+                        <span id="res-time">0m 0s</span>
+                        <p>Time Taken</p>
+                    </div>
+                </div>
+
+                <div class="result-actions">
+                    <button class="btn-primary" onclick="showReview()">Review Answers</button>
+                    <button class="btn-outline" onclick="retakeTest()">Retake Test</button>
+                    <button class="btn-secondary" onclick="showView('home')">Start New Test</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Review Page -->
+        <section id="review-view" class="view">
+            <div class="review-header">
+                <h2>Review Your Answers</h2>
+                <button class="btn-outline" onclick="showView('result')">Back to Results</button>
+            </div>
+            <div id="review-list" class="review-list">
+                <!-- Review items injected here -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 QuizPro. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
