@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-day">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexExam | Distraction-Free Exam Console</title>
+  
+  <meta name="description" content="Secure, state-preserving exam console featuring live clocks, responsive routing navigator grids, and auto-save systems.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            theme: {
+              bg: 'var(--bg-color)',
+              surface: 'var(--surface-color)',
+              'surface-hover': 'var(--surface-hover)',
+              primary: 'var(--primary-color)',
+              'primary-hover': 'var(--primary-hover)',
+              text: 'var(--text-color)',
+              muted: 'var(--muted-color)',
+              border: 'var(--border-color)',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Poppins', 'sans-serif'],
+            hindi: ['Noto Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-theme-bg text-theme-text transition-colors duration-300 font-sans flex flex-col min-h-screen select-none">
+
+  <!-- ==========================================
+       STICKY HUD HEADER (Distraction Free)
+       ========================================== -->
+  <header class="sticky top-0 z-40 w-full glass border-b border-theme-border py-4 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between gap-4">
+        
+        <!-- Console Brand -->
+        <div class="flex items-center space-x-2.5">
+          <div class="w-8.5 h-8.5 bg-theme-primary text-white rounded-lg flex items-center justify-center shadow-md">
+            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+          </div>
+          <div class="flex flex-col text-left leading-tight">
+            <span class="text-xs text-theme-muted font-bold uppercase tracking-wider">Console Terminal</span>
+            <span id="hud-exam-title" class="text-sm font-extrabold font-heading text-theme-text max-w-[180px] sm:max-w-xs truncate">Exam Title</span>
+          </div>
+        </div>
+
+        <!-- Question Tracker & Progress Bar -->
+        <div class="hidden md:flex flex-col items-center flex-grow max-w-sm space-y-1.5 px-4">
+          <div class="flex items-center justify-between w-full text-xxs font-bold text-theme-muted uppercase tracking-wider">
+            <span>Progress bar</span>
+            <span id="hud-progress-text">Question 0 of 0</span>
+          </div>
+          <div class="w-full h-2 bg-theme-surface border border-theme-border rounded-full overflow-hidden">
+            <div id="hud-progress-bar" class="h-full bg-theme-primary transition-all duration-350" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Timer Countdown Clock -->
+        <div class="flex items-center space-x-3">
+          <div id="hud-timer-card" class="flex items-center px-4 py-2 border border-theme-border bg-theme-surface text-theme-primary rounded-xl text-sm sm:text-base font-bold font-mono tracking-wider shadow-sm transition-all duration-300">
+            <i data-lucide="stopwatch" class="w-4 h-4 mr-2 animate-pulse" id="hud-timer-icon"></i>
+            <span id="hud-timer-clock">00:00</span>
+          </div>
+
+          <!-- Theme quick selector -->
+          <div class="flex items-center p-0.5 bg-theme-surface border border-theme-border rounded-lg text-xs">
+            <button data-theme-select="day" class="p-1 rounded-md border text-theme-text transition-all-custom">
+              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
+            </button>
+            <button data-theme-select="night" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
+              <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+            </button>
+            <button data-theme-select="warm" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       MAIN TEST WORKSPACE
+       ========================================== -->
+  <main class="flex-grow py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col justify-start">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full">
+      
+      <!-- ==========================================
+           LEFT COLUMN - THE ACTIVE QUESTION CANVAS
+           ========================================== -->
+      <div class="lg:col-span-8 space-y-6 flex flex-col">
+        
+        <!-- Question Block Card -->
+        <div class="theme-card-static p-6 sm:p-8 border border-theme-border space-y-6 min-h-[320px] flex flex-col justify-between" id="question-card">
+          
+          <div class="space-y-6">
+            <!-- Question Index Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-theme-border select-none">
+              <span class="px-2.5 py-1 text-xxs font-extrabold bg-theme-primary/10 text-theme-primary uppercase rounded-lg tracking-wider" id="q-index-badge">
+                Question 1 of 5
+              </span>
+              <button id="btn-flag-question" class="text-xs font-bold text-theme-muted hover:text-orange-500 transition-all flex items-center">
+                <i data-lucide="flag" class="w-4 h-4 mr-1"></i>
+                <span>Flag for Review</span>
+              </button>
+            </div>
+
+            <!-- Question Text -->
+            <div class="space-y-4">
+              <h2 id="q-text" class="text-base sm:text-lg font-bold leading-relaxed text-theme-text font-heading">
+                Loading question data...
+              </h2>
+            </div>
+
+            <!-- Multiple Choice Choices (options list) -->
+            <div id="q-options" class="grid grid-cols-1 gap-3.5">
+              <!-- Dynamically rendered options cards -->
+            </div>
+          </div>
+
+          <!-- Card navigation controls -->
+          <div class="pt-6 border-t border-theme-border flex items-center justify-between select-none">
+            <div class="flex gap-2">
+              <button id="btn-prev" class="px-4 py-2.5 border border-theme-border bg-theme-bg hover:bg-theme-surface-hover font-bold text-xs rounded-xl transition-all flex items-center disabled:opacity-40 disabled:cursor-not-allowed">
+                <i data-lucide="chevron-left" class="w-4 h-4 mr-1"></i>
+                Prev
+              </button>
+              <button id="btn-clear" class="px-4 py-2.5 border border-theme-border bg-theme-bg hover:bg-red-500/10 hover:border-red-300 hover:text-red-500 font-bold text-xs rounded-xl transition-all">
+                Clear Answer
+              </button>
+            </div>
+            
+            <button id="btn-next" class="px-6 py-2.5 bg-theme-primary hover:bg-theme-primary-hover text-white font-bold text-xs rounded-xl shadow transition-all flex items-center">
+              <span>Save & Next</span>
+              <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ==========================================
+           RIGHT COLUMN - SIDEBAR NAVIGATOR & SUBMISSIONS
+           ========================================== -->
+      <div class="lg:col-span-4 space-y-6">
+        
+        <!-- Navigator circle grid node box -->
+        <div class="theme-card-static p-6 border border-theme-border space-y-6">
+          <div class="space-y-1">
+            <h3 class="text-sm font-extrabold font-heading text-theme-text">Question Navigator</h3>
+            <p class="text-xxs text-theme-muted font-bold uppercase tracking-wider">Click index nodes to route directly.</p>
+          </div>
+
+          <!-- Navigator node grid (target) -->
+          <div id="navigator-grid" class="grid grid-cols-5 gap-2.5">
+            <!-- Rendered via JS -->
+          </div>
+
+          <!-- Dynamic Legend Indicators -->
+          <div class="pt-4 border-t border-theme-border grid grid-cols-2 gap-2 text-xxs font-bold text-theme-muted uppercase tracking-wider">
+            <div class="flex items-center">
+              <span class="w-3 h-3 bg-emerald-500 rounded-full mr-2"></span>
+              <span>Answered (<span id="legend-ans">0</span>)</span>
+            </div>
+            <div class="flex items-center">
+              <span class="w-3 h-3 bg-amber-500 rounded-full mr-2"></span>
+              <span>Flagged (<span id="legend-flg">0</span>)</span>
+            </div>
+            <div class="flex items-center">
+              <span class="w-3 h-3 border border-red-300 bg-red-500/10 rounded-full mr-2"></span>
+              <span>Unanswered (<span id="legend-unans">0</span>)</span>
+            </div>
+            <div class="flex items-center">
+              <span class="w-3 h-3 bg-theme-surface border border-theme-border rounded-full mr-2"></span>
+              <span>Unvisited (<span id="legend-unvis">0</span>)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal Submissions box -->
+        <div class="theme-card-static p-6 border border-theme-border space-y-4">
+          <h3 class="text-sm font-extrabold font-heading text-theme-text">Complete Session</h3>
+          <p class="text-xs text-theme-muted leading-relaxed font-semibold">
+            Once submitted, your scores are compiled immediately and saved into your student profile metrics log.
+          </p>
+          <button id="btn-submit-exam" class="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg shadow-red-600/10 hover:shadow-red-600/20 transition-all-custom flex items-center justify-center">
+            <i data-lucide="check-circle" class="w-5 h-5 mr-2"></i>
+            Submit Examination
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================
+       SUBMIT EXAMINATION CONFIRMATION POPUP (Modal)
+       ========================================== -->
+  <div id="submit-modal-overlay" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="w-full max-w-md bg-theme-bg border border-theme-border rounded-2xl shadow-2xl p-6 space-y-6 fade-in-slide-up">
+      
+      <div class="text-center space-y-4">
+        <div class="w-14 h-14 bg-red-100 border border-red-200 text-red-600 rounded-2xl flex items-center justify-center mx-auto shadow-sm">
+          <i data-lucide="alert-circle" class="w-7 h-7"></i>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-lg font-bold font-heading text-theme-text">Submit Assessment Session?</h3>
+          <p class="text-xs text-theme-muted font-bold uppercase tracking-wider">Are you absolutely sure you wish to submit?</p>
+        </div>
+      </div>
+
+      <!-- Live metrics summary brief inside modal -->
+      <div class="p-4 bg-theme-surface border border-theme-border rounded-xl grid grid-cols-3 gap-2 text-center text-xs font-semibold">
+        <div class="space-y-0.5">
+          <span class="text-theme-muted block text-xxs uppercase">Answered</span>
+          <span id="modal-sum-ans" class="text-base font-bold text-emerald-500">0</span>
+        </div>
+        <div class="space-y-0.5 border-x border-theme-border">
+          <span class="text-theme-muted block text-xxs uppercase">Flagged</span>
+          <span id="modal-sum-flg" class="text-base font-bold text-amber-500">0</span>
+        </div>
+        <div class="space-y-0.5">
+          <span class="text-theme-muted block text-xxs uppercase">Skipped</span>
+          <span id="modal-sum-skip" class="text-base font-bold text-red-500">0</span>
+        </div>
+      </div>
+
+      <p class="text-xs text-theme-muted text-center font-medium leading-relaxed">
+        Confirming submission locks this assessment terminal. You will be redirected instantly to the comprehensive evaluation scorecard.
+      </p>
+
+      <!-- Action buttons -->
+      <div class="flex items-center gap-3">
+        <button id="modal-submit-confirm" class="flex-grow py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-md transition-all">
+          Yes, Submit Test
+        </button>
+        <button id="modal-submit-cancel" class="flex-grow py-3 border border-theme-border bg-theme-bg hover:bg-theme-surface-hover font-semibold text-sm rounded-xl transition-all">
+          Cancel & Continue
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/db.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!window.ExamDB) return;
+
+      const examId = new URLSearchParams(window.location.search).get("id");
+      const exam = window.ExamDB.getExam(examId);
+
+      // Verify exam existences
+      if (!exam) {
+        window.location.href = "exams.html";
+        return;
+      }
+
+      // HUD & Elements
+      document.getElementById("hud-exam-title").textContent = exam.title;
+
+      // Variables tracking session state
+      let activeIndex = 0; // 0-indexed active question index
+      let answersMap = {}; // Maps questionId -> selectedOptionIndex (0-3)
+      let flaggedSet = new Set(); // Stores flagged question IDs
+      let visitedSet = new Set([exam.questions[0].id]); // Stores visited question IDs, starts with Q1 visited
+
+      // Timer variables
+      let countdownTimerInterval = null;
+      let durationSeconds = exam.duration * 60;
+      let remainingSeconds = durationSeconds;
+
+      // Retrieve state Recovery Drafts if they exist
+      const savedDraft = window.ExamDB.getExamDraft(exam.id);
+      const timerStartKey = `exam_timer_start_${exam.id}`;
+      let examStartTimestamp = localStorage.getItem(timerStartKey);
+
+      if (savedDraft) {
+        answersMap = savedDraft.state.answersMap || {};
+        const flaggedList = savedDraft.state.flaggedList || [];
+        flaggedSet = new Set(flaggedList);
+        const visitedList = savedDraft.state.visitedList || [];
+        visitedSet = new Set(visitedList);
+        activeIndex = savedDraft.state.activeIndex || 0;
+      }
+
+      if (!examStartTimestamp) {
+        examStartTimestamp = Date.now().toString();
+        localStorage.setItem(timerStartKey, examStartTimestamp);
+      }
+
+      // Math calculations for remaining timer seconds in case of refreshes
+      const elapsedSeconds = Math.floor((Date.now() - parseInt(examStartTimestamp)) / 1000);
+      remainingSeconds = durationSeconds - elapsedSeconds;
+
+      // If time ran out during departure, auto submit instantly
+      if (remainingSeconds <= 0) {
+        completeAndSubmitExam(true); // Forced submit
+        return;
+      }
+
+      // ==========================================
+      // CONTROLLER ENGINE LOGIC
+      // ==========================================
+      const qIndexBadge = document.getElementById("q-index-badge");
+      const qText = document.getElementById("q-text");
+      const qOptions = document.getElementById("q-options");
+      const flagBtn = document.getElementById("btn-flag-question");
+      
+      const prevBtn = document.getElementById("btn-prev");
+      const clearBtn = document.getElementById("btn-clear");
+      const nextBtn = document.getElementById("btn-next");
+
+      const navGrid = document.getElementById("navigator-grid");
+      const submitBtn = document.getElementById("btn-submit-exam");
+
+      // Modals
+      const submitModal = document.getElementById("submit-modal-overlay");
+      const modalConfirm = document.getElementById("modal-submit-confirm");
+      const modalCancel = document.getElementById("modal-submit-cancel");
+
+      function loadQuestion(index) {
+        activeIndex = index;
+        const question = exam.questions[activeIndex];
+        visitedSet.add(question.id);
+
+        // Update badge indices
+        qIndexBadge.textContent = `Question ${activeIndex + 1} of ${exam.questionsCount}`;
+        
+        // Render Question Text (Support bilingual classes if needed)
+        qText.innerHTML = question.text;
+        if (question.text.includes("/")) {
+          qText.className = "text-base sm:text-lg font-bold leading-relaxed text-theme-text font-hindi";
+        } else {
+          qText.className = "text-base sm:text-lg font-bold leading-relaxed text-theme-text font-heading";
+        }
+
+        // Save selected choices state
+        const selectedValue = answersMap[question.id];
+
+        // Render multiple options cards
+        qOptions.innerHTML = question.options.map((opt, oIdx) => {
+          const isSelected = selectedValue === oIdx;
+          const letter = String.fromCharCode(65 + oIdx); // A, B, C, D
+          
+          let optClass = "option-card p-4 flex items-center justify-between border-2";
+          let circleClass = "w-5 h-5 rounded-full border border-theme-border flex items-center justify-center shrink-0 mr-3 text-xxs font-bold";
+
+          if (isSelected) {
+            optClass += " selected border-theme-primary";
+            circleClass += " bg-theme-primary border-theme-primary text-white";
+          } else {
+            circleClass += " bg-theme-surface text-theme-muted";
+          }
+
+          // Bilingual typography check
+          const fontClass = opt.includes("/") ? "font-hindi" : "font-sans";
+
+          return `
+            <div onclick="selectOption(${oIdx})" class="${optClass}">
+              <div class="flex items-center">
+                <span class="${circleClass}">${letter}</span>
+                <span class="text-sm font-semibold text-theme-text ${fontClass}">${opt}</span>
+              </div>
+              ${isSelected ? `<i data-lucide="check-circle" class="w-5 h-5 text-theme-primary shrink-0"></i>` : ""}
+            </div>
+          `;
+        }).join("");
+
+        // Sync visual controllers
+        prevBtn.disabled = activeIndex === 0;
+        
+        if (activeIndex === exam.questionsCount - 1) {
+          nextBtn.innerHTML = `<span>Review & Submit</span> <i data-lucide="check-circle" class="w-4 h-4 ml-1"></i>`;
+        } else {
+          nextBtn.innerHTML = `<span>Save & Next</span> <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>`;
+        }
+
+        // Flag Visual Sync
+        const isFlagged = flaggedSet.has(question.id);
+        if (isFlagged) {
+          flagBtn.classList.remove("text-theme-muted");
+          flagBtn.classList.add("text-orange-500");
+          flagBtn.querySelector("span").textContent = "Flagged for Review";
+          flagBtn.querySelector("svg").classList.add("fill-orange-500");
+        } else {
+          flagBtn.classList.add("text-theme-muted");
+          flagBtn.classList.remove("text-orange-500");
+          flagBtn.querySelector("span").textContent = "Flagid for Review";
+          if (flagBtn.querySelector("svg")) flagBtn.querySelector("svg").classList.remove("fill-orange-500");
+        }
+
+        // Save progress details to local draft
+        saveSessionDraft();
+        
+        // Sync navigator side grid states
+        updateNavigatorGrid();
+        
+        // Recount dashboard legend counters
+        calculateLegendCounts();
+        
+        lucide.createIcons();
+      }
+
+      // Handle Option Selection
+      window.selectOption = function(optionIndex) {
+        const question = exam.questions[activeIndex];
+        answersMap[question.id] = optionIndex;
+        
+        // Re-load question visually
+        loadQuestion(activeIndex);
+      };
+
+      // Clear Options triggers
+      clearBtn.addEventListener("click", () => {
+        const question = exam.questions[activeIndex];
+        delete answersMap[question.id];
+        loadQuestion(activeIndex);
+      });
+
+      // Navigation Actions
+      prevBtn.addEventListener("click", () => {
+        if (activeIndex > 0) loadQuestion(activeIndex - 1);
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (activeIndex < exam.questionsCount - 1) {
+          loadQuestion(activeIndex + 1);
+        } else {
+          // Open Submit modal triggers
+          openSubmitConfirmationModal();
+        }
+      });
+
+      // Flag Click handlers
+      flagBtn.addEventListener("click", () => {
+        const question = exam.questions[activeIndex];
+        if (flaggedSet.has(question.id)) {
+          flaggedSet.delete(question.id);
+        } else {
+          flaggedSet.add(question.id);
+        }
+        loadQuestion(activeIndex);
+      });
+
+      // ==========================================
+      // STATE SAVERS
+      // ==========================================
+      function saveSessionDraft() {
+        window.ExamDB.saveExamDraft(exam.id, {
+          answersMap,
+          flaggedList: Array.from(flaggedSet),
+          visitedList: Array.from(visitedSet),
+          activeIndex
+        });
+      }
+
+      // ==========================================
+      // NAVIGATOR INTERACTIVE ROUTING
+      // ==========================================
+      function updateNavigatorGrid() {
+        navGrid.innerHTML = exam.questions.map((q, idx) => {
+          const isCurrent = idx === activeIndex;
+          const isAnswered = answersMap[q.id] !== undefined;
+          const isFlagged = flaggedSet.has(q.id);
+          const isVisited = visitedSet.has(q.id);
+
+          let nodeClass = "w-10 h-10 rounded-xl font-bold text-sm flex items-center justify-center transition-all cursor-pointer border select-none ";
+          
+          if (isCurrent) {
+            nodeClass += "ring-2 ring-offset-2 ring-theme-primary border-theme-primary ";
+          }
+
+          if (isFlagged) {
+            // Flagged wins priority colors
+            nodeClass += "bg-amber-500 text-white border-amber-600 shadow-sm shadow-amber-500/10";
+          } else if (isAnswered) {
+            nodeClass += "bg-emerald-500 text-white border-emerald-600 shadow-sm shadow-emerald-500/10";
+          } else if (isVisited) {
+            nodeClass += "bg-red-500/10 border-red-300 text-red-500";
+          } else {
+            nodeClass += "bg-theme-surface border-theme-border text-theme-muted hover:bg-theme-surface-hover";
+          }
+
+          return `
+            <button onclick="jumpToQuestion(${idx})" class="${nodeClass}">
+              ${idx + 1}
+            </button>
+          `;
+        }).join("");
+      }
+
+      window.jumpToQuestion = function(index) {
+        loadQuestion(index);
+      };
+
+      // Legend calculations
+      function calculateLegendCounts() {
+        let ans = 0, flg = 0, unans = 0, unvis = 0;
+        
+        exam.questions.forEach(q => {
+          const isAnswered = answersMap[q.id] !== undefined;
+          const isFlagged = flaggedSet.has(q.id);
+          const isVisited = visitedSet.has(q.id);
+
+          if (isFlagged) {
+            flg++;
+          } else if (isAnswered) {
+            ans++;
+          } else if (isVisited) {
+            unans++;
+          } else {
+            unvis++;
+          }
+        });
+
+        // Set counts
+        document.getElementById("legend-ans").textContent = ans;
+        document.getElementById("legend-flg").textContent = flg;
+        document.getElementById("legend-unans").textContent = unans;
+        document.getElementById("legend-unvis").textContent = unvis;
+
+        // Sync header progress
+        const answeredCount = Object.keys(answersMap).length;
+        document.getElementById("hud-progress-text").textContent = `Question ${activeIndex + 1} of ${exam.questionsCount}`;
+        const progressPct = Math.round((answeredCount / exam.questionsCount) * 100);
+        document.getElementById("hud-progress-bar").style.width = `${progressPct}%`;
+      }
+
+      // ==========================================
+      // TIMER COMPILER ENGINE
+      // ==========================================
+      function startCountdownTimer() {
+        const clockEl = document.getElementById("hud-timer-clock");
+        const cardEl = document.getElementById("hud-timer-card");
+
+        function updateClock() {
+          if (remainingSeconds <= 0) {
+            clearInterval(countdownTimerInterval);
+            completeAndSubmitExam(true); // Timer force submit
+            return;
+          }
+
+          remainingSeconds--;
+
+          const mins = Math.floor(remainingSeconds / 60);
+          const secs = remainingSeconds % 60;
+
+          const formattedMins = mins.toString().padStart(2, "0");
+          const formattedSecs = secs.toString().padStart(2, "0");
+
+          clockEl.textContent = `${formattedMins}:${formattedSecs}`;
+
+          // Micro countdown notifications under 2 mins
+          if (remainingSeconds <= 120) {
+            cardEl.classList.remove("text-theme-primary", "border-theme-border");
+            cardEl.classList.add("text-red-500", "border-red-300", "bg-red-500/10");
+            cardEl.style.transform = "scale(1.05)";
+          }
+        }
+
+        updateClock();
+        countdownTimerInterval = setInterval(updateClock, 1000);
+      }
+
+      // ==========================================
+      // POPUP MODAL CONTROL
+      // ==========================================
+      function openSubmitConfirmationModal() {
+        let ans = 0, flg = 0, skip = 0;
+        
+        exam.questions.forEach(q => {
+          const isAnswered = answersMap[q.id] !== undefined;
+          const isFlagged = flaggedSet.has(q.id);
+
+          if (isFlagged) {
+            flg++;
+          } else if (isAnswered) {
+            ans++;
+          } else {
+            skip++;
+          }
+        });
+
+        document.getElementById("modal-sum-ans").textContent = ans;
+        document.getElementById("modal-sum-flg").textContent = flg;
+        document.getElementById("modal-sum-skip").textContent = skip;
+
+        submitModal.classList.remove("hidden");
+        submitModal.classList.add("flex");
+      }
+
+      submitBtn.addEventListener("click", openSubmitConfirmationModal);
+
+      modalCancel.addEventListener("click", () => {
+        submitModal.classList.remove("flex");
+        submitModal.classList.add("hidden");
+      });
+
+      modalConfirm.addEventListener("click", () => {
+        completeAndSubmitExam(false); // Manual submit
+      });
+
+      // ==========================================
+      // EXAM FINALIZE & SCORES COMPILER
+      // ==========================================
+      function completeAndSubmitExam(isForcedTimer = false) {
+        clearInterval(countdownTimerInterval);
+
+        // Compile calculations
+        let correctCount = 0;
+        let wrongCount = 0;
+        let skippedCount = 0;
+
+        exam.questions.forEach(q => {
+          const selected = answersMap[q.id];
+          if (selected === undefined) {
+            skippedCount++;
+          } else if (selected === q.correctOption) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        const scorePct = Math.round((correctCount / exam.questionsCount) * 100);
+        const actualTimeSpent = durationSeconds - remainingSeconds; // in seconds
+
+        const attemptObj = {
+          id: `att-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`,
+          examId: exam.id,
+          examTitle: exam.title,
+          date: new Date().toISOString(),
+          score: scorePct,
+          totalQuestions: exam.questionsCount,
+          correctCount,
+          wrongCount,
+          skippedCount,
+          timeSpent: actualTimeSpent,
+          answersMap
+        };
+
+        // Write to local database attempts log
+        window.ExamDB.saveAttempt(attemptObj);
+
+        // Clear active session buffers
+        window.ExamDB.clearExamDraft(exam.id);
+        localStorage.removeItem(timerStartKey);
+
+        // Alert user if timer forced
+        if (isForcedTimer) {
+          alert("Time is up! Your examination session has been compiled and submitted automatically.");
+        }
+
+        // Redirect to results sheets
+        window.location.href = `result.html?attemptId=${attemptObj.id}`;
+      }
+
+      // Initialize
+      startCountdownTimer();
+      loadQuestion(activeIndex);
+    });
+  </script>
+</body>
+</html>

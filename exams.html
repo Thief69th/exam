@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-day">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexExam | Exams Catalog</title>
+  
+  <meta name="description" content="Browse ApexExam's rich catalog of online assessments covering full-stack web technologies, algorithm concepts, bilingual general awareness, and aptitude.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            theme: {
+              bg: 'var(--bg-color)',
+              surface: 'var(--surface-color)',
+              'surface-hover': 'var(--surface-hover)',
+              primary: 'var(--primary-color)',
+              'primary-hover': 'var(--primary-hover)',
+              text: 'var(--text-color)',
+              muted: 'var(--muted-color)',
+              border: 'var(--border-color)',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Poppins', 'sans-serif'],
+            hindi: ['Noto Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-theme-bg text-theme-text transition-colors duration-300 font-sans flex flex-col min-h-screen">
+
+  <!-- ==========================================
+       HEADER & NAVIGATION
+       ========================================== -->
+  <header class="sticky top-0 z-40 w-full glass border-b border-theme-border transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center space-x-2 group">
+          <div class="w-10 h-10 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-all-custom">
+            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+          </div>
+          <span class="text-xl sm:text-2xl font-bold tracking-tight font-heading">
+            Apex<span class="text-theme-primary">Exam</span>
+          </span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="hidden md:flex items-center space-x-8 font-medium">
+          <a href="index.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Home</a>
+          <a href="exams.html" class="text-theme-primary hover:text-theme-primary border-b-2 border-theme-primary px-1 py-2 text-sm transition-all-custom">Exams</a>
+          <a href="dashboard.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Dashboard</a>
+        </nav>
+
+        <!-- Live Clock, Themes, & Profile -->
+        <div class="hidden lg:flex items-center space-x-6">
+          
+          <!-- Live Date & Clock -->
+          <div class="flex items-center space-x-4 px-3 py-1.5 border border-theme-border rounded-xl bg-theme-surface text-xs font-semibold tracking-wide">
+            <span class="flex items-center text-theme-muted">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5 text-theme-primary"></i>
+              <span id="header-date">-- --- ----</span>
+            </span>
+            <span class="w-px h-3 bg-theme-border"></span>
+            <span class="flex items-center text-theme-primary font-mono">
+              <i data-lucide="clock" class="w-3.5 h-3.5 mr-1.5 animate-pulse"></i>
+              <span id="header-time">00:00:00 AM</span>
+            </span>
+          </div>
+
+          <!-- Theme Switcher Pills -->
+          <div class="flex items-center p-1 bg-theme-surface border border-theme-border rounded-xl">
+            <button data-theme-select="day" title="Day Mode" class="p-1.5 rounded-lg border transition-all-custom">
+              <i data-lucide="sun" class="w-4 h-4"></i>
+            </button>
+            <button data-theme-select="night" title="Night Mode" class="p-1.5 rounded-lg border transition-all-custom ml-1">
+              <i data-lucide="moon" class="w-4 h-4"></i>
+            </button>
+            <button data-theme-select="warm" title="Warm Mode" class="p-1.5 rounded-lg border transition-all-custom ml-1">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <!-- Profile Thumbnail -->
+          <a href="dashboard.html" class="flex items-center space-x-3 pl-2 group">
+            <div id="header-avatar" class="w-9 h-9 rounded-xl overflow-hidden border border-theme-border group-hover:ring-2 group-hover:ring-theme-primary transition-all-custom">
+              <!-- Dynamically populated -->
+            </div>
+            <div class="flex flex-col text-left">
+              <span class="text-xs text-theme-muted font-medium">Welcome back,</span>
+              <span id="header-username" class="text-sm font-semibold tracking-tight">Amit</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Mobile Controls Wrapper -->
+        <div class="flex items-center space-x-3 md:space-x-4 lg:hidden">
+          <div class="flex items-center p-0.5 bg-theme-surface border border-theme-border rounded-lg text-xs">
+            <button data-theme-select="day" class="p-1 rounded-md border text-theme-text transition-all-custom">
+              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
+            </button>
+            <button data-theme-select="night" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
+              <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+            </button>
+            <button data-theme-select="warm" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="p-2 border border-theme-border rounded-xl bg-theme-surface text-theme-text hover:bg-theme-surface-hover focus-ring-custom">
+            <i data-lucide="menu" class="w-5.5 h-5.5"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation Drawer -->
+    <div id="mobile-menu-container" class="hidden border-t border-theme-border bg-theme-bg md:hidden fade-in-slide-up">
+      <div class="px-4 pt-2 pb-6 space-y-3 font-semibold text-center shadow-lg">
+        <a href="index.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Home</a>
+        <a href="exams.html" class="block px-3 py-2.5 rounded-xl bg-theme-surface text-theme-primary border-l-4 border-theme-primary transition-all-custom text-left text-base">Exams</a>
+        <a href="dashboard.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Dashboard</a>
+        
+        <!-- Mobile live clock -->
+        <div class="flex items-center justify-between px-3 py-2 bg-theme-surface border border-theme-border rounded-xl text-xs mt-4">
+          <span class="flex items-center text-theme-muted">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5 text-theme-primary"></i>
+            <span class="mobile-date font-semibold">Today</span>
+          </span>
+          <span class="flex items-center text-theme-primary font-mono font-semibold">
+            <i data-lucide="clock" class="w-3.5 h-3.5 mr-1.5 animate-pulse"></i>
+            <span class="mobile-time">00:00</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       MAIN CONTENT - CATALOG EXPLORER
+       ========================================== -->
+  <main class="flex-grow py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <!-- Catalog Page Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-theme-border">
+        <div class="space-y-2">
+          <div class="flex items-center space-x-2">
+            <button class="btn-back p-1.5 border border-theme-border rounded-lg bg-theme-surface hover:bg-theme-surface-hover text-theme-muted hover:text-theme-primary transition-all-custom">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+            <span class="text-xs font-semibold text-theme-primary uppercase tracking-wider">Apex Assessment Catalog</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight font-heading">Explore Examinations</h1>
+          <p class="text-sm text-theme-muted font-medium max-w-xl">
+            Filter our premium assessments dynamically to test your logical, linguistic, and software development capabilities.
+          </p>
+        </div>
+      </div>
+
+      <!-- Search & Filters Toolbar -->
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-4 p-4 bg-theme-surface border border-theme-border rounded-2xl shadow-sm">
+        
+        <!-- Search bar input -->
+        <div class="relative w-full lg:max-w-md">
+          <i data-lucide="search" class="absolute left-4 top-3.5 w-5 h-5 text-theme-muted"></i>
+          <input id="catalog-search" type="text" placeholder="Search exams by title, topics or tags..." class="w-full pl-12 pr-4 py-3 bg-theme-bg border border-theme-border rounded-xl text-sm font-medium focus-ring-custom transition-all-custom text-theme-text" />
+        </div>
+
+        <!-- Filter category tabs / pills -->
+        <div class="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+          <button data-cat-filter="All" class="px-4 py-2 border border-theme-primary bg-theme-primary text-white font-semibold text-xs rounded-xl shadow-md shadow-theme-primary/10 transition-all-custom hover:-translate-y-0.5">
+            All Categories
+          </button>
+          <button data-cat-filter="Tech" class="px-4 py-2 border border-theme-border bg-theme-bg font-semibold text-xs text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover rounded-xl transition-all-custom hover:-translate-y-0.5">
+            Tech Syllabus
+          </button>
+          <button data-cat-filter="Language" class="px-4 py-2 border border-theme-border bg-theme-bg font-semibold text-xs text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover rounded-xl transition-all-custom hover:-translate-y-0.5">
+            Language GK
+          </button>
+          <button data-cat-filter="Aptitude" class="px-4 py-2 border border-theme-border bg-theme-bg font-semibold text-xs text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover rounded-xl transition-all-custom hover:-translate-y-0.5">
+            Aptitude & Logic
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Exam Catalog Grid (Target) -->
+      <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Dynamically rendered by JS -->
+      </div>
+
+      <!-- Empty Catalog State -->
+      <div id="catalog-empty-state" class="hidden py-16 text-center space-y-4">
+        <div class="w-16 h-16 bg-theme-surface border border-theme-border text-theme-muted rounded-2xl flex items-center justify-center mx-auto shadow-sm">
+          <i data-lucide="inbox" class="w-8 h-8"></i>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-lg font-bold font-heading text-theme-text">No Exams Found</h3>
+          <p class="text-sm text-theme-muted max-w-xs mx-auto">Try refining your search keyword or selected category filter.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================
+       SIDE DRAWER DETAIL PREVIEW (Premium Modal)
+       ========================================== -->
+  <div id="preview-drawer-overlay" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden transition-all-custom">
+    <div class="fixed right-0 top-0 bottom-0 w-full sm:max-w-md bg-theme-bg border-l border-theme-border shadow-2xl p-6 sm:p-8 flex flex-col justify-between overflow-y-auto transform translate-x-full transition-transform duration-300 ease-in-out" id="preview-drawer-content">
+      
+      <!-- Drawer Body -->
+      <div class="space-y-6">
+        <!-- Close/Back header -->
+        <div class="flex items-center justify-between pb-4 border-b border-theme-border">
+          <div class="flex items-center space-x-2">
+            <button id="drawer-back-btn" class="p-1.5 border border-theme-border rounded-lg bg-theme-surface text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom" title="Back to catalog">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            <span class="text-xs font-semibold text-theme-muted uppercase tracking-wider">Exam Details</span>
+          </div>
+          <button id="drawer-close-btn" class="p-1.5 hover:bg-theme-surface rounded-lg text-theme-muted hover:text-theme-text transition-all" title="Close details">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Meta Overview -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span id="drawer-difficulty" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-500/10 text-emerald-600">Intermediate</span>
+            <span id="drawer-category" class="text-xs font-semibold tracking-wider text-theme-primary bg-theme-surface border border-theme-border px-2.5 py-1 rounded-lg">Tech</span>
+          </div>
+          <h2 id="drawer-title" class="text-2xl font-bold font-heading text-theme-text leading-tight">Exam Title</h2>
+          <p id="drawer-desc" class="text-sm text-theme-muted leading-relaxed font-medium">Exam Description goes here.</p>
+        </div>
+
+        <!-- KPI Grid details -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="p-4 bg-theme-surface border border-theme-border rounded-xl text-center space-y-1">
+            <i data-lucide="clock" class="w-5 h-5 mx-auto text-theme-primary"></i>
+            <span class="text-xs font-semibold text-theme-muted block">Duration</span>
+            <span id="drawer-duration" class="text-sm font-bold text-theme-text font-heading">15 Mins</span>
+          </div>
+          <div class="p-4 bg-theme-surface border border-theme-border rounded-xl text-center space-y-1">
+            <i data-lucide="help-circle" class="w-5 h-5 mx-auto text-theme-primary"></i>
+            <span class="text-xs font-semibold text-theme-muted block">Questions</span>
+            <span id="drawer-questions" class="text-sm font-bold text-theme-text font-heading">5 MCQs</span>
+          </div>
+          <div class="p-4 bg-theme-surface border border-theme-border rounded-xl text-center space-y-1">
+            <i data-lucide="globe" class="w-5 h-5 mx-auto text-theme-primary"></i>
+            <span class="text-xs font-semibold text-theme-muted block">Language</span>
+            <span id="drawer-language" class="text-sm font-bold text-theme-text font-heading">English</span>
+          </div>
+          <div class="p-4 bg-theme-surface border border-theme-border rounded-xl text-center space-y-1">
+            <i data-lucide="check-circle" class="w-5 h-5 mx-auto text-theme-primary"></i>
+            <span class="text-xs font-semibold text-theme-muted block">Passing Mark</span>
+            <span class="text-sm font-bold text-theme-text font-heading">60%</span>
+          </div>
+        </div>
+
+        <!-- Pre-requisites & Rules Brief -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Exam Syllabus & Rules</h4>
+          <ul class="space-y-2.5 text-xs text-theme-muted leading-relaxed font-semibold">
+            <li class="flex items-start">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-2 shrink-0"></i>
+              Multiple-Choice Questions with single selection.
+            </li>
+            <li class="flex items-start">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-2 shrink-0"></i>
+              Auto-Save engine stores selected choices live.
+            </li>
+            <li class="flex items-start">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-2 shrink-0"></i>
+              Real-time countdown timer with auto-submit on completion.
+            </li>
+            <li class="flex items-start">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-2 shrink-0"></i>
+              Bilingual support (English and Hindi versions) included.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="pt-6 border-t border-theme-border flex flex-col gap-3 mt-8">
+        <a id="drawer-start-btn" href="#" class="w-full py-4 bg-theme-primary hover:bg-theme-primary-hover text-white text-center font-bold rounded-2xl shadow-lg shadow-theme-primary/20 transition-all-custom flex items-center justify-center">
+          Proceed to Registration
+          <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+        </a>
+        <button id="drawer-cancel-btn" class="w-full py-4 border border-theme-border bg-theme-bg hover:bg-theme-surface-hover font-semibold text-sm rounded-2xl transition-all-custom">
+          Back to Catalog
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="bg-theme-surface border-t border-theme-border py-12 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+        <div class="md:col-span-5 space-y-4">
+          <a href="index.html" class="flex items-center space-x-2">
+            <div class="w-8 h-8 bg-theme-primary text-white rounded-lg flex items-center justify-center">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+            <span class="text-lg font-bold font-heading">ApexExam</span>
+          </a>
+          <p class="text-sm text-theme-muted max-w-sm leading-relaxed">
+            ApexExam is a modern, responsive, and completely client-side assessment terminal designed to provide distraction-free testing with instant reporting insights.
+          </p>
+        </div>
+        <div class="md:col-span-3 space-y-3">
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-theme-text font-heading">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-theme-muted">
+            <li><a href="index.html" class="hover:text-theme-primary transition-all-custom">Home Page</a></li>
+            <li><a href="exams.html" class="hover:text-theme-primary transition-all-custom">Exams Catalog</a></li>
+            <li><a href="dashboard.html" class="hover:text-theme-primary transition-all-custom">Student Terminal</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-4 space-y-3">
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-theme-text font-heading">Legal & Compliance</h4>
+          <ul class="space-y-2 text-sm text-theme-muted">
+            <li><a href="#" class="hover:text-theme-primary transition-all-custom">Terms & Conditions</a></li>
+            <li><a href="#" class="hover:text-theme-primary transition-all-custom">Privacy & Security Policies</a></li>
+            <li><a href="#" class="hover:text-theme-primary transition-all-custom">Support desk</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-8 pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-xs text-theme-muted gap-4">
+        <span>© 2026 ApexExam Inc. All rights reserved.</span>
+        <span>Designed for outstanding performance. Fully browser static.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/db.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Setup mobile clocks
+      const mobileTime = document.querySelector(".mobile-time");
+      const mobileDate = document.querySelector(".mobile-date");
+      if (mobileTime && mobileDate) {
+        function updateMobileClock() {
+          const now = new Date();
+          mobileTime.textContent = now.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
+          mobileDate.textContent = now.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+        }
+        updateMobileClock();
+        setInterval(updateMobileClock, 1000);
+      }
+
+      if (!window.ExamDB) return;
+
+      const exams = window.ExamDB.getExams();
+      const grid = document.getElementById("catalog-grid");
+      const emptyState = document.getElementById("catalog-empty-state");
+      const searchInput = document.getElementById("catalog-search");
+      const catFilters = document.querySelectorAll("[data-cat-filter]");
+      
+      let activeCategory = "All";
+      let searchKeyword = "";
+
+      // Drawer Elements
+      const drawerOverlay = document.getElementById("preview-drawer-overlay");
+      const drawerContent = document.getElementById("preview-drawer-content");
+      const drawerCloseBtn = document.getElementById("drawer-close-btn");
+      const drawerBackBtn = document.getElementById("drawer-back-btn");
+      const drawerCancelBtn = document.getElementById("drawer-cancel-btn");
+      const drawerStartBtn = document.getElementById("drawer-start-btn");
+
+      const dTitle = document.getElementById("drawer-title");
+      const dDesc = document.getElementById("drawer-desc");
+      const dDifficulty = document.getElementById("drawer-difficulty");
+      const dCategory = document.getElementById("drawer-category");
+      const dDuration = document.getElementById("drawer-duration");
+      const dQuestions = document.getElementById("drawer-questions");
+      const dLanguage = document.getElementById("drawer-language");
+
+      function renderCatalog() {
+        const filtered = exams.filter(exam => {
+          const matchesCategory = activeCategory === "All" || exam.category === activeCategory;
+          const matchesSearch = exam.title.toLowerCase().includes(searchKeyword.toLowerCase()) || 
+                                exam.description.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+                                exam.tags.some(tag => tag.toLowerCase().includes(searchKeyword.toLowerCase()));
+          return matchesCategory && matchesSearch;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = "";
+          emptyState.classList.remove("hidden");
+          return;
+        }
+
+        emptyState.classList.add("hidden");
+        grid.innerHTML = filtered.map(exam => {
+          let difficultyColor = "bg-emerald-500/10 text-emerald-600";
+          if (exam.difficulty === "Intermediate") difficultyColor = "bg-blue-500/10 text-theme-primary";
+          if (exam.difficulty === "Advanced") difficultyColor = "bg-orange-500/10 text-orange-600";
+
+          const tagBadges = exam.tags.map(t => `<span class="px-2 py-0.5 border border-theme-border bg-theme-bg rounded text-xxs font-medium text-theme-muted">${t}</span>`).join(" ");
+
+          return `
+            <div class="theme-card p-6 border border-theme-border flex flex-col justify-between h-full">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-1 text-xs font-semibold rounded-lg ${difficultyColor}">${exam.difficulty}</span>
+                  <span class="flex items-center text-xs font-semibold text-theme-muted">
+                    <i data-lucide="clock" class="w-3.5 h-3.5 mr-1 text-theme-primary"></i>
+                    ${exam.duration} mins
+                  </span>
+                </div>
+
+                <div class="space-y-2">
+                  <h3 class="text-lg font-bold font-heading leading-snug tracking-tight text-theme-text">${exam.title}</h3>
+                  <p class="text-sm text-theme-muted line-clamp-2 leading-relaxed">${exam.description}</p>
+                </div>
+                
+                <div class="flex flex-wrap gap-1.5 pt-1">
+                  ${tagBadges}
+                </div>
+              </div>
+
+              <div class="pt-6 mt-6 border-t border-theme-border flex items-center justify-between">
+                <span class="text-xs text-theme-muted font-semibold flex items-center">
+                  <i data-lucide="help-circle" class="w-4 h-4 mr-1 text-theme-primary"></i>
+                  ${exam.questionsCount} MCQs
+                </span>
+                <button onclick="openExamPreview('${exam.id}')" class="px-4 py-2 bg-theme-primary hover:bg-theme-primary-hover text-white font-semibold text-xs rounded-xl shadow-md shadow-theme-primary/10 hover:shadow-theme-primary/20 transition-all-custom flex items-center">
+                  Open Exam
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 ml-1"></i>
+                </button>
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        lucide.createIcons();
+      }
+
+      // Live search typing listener
+      searchInput.addEventListener("input", (e) => {
+        searchKeyword = e.target.value;
+        renderCatalog();
+      });
+
+      // Category Pill Click Handlers
+      catFilters.forEach(btn => {
+        btn.addEventListener("click", () => {
+          // Sync visually
+          catFilters.forEach(b => {
+            b.classList.remove("border-theme-primary", "bg-theme-primary", "text-white");
+            b.classList.add("border-theme-border", "bg-theme-bg", "text-theme-muted");
+          });
+          btn.classList.remove("border-theme-border", "bg-theme-bg", "text-theme-muted");
+          btn.classList.add("border-theme-primary", "bg-theme-primary", "text-white");
+
+          activeCategory = btn.getAttribute("data-cat-filter");
+          renderCatalog();
+        });
+      });
+
+      // DRAWER INTERACTION ENGINE
+      window.openExamPreview = function(examId) {
+        const exam = window.ExamDB.getExam(examId);
+        if (!exam) return;
+
+        // Populate drawer contents
+        dTitle.textContent = exam.title;
+        dDesc.textContent = exam.description;
+        dCategory.textContent = exam.category;
+        dDuration.textContent = `${exam.duration} Mins`;
+        dQuestions.textContent = `${exam.questionsCount} MCQs`;
+        dLanguage.textContent = exam.language;
+        
+        let difficultyColor = "bg-emerald-500/10 text-emerald-600";
+        if (exam.difficulty === "Intermediate") difficultyColor = "bg-blue-500/10 text-theme-primary";
+        if (exam.difficulty === "Advanced") difficultyColor = "bg-orange-500/10 text-orange-600";
+        
+        dDifficulty.className = `px-2.5 py-1 text-xs font-semibold rounded-lg ${difficultyColor}`;
+        
+        // Map proceed link
+        drawerStartBtn.setAttribute("href", `instructions.html?id=${exam.id}`);
+
+        // Open visually with smooth animations
+        drawerOverlay.classList.remove("hidden");
+        // Trigger reflow to initiate transition
+        setTimeout(() => {
+          drawerContent.classList.remove("translate-x-full");
+        }, 10);
+      };
+
+      function closeDrawer() {
+        drawerContent.classList.add("translate-x-full");
+        setTimeout(() => {
+          drawerOverlay.classList.add("hidden");
+        }, 300); // Wait for transition out
+      }
+
+      drawerCloseBtn.addEventListener("click", closeDrawer);
+      drawerBackBtn.addEventListener("click", closeDrawer);
+      drawerCancelBtn.addEventListener("click", closeDrawer);
+      drawerOverlay.addEventListener("click", (e) => {
+        if (e.target === drawerOverlay) closeDrawer();
+      });
+
+      // Initialize Catalog Render
+      renderCatalog();
+    });
+  </script>
+</body>
+</html>

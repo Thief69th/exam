@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-day">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexExam | Student Terminal</title>
+  
+  <meta name="description" content="Manage your exam schedule, update your visual avatar profile, and track your analytical performance trends using ApexExam's student dashboard.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            theme: {
+              bg: 'var(--bg-color)',
+              surface: 'var(--surface-color)',
+              'surface-hover': 'var(--surface-hover)',
+              primary: 'var(--primary-color)',
+              'primary-hover': 'var(--primary-hover)',
+              text: 'var(--text-color)',
+              muted: 'var(--muted-color)',
+              border: 'var(--border-color)',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Poppins', 'sans-serif'],
+            hindi: ['Noto Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-theme-bg text-theme-text transition-colors duration-300 font-sans flex flex-col min-h-screen">
+
+  <!-- ==========================================
+       HEADER & NAVIGATION
+       ========================================== -->
+  <header class="sticky top-0 z-40 w-full glass border-b border-theme-border transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center space-x-2 group">
+          <div class="w-10 h-10 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-all-custom">
+            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+          </div>
+          <span class="text-xl sm:text-2xl font-bold tracking-tight font-heading">
+            Apex<span class="text-theme-primary">Exam</span>
+          </span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="hidden md:flex items-center space-x-8 font-medium">
+          <a href="index.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Home</a>
+          <a href="exams.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Exams</a>
+          <a href="dashboard.html" class="text-theme-primary hover:text-theme-primary border-b-2 border-theme-primary px-1 py-2 text-sm transition-all-custom">Dashboard</a>
+        </nav>
+
+        <!-- Live Clock, Themes, & Profile -->
+        <div class="hidden lg:flex items-center space-x-6">
+          
+          <!-- Live Date & Clock -->
+          <div class="flex items-center space-x-4 px-3 py-1.5 border border-theme-border rounded-xl bg-theme-surface text-xs font-semibold tracking-wide">
+            <span class="flex items-center text-theme-muted">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5 text-theme-primary"></i>
+              <span id="header-date">-- --- ----</span>
+            </span>
+            <span class="w-px h-3 bg-theme-border"></span>
+            <span class="flex items-center text-theme-primary font-mono">
+              <i data-lucide="clock" class="w-3.5 h-3.5 mr-1.5 animate-pulse"></i>
+              <span id="header-time">00:00:00 AM</span>
+            </span>
+          </div>
+
+          <!-- Theme Switcher Pills -->
+          <div class="flex items-center p-1 bg-theme-surface border border-theme-border rounded-xl">
+            <button data-theme-select="day" title="Day Mode" class="p-1.5 rounded-lg border transition-all-custom">
+              <i data-lucide="sun" class="w-4 h-4"></i>
+            </button>
+            <button data-theme-select="night" title="Night Mode" class="p-1.5 rounded-lg border transition-all-custom ml-1">
+              <i data-lucide="moon" class="w-4 h-4"></i>
+            </button>
+            <button data-theme-select="warm" title="Warm Mode" class="p-1.5 rounded-lg border transition-all-custom ml-1">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <!-- Profile Thumbnail -->
+          <a href="dashboard.html" class="flex items-center space-x-3 pl-2 group">
+            <div id="header-avatar" class="w-9 h-9 rounded-xl overflow-hidden border border-theme-border group-hover:ring-2 group-hover:ring-theme-primary transition-all-custom">
+              <!-- Dynamically populated -->
+            </div>
+            <div class="flex flex-col text-left">
+              <span class="text-xs text-theme-muted font-medium">Welcome back,</span>
+              <span id="header-username" class="text-sm font-semibold tracking-tight">Amit</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Mobile Controls Wrapper -->
+        <div class="flex items-center space-x-3 md:space-x-4 lg:hidden">
+          <div class="flex items-center p-0.5 bg-theme-surface border border-theme-border rounded-lg text-xs">
+            <button data-theme-select="day" class="p-1 rounded-md border text-theme-text transition-all-custom">
+              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
+            </button>
+            <button data-theme-select="night" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
+              <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+            </button>
+            <button data-theme-select="warm" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="p-2 border border-theme-border rounded-xl bg-theme-surface text-theme-text hover:bg-theme-surface-hover focus-ring-custom">
+            <i data-lucide="menu" class="w-5.5 h-5.5"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Drawer -->
+    <div id="mobile-menu-container" class="hidden border-t border-theme-border bg-theme-bg md:hidden fade-in-slide-up">
+      <div class="px-4 pt-2 pb-6 space-y-3 font-semibold text-center shadow-lg">
+        <a href="index.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Home</a>
+        <a href="exams.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Exams</a>
+        <a href="dashboard.html" class="block px-3 py-2.5 rounded-xl bg-theme-surface text-theme-primary border-l-4 border-theme-primary transition-all-custom text-left text-base">Dashboard</a>
+        
+        <div class="flex items-center justify-between px-3 py-2 bg-theme-surface border border-theme-border rounded-xl text-xs mt-4">
+          <span class="flex items-center text-theme-muted">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5 text-theme-primary"></i>
+            <span class="mobile-date font-semibold">Today</span>
+          </span>
+          <span class="flex items-center text-theme-primary font-mono font-semibold">
+            <i data-lucide="clock" class="w-3.5 h-3.5 mr-1.5 animate-pulse"></i>
+            <span class="mobile-time">00:00</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       MAIN CONTENT - STUDENT WORKSPACE
+       ========================================== -->
+  <main class="flex-grow py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <!-- Greeting and Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-theme-border">
+        <div class="space-y-2">
+          <div class="flex items-center space-x-2">
+            <button class="btn-back p-1.5 border border-theme-border rounded-lg bg-theme-surface hover:bg-theme-surface-hover text-theme-muted hover:text-theme-primary transition-all-custom">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+            <span class="text-xs font-semibold text-theme-primary uppercase tracking-wider">Student Terminal Panel</span>
+          </div>
+          <h1 class="text-3xl font-extrabold tracking-tight font-heading">
+            Hello, <span id="dash-greeting-name" class="text-theme-primary">Student</span>!
+          </h1>
+          <p class="text-sm text-theme-muted font-medium">
+            Monitor your exam performance aggregates, evaluate trends, and manage your localized student configurations.
+          </p>
+        </div>
+        <a href="exams.html" class="px-5 py-3 bg-theme-primary hover:bg-theme-primary-hover text-white font-bold rounded-xl shadow-lg shadow-theme-primary/25 hover:shadow-theme-primary/35 hover:-translate-y-0.5 transition-all-custom flex items-center justify-center">
+          <i data-lucide="book-open" class="w-4.5 h-4.5 mr-2"></i>
+          Take a New Test
+        </a>
+      </div>
+
+      <!-- Main Layout Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- ==========================================
+             LEFT COLUMN - PROFILE CARD & BADGES
+             ========================================== -->
+        <div class="lg:col-span-4 space-y-8">
+          
+          <!-- Static Profile Card -->
+          <div class="theme-card-static p-6 border border-theme-border flex flex-col items-center text-center space-y-4" id="profile-container-view">
+            <div id="dash-profile-avatar" class="w-24 h-24 rounded-2xl border-2 border-theme-primary overflow-hidden shadow-lg">
+              <!-- Avatar Render -->
+            </div>
+            
+            <div class="space-y-1">
+              <h3 id="dash-profile-name" class="text-xl font-bold font-heading">Amit Kumar</h3>
+              <p id="dash-profile-email" class="text-xs font-semibold text-theme-muted">amit.kumar@education.in</p>
+            </div>
+
+            <div class="w-full pt-4 border-t border-theme-border flex justify-between items-center text-xs text-theme-muted font-semibold">
+              <span>Member Since:</span>
+              <span id="dash-profile-joined" class="text-theme-text font-bold">May 2026</span>
+            </div>
+
+            <button id="profile-edit-trigger" class="w-full py-2.5 border border-theme-border hover:border-theme-primary hover:text-theme-primary rounded-xl font-semibold text-sm transition-all flex items-center justify-center bg-theme-surface hover:bg-theme-surface-hover">
+              <i data-lucide="edit-3" class="w-4 h-4 mr-2"></i>
+              Modify Profile Details
+            </button>
+          </div>
+
+          <!-- Interactive Profile Editing Form (Hidden initially) -->
+          <div class="theme-card-static p-6 border border-theme-border hidden space-y-4" id="profile-container-edit">
+            <div class="flex items-center justify-between pb-3 border-b border-theme-border">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-theme-text font-heading">Edit Profile</h3>
+              <button id="profile-edit-cancel" class="text-xs text-theme-muted hover:text-theme-primary font-semibold transition-all">Cancel</button>
+            </div>
+            
+            <form id="profile-update-form" class="space-y-4">
+              <!-- Name -->
+              <div class="space-y-1.5">
+                <label class="text-xs font-bold text-theme-muted uppercase tracking-wider">Full Name</label>
+                <input id="edit-input-name" type="text" class="w-full px-3 py-2 bg-theme-bg border border-theme-border rounded-xl text-sm focus-ring-custom text-theme-text font-medium" required />
+              </div>
+              
+              <!-- Email -->
+              <div class="space-y-1.5">
+                <label class="text-xs font-bold text-theme-muted uppercase tracking-wider">Email Address</label>
+                <input id="edit-input-email" type="email" class="w-full px-3 py-2 bg-theme-bg border border-theme-border rounded-xl text-sm focus-ring-custom text-theme-text font-medium" required />
+              </div>
+
+              <!-- Avatar Selection -->
+              <div class="space-y-2">
+                <label class="text-xs font-bold text-theme-muted uppercase tracking-wider block">Choose Avatar</label>
+                <div class="grid grid-cols-5 gap-2">
+                  <button type="button" data-avatar-select="avatar-1" class="aspect-square border-2 border-transparent rounded-xl overflow-hidden transition-all focus:outline-none"></button>
+                  <button type="button" data-avatar-select="avatar-2" class="aspect-square border-2 border-transparent rounded-xl overflow-hidden transition-all focus:outline-none"></button>
+                  <button type="button" data-avatar-select="avatar-3" class="aspect-square border-2 border-transparent rounded-xl overflow-hidden transition-all focus:outline-none"></button>
+                  <button type="button" data-avatar-select="avatar-4" class="aspect-square border-2 border-transparent rounded-xl overflow-hidden transition-all focus:outline-none"></button>
+                  <button type="button" data-avatar-select="avatar-5" class="aspect-square border-2 border-transparent rounded-xl overflow-hidden transition-all focus:outline-none"></button>
+                </div>
+              </div>
+
+              <!-- Action button -->
+              <button type="submit" class="w-full py-3 bg-theme-primary hover:bg-theme-primary-hover text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center">
+                <i data-lucide="check" class="w-4.5 h-4.5 mr-2"></i>
+                Save Changes
+              </button>
+            </form>
+          </div>
+
+          <!-- Achievements Module -->
+          <div class="theme-card-static p-6 border border-theme-border space-y-4">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Achievements Unlocked</h3>
+            <div id="achievements-list" class="space-y-3">
+              <!-- Dynamically populated badges depending on history count -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ==========================================
+             RIGHT COLUMN - KPIS, SVG METRICS, HISTORY LOGS
+             ========================================== -->
+        <div class="lg:col-span-8 space-y-8">
+          
+          <!-- KPI Statistics Cards Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            
+            <div class="theme-card-static p-4 border border-theme-border text-center space-y-1.5 bg-theme-surface">
+              <span class="text-xxs font-bold uppercase text-theme-muted tracking-wider block">Exams Taken</span>
+              <span id="kpi-taken" class="text-2xl font-bold font-heading text-theme-text block">0</span>
+            </div>
+
+            <div class="theme-card-static p-4 border border-theme-border text-center space-y-1.5 bg-theme-surface">
+              <span class="text-xxs font-bold uppercase text-theme-muted tracking-wider block">Average Score</span>
+              <span id="kpi-score" class="text-2xl font-bold font-heading text-theme-primary block">0%</span>
+            </div>
+
+            <div class="theme-card-static p-4 border border-theme-border text-center space-y-1.5 bg-theme-surface">
+              <span class="text-xxs font-bold uppercase text-theme-muted tracking-wider block">Study Time</span>
+              <span id="kpi-time" class="text-2xl font-bold font-heading text-theme-text block">0m</span>
+            </div>
+
+            <div class="theme-card-static p-4 border border-theme-border text-center space-y-1.5 bg-theme-surface">
+              <span class="text-xxs font-bold uppercase text-theme-muted tracking-wider block">Passing Rate</span>
+              <span id="kpi-passing" class="text-2xl font-bold font-heading text-emerald-500 block">0%</span>
+            </div>
+
+          </div>
+
+          <!-- Dynamic SVG Trend Progress Chart -->
+          <div class="theme-card-static p-6 border border-theme-border space-y-6">
+            <div class="flex items-center justify-between pb-2">
+              <div class="space-y-1">
+                <h3 class="text-lg font-bold font-heading">Performance Progress Trend</h3>
+                <p class="text-xs text-theme-muted font-semibold">Graphing your latest 10 examination score percentages chronologically.</p>
+              </div>
+              <span class="text-xxs font-bold uppercase border border-theme-border px-2 py-1 rounded bg-theme-surface text-theme-muted">Interactive</span>
+            </div>
+
+            <!-- Dynamic SVG Container -->
+            <div class="relative w-full aspect-[2.2/1] sm:aspect-[2.8/1] border border-theme-border rounded-xl p-4 bg-theme-surface" id="svg-chart-wrapper">
+              <!-- Handled in javascript -->
+            </div>
+          </div>
+
+          <!-- History Attempt Log -->
+          <div class="theme-card-static border border-theme-border overflow-hidden space-y-4 py-6">
+            <h3 class="text-lg font-bold font-heading px-6">Examination History Log</h3>
+            
+            <div class="overflow-x-auto w-full">
+              <table class="w-full text-left text-sm border-collapse">
+                <thead>
+                  <tr class="border-b border-theme-border text-xxs font-bold uppercase text-theme-muted tracking-wider bg-theme-surface select-none">
+                    <th class="py-3.5 px-6">Assessment</th>
+                    <th class="py-3.5 px-6">Date Taken</th>
+                    <th class="py-3.5 px-6 text-center">Correct</th>
+                    <th class="py-3.5 px-6 text-center">Score</th>
+                    <th class="py-3.5 px-6 text-center">Status</th>
+                    <th class="py-3.5 px-6 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="history-table-body" class="divide-y divide-theme-border font-medium">
+                  <!-- Dynamically generated rows -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Empty table state -->
+            <div id="history-empty-state" class="hidden py-8 text-center space-y-3">
+              <i data-lucide="file-text" class="w-8 h-8 text-theme-muted mx-auto"></i>
+              <p class="text-xs text-theme-muted font-bold">You haven't completed any online assessments yet.</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="bg-theme-surface border-t border-theme-border py-12 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+        <div class="md:col-span-5 space-y-4">
+          <a href="index.html" class="flex items-center space-x-2">
+            <div class="w-8 h-8 bg-theme-primary text-white rounded-lg flex items-center justify-center">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+            <span class="text-lg font-bold font-heading">ApexExam</span>
+          </a>
+          <p class="text-sm text-theme-muted max-w-sm leading-relaxed">
+            ApexExam is a modern, responsive, and completely client-side assessment terminal designed to provide distraction-free testing with instant reporting insights.
+          </p>
+        </div>
+        <div class="md:col-span-3 space-y-3">
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-theme-text font-heading">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-theme-muted">
+            <li><a href="index.html" class="hover:text-theme-primary transition-all-custom">Home Page</a></li>
+            <li><a href="exams.html" class="hover:text-theme-primary transition-all-custom">Exams Catalog</a></li>
+            <li><a href="dashboard.html" class="hover:text-theme-primary transition-all-custom">Student Terminal</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-4 space-y-3">
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-theme-text font-heading">Legal & Compliance</h4>
+          <ul class="space-y-2 text-sm text-theme-muted">
+            <li><a href="#" class="hover:text-theme-primary transition-all-custom">Terms & Conditions</a></li>
+            <li><a href="#" class="hover:text-theme-primary transition-all-custom">Privacy & Security Policies</a></li>
+            <li><a href="#" class="hover:text-theme-primary transition-all-custom">Support desk</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-8 pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-xs text-theme-muted gap-4">
+        <span>© 2026 ApexExam Inc. All rights reserved.</span>
+        <span>Designed for outstanding performance. Fully browser static.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/db.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Mobile ticking clock
+      const mobileTime = document.querySelector(".mobile-time");
+      const mobileDate = document.querySelector(".mobile-date");
+      if (mobileTime && mobileDate) {
+        function updateMobileClock() {
+          const now = new Date();
+          mobileTime.textContent = now.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
+          mobileDate.textContent = now.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+        }
+        updateMobileClock();
+        setInterval(updateMobileClock, 1000);
+      }
+
+      if (!window.ExamDB) return;
+
+      const profileView = document.getElementById("profile-container-view");
+      const profileEdit = document.getElementById("profile-container-edit");
+      const editTrigger = document.getElementById("profile-edit-trigger");
+      const editCancel = document.getElementById("profile-edit-cancel");
+      const updateForm = document.getElementById("profile-update-form");
+      
+      const inputName = document.getElementById("edit-input-name");
+      const inputEmail = document.getElementById("edit-input-email");
+      let selectedAvatarId = "";
+
+      // Load Profile Views
+      function loadProfile() {
+        const profile = window.ExamDB.getUserProfile();
+        
+        // Populate text details
+        document.getElementById("dash-profile-name").textContent = profile.name;
+        document.getElementById("dash-profile-email").textContent = profile.email;
+        document.getElementById("dash-greeting-name").textContent = profile.name.split(" ")[0];
+        
+        // Member since rendering
+        const dObj = new Date(profile.registeredAt);
+        document.getElementById("dash-profile-joined").textContent = dObj.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+        
+        // Avatar visual rendering
+        document.getElementById("dash-profile-avatar").innerHTML = window.getAvatarSvg(profile.avatar);
+        
+        // Populate edit inputs
+        inputName.value = profile.name;
+        inputEmail.value = profile.email;
+        selectedAvatarId = profile.avatar;
+        
+        // Update edit avatar highlights
+        document.querySelectorAll("[data-avatar-select]").forEach(btn => {
+          const id = btn.getAttribute("data-avatar-select");
+          btn.innerHTML = window.getAvatarSvg(id);
+          
+          if (id === selectedAvatarId) {
+            btn.classList.add("border-theme-primary", "scale-105");
+            btn.classList.remove("border-transparent");
+          } else {
+            btn.classList.remove("border-theme-primary", "scale-105");
+            btn.classList.add("border-transparent");
+          }
+        });
+      }
+
+      // Profile Switch toggles
+      editTrigger.addEventListener("click", () => {
+        profileView.classList.add("hidden");
+        profileEdit.classList.remove("hidden");
+      });
+
+      editCancel.addEventListener("click", () => {
+        profileEdit.classList.add("hidden");
+        profileView.classList.remove("hidden");
+      });
+
+      // Avatar selection click mapping
+      document.querySelectorAll("[data-avatar-select]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          selectedAvatarId = btn.getAttribute("data-avatar-select");
+          
+          // Re-highlight visually
+          document.querySelectorAll("[data-avatar-select]").forEach(b => {
+            b.classList.remove("border-theme-primary", "scale-105");
+            b.classList.add("border-transparent");
+          });
+          btn.classList.add("border-theme-primary", "scale-105");
+          btn.classList.remove("border-transparent");
+        });
+      });
+
+      // Form Submission
+      updateForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        
+        window.ExamDB.saveUserProfile({
+          name: inputName.value,
+          email: inputEmail.value,
+          avatar: selectedAvatarId
+        });
+
+        // Hide, reload, and sync visually
+        profileEdit.classList.add("hidden");
+        profileView.classList.remove("hidden");
+        
+        loadProfile();
+        // Force sync shared header avatars via the main script
+        if (window.updateHeaderProfile) window.updateHeaderProfile();
+      });
+
+      // ==========================================
+      // STATISTICS & TABLES RENDERING
+      // ==========================================
+      function loadStatsAndHistory() {
+        const stats = window.ExamDB.getDashboardStats();
+        const attempts = window.ExamDB.getAttempts();
+
+        // 1. KPI cards population
+        document.getElementById("kpi-taken").textContent = stats.totalExamsTaken;
+        document.getElementById("kpi-score").textContent = `${stats.averageScore}%`;
+        
+        // Study Time human readable formatting
+        const mins = Math.floor(stats.totalTimeSpent / 60);
+        const secs = stats.totalTimeSpent % 60;
+        document.getElementById("kpi-time").textContent = mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
+        
+        document.getElementById("kpi-passing").textContent = `${stats.passingRate}%`;
+
+        // 2. Achievements Rendering
+        const badgesContainer = document.getElementById("achievements-list");
+        const badges = [
+          { key: 1, title: "First Ascent", desc: "Completed your initial online exam.", icon: "zap", color: "bg-blue-500/10 text-theme-primary" },
+          { key: 2, title: "Grand Scholar", desc: "Averaging an overall passing score > 80%.", icon: "award", color: "bg-emerald-500/10 text-emerald-600" },
+          { key: 3, title: "Apex Scholar", desc: "Unlocked a perfect 100% scorecard.", icon: "check-circle", color: "bg-pink-500/10 text-pink-600" },
+          { key: 4, title: "High Diligence", desc: "Accumulated over 10 minutes testing time.", icon: "clock", color: "bg-amber-500/10 text-amber-600" }
+        ];
+
+        // Unlock logic
+        const unlockedKeys = [];
+        if (stats.totalExamsTaken >= 1) unlockedKeys.push(1);
+        if (stats.averageScore >= 80) unlockedKeys.push(2);
+        if (attempts.some(a => a.score === 100)) unlockedKeys.push(3);
+        if (stats.totalTimeSpent >= 600) unlockedKeys.push(4);
+
+        if (unlockedKeys.length === 0) {
+          badgesContainer.innerHTML = `
+            <div class="text-xs text-theme-muted font-bold text-center py-4 bg-theme-surface border border-theme-border rounded-xl">
+              No achievements unlocked yet. Finish tests to earn!
+            </div>
+          `;
+        } else {
+          badgesContainer.innerHTML = badges.map(badge => {
+            const isUnlocked = unlockedKeys.includes(badge.key);
+            if (!isUnlocked) return ""; // Only render unlocked achievements
+            
+            return `
+              <div class="flex items-center space-x-3 p-3 bg-theme-surface border border-theme-border rounded-xl text-left fade-in-slide-up">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${badge.color}">
+                  <i data-lucide="${badge.icon}" class="w-5.5 h-5.5"></i>
+                </div>
+                <div class="space-y-0.5">
+                  <h4 class="text-xs font-bold text-theme-text font-heading">${badge.title}</h4>
+                  <p class="text-xxs text-theme-muted leading-tight font-semibold">${badge.desc}</p>
+                </div>
+              </div>
+            `;
+          }).join("");
+        }
+
+        // 3. Render Historical Table attempts
+        const tableBody = document.getElementById("history-table-body");
+        const emptyHistory = document.getElementById("history-empty-state");
+
+        if (attempts.length === 0) {
+          tableBody.parentElement.parentElement.classList.add("hidden");
+          emptyHistory.classList.remove("hidden");
+        } else {
+          emptyHistory.classList.add("hidden");
+          tableBody.parentElement.parentElement.classList.remove("hidden");
+
+          tableBody.innerHTML = attempts.map(attempt => {
+            const dStr = new Date(attempt.date).toLocaleDateString(undefined, {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit"
+            });
+
+            const statusClass = attempt.score >= 60 ? "bg-emerald-500/10 text-emerald-600" : "bg-red-500/10 text-red-600";
+            const statusLabel = attempt.score >= 60 ? "Passed" : "Failed";
+
+            return `
+              <tr class="hover:bg-theme-surface-hover/50 transition-colors">
+                <td class="py-4 px-6 font-semibold text-theme-text max-w-xs truncate">${attempt.examTitle}</td>
+                <td class="py-4 px-6 text-xs text-theme-muted font-bold">${dStr}</td>
+                <td class="py-4 px-6 text-center font-bold text-theme-muted">${attempt.correctCount} / ${attempt.totalQuestions}</td>
+                <td class="py-4 px-6 text-center font-extrabold font-heading text-theme-text">${attempt.score}%</td>
+                <td class="py-4 px-6 text-center">
+                  <span class="px-2.5 py-0.5 rounded-full text-xxs font-extrabold tracking-wide uppercase ${statusClass}">
+                    ${statusLabel}
+                  </span>
+                </td>
+                <td class="py-4 px-6 text-right">
+                  <a href="result.html?attemptId=${attempt.id}" class="px-3.5 py-1.5 bg-theme-bg hover:bg-theme-surface border border-theme-border text-theme-primary font-bold text-xs rounded-lg shadow-sm hover:shadow transition-all-custom inline-flex items-center">
+                    Review
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
+                  </a>
+                </td>
+              </tr>
+            `;
+          }).join("");
+        }
+
+        // 4. Render Dynamic SVG chart progress trend
+        renderProgressChart(stats.recentTrends);
+        
+        lucide.createIcons();
+      }
+
+      // ==========================================
+      // SVG PROGRESS CHART GRAPH GENERATOR
+      // ==========================================
+      function renderProgressChart(trendsData) {
+        const wrapper = document.getElementById("svg-chart-wrapper");
+        
+        if (trendsData.length === 0) {
+          wrapper.innerHTML = `
+            <div class="absolute inset-0 flex items-center justify-center text-xs font-semibold text-theme-muted">
+              Accumulate mock history attempts to draw analytics trends.
+            </div>
+          `;
+          return;
+        }
+
+        // Setup sizes matching bounding ratios
+        const width = 600;
+        const height = 180;
+        const paddingLeft = 40;
+        const paddingRight = 20;
+        const paddingTop = 20;
+        const paddingBottom = 25;
+
+        const plotWidth = width - paddingLeft - paddingRight;
+        const plotHeight = height - paddingTop - paddingBottom;
+
+        // If single data point is present, clone it to draw a straight line
+        const data = trendsData.length === 1 ? [
+          { score: trendsData[0].score, date: "Start" }, 
+          { score: trendsData[0].score, date: trendsData[0].date }
+        ] : trendsData;
+
+        // Math mapping points to x,y coords
+        const pointsCount = data.length;
+        const xStep = plotWidth / (pointsCount - 1);
+        
+        const coords = data.map((item, index) => {
+          const x = paddingLeft + index * xStep;
+          // Percentage coordinates invert (100% score is at Y=paddingTop, 0% is at plotHeight + paddingTop)
+          const y = paddingTop + plotHeight - (item.score / 100) * plotHeight;
+          return { x, y, score: item.score, date: item.date };
+        });
+
+        // Construct SVG tags
+        // Dynamic Gridlines
+        let gridLinesSvg = "";
+        for (let pct = 0; pct <= 100; pct += 20) {
+          const yGrid = paddingTop + plotHeight - (pct / 100) * plotHeight;
+          gridLinesSvg += `
+            <line x1="${paddingLeft}" y1="${yGrid}" x2="${width - paddingRight}" y2="${yGrid}" stroke="var(--border-color)" stroke-dasharray="3,3" stroke-width="1"/>
+            <text x="${paddingLeft - 10}" y="${yGrid + 4}" fill="var(--muted-color)" font-size="9" font-weight="bold" text-anchor="end">${pct}%</text>
+          `;
+        }
+
+        // SVG Path Curve coordinates
+        let pathD = `M ${coords[0].x} ${coords[0].y}`;
+        let areaD = `M ${coords[0].x} ${paddingTop + plotHeight} L ${coords[0].x} ${coords[0].y}`;
+        
+        for (let i = 1; i < coords.length; i++) {
+          // Linear plotting
+          pathD += ` L ${coords[i].x} ${coords[i].y}`;
+          areaD += ` L ${coords[i].x} ${coords[i].y}`;
+        }
+        areaD += ` L ${coords[coords.length - 1].x} ${paddingTop + plotHeight} Z`;
+
+        // SVG Nodes circles
+        let dotsSvg = "";
+        let tooltipsSvg = "";
+        coords.forEach((c, idx) => {
+          dotsSvg += `
+            <circle cx="${c.x}" cy="${c.y}" r="4" fill="var(--bg-color)" stroke="var(--primary-color)" stroke-width="2.5" class="transition-all duration-300 hover:r-6 cursor-pointer" />
+          `;
+          
+          // Micro-tooltip rendering
+          tooltipsSvg += `
+            <text x="${c.x}" y="${c.y - 8}" fill="var(--primary-color)" font-size="9" font-weight="extrabold" text-anchor="middle">${c.score}%</text>
+            <text x="${c.x}" y="${height - 6}" fill="var(--muted-color)" font-size="8" font-weight="bold" text-anchor="middle">${c.date}</text>
+          `;
+        });
+
+        // Core compilation
+        wrapper.innerHTML = `
+          <svg class="w-full h-full" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="chart-area-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="var(--primary-color)" stop-opacity="0.18" />
+                <stop offset="100%" stop-color="var(--primary-color)" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <!-- Dynamic Grid -->
+            ${gridLinesSvg}
+            <!-- Shaded Area Under Path -->
+            <path d="${areaD}" fill="url(#chart-area-grad)" />
+            <!-- Glowing Line path -->
+            <path d="${pathD}" fill="none" stroke="var(--primary-color)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            <!-- Node circles -->
+            ${dotsSvg}
+            <!-- Label values and tooltip text -->
+            ${tooltipsSvg}
+          </svg>
+        `;
+      }
+
+      // Initialize Loaders
+      loadProfile();
+      loadStatsAndHistory();
+    });
+  </script>
+</body>
+</html>
