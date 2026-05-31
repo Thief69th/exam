@@ -1,503 +1,455 @@
 <!DOCTYPE html>
-<html lang="en" class="theme-day">
+<html lang="hi" data-theme="day">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ApexExam | Premium Online Examination Platform</title>
-  
-  <meta name="description" content="Take your online assessments on ApexExam, a state-of-the-art client-side exam terminal featuring robust bilingual support, analytics tracker dashboards, and state-preserving test instances.">
-  <meta name="keywords" content="Online Exams, Student Portal, Web Development Test, DSA exam, Sepia Dark Theme, Bilingual Examination">
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            theme: {
-              bg: 'var(--bg-color)',
-              surface: 'var(--surface-color)',
-              'surface-hover': 'var(--surface-hover)',
-              primary: 'var(--primary-color)',
-              'primary-hover': 'var(--primary-hover)',
-              text: 'var(--text-color)',
-              muted: 'var(--muted-color)',
-              border: 'var(--border-color)',
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            heading: ['Poppins', 'sans-serif'],
-            hindi: ['Noto Sans', 'sans-serif'],
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCC Exam Practice Portal</title>
+    <style>
+        /* --- CSS VARIABLES FOR 3 THEMES --- */
+        [data-theme="day"] {
+            --bg-color: #f4f6f9;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+            --primary-color: #0056b3;
+            --primary-hover: #004085;
+            --footer-bg: #222222;
+            --footer-text: #ffffff;
+            --border-color: #dddddd;
         }
-      }
-    }
-  </script>
-  
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
+
+        [data-theme="night"] {
+            --bg-color: #121212;
+            --text-color: #ffffff; /* शुद्ध सफेद टेक्स्ट */
+            --card-bg: #1e1e1e;
+            --primary-color: #bb86fc;
+            --primary-hover: #3700b3;
+            --footer-bg: #000000;
+            --footer-text: #ffffff;
+            --border-color: #333333;
+        }
+
+        [data-theme="warm"] {
+            --bg-color: #fbf0db;
+            --text-color: #4a3b32;
+            --card-bg: #fff9ed;
+            --primary-color: #8b5a2b;
+            --primary-hover: #5c3a1a;
+            --footer-bg: #3e2723;
+            --footer-text: #f5f5f5;
+            --border-color: #e6d5bc;
+        }
+
+        /* --- GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* नाइट मोड में टेक्स्ट कलर को ज़बरदस्ती सफेद रखने के लिए */
+        [data-theme="night"] body,
+        [data-theme="night"] p,
+        [data-theme="night"] h1,
+        [data-theme="night"] h2,
+        [data-theme="night"] h3,
+        [data-theme="night"] nav ul li a,
+        [data-theme="night"] .footer-links a {
+            color: #ffffff !important;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        /* Menu Links */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-color) !important;
+            background-color: rgba(0,0,0,0.05);
+        }
+        
+        [data-theme="night"] nav ul li a:hover, 
+        [data-theme="night"] nav ul li a.active {
+            color: var(--primary-color) !important;
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Theme Controls */
+        .theme-selector {
+            display: flex;
+            gap: 8px;
+        }
+
+        .theme-btn {
+            padding: 6px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .btn-day { background: #ffffff; color: #333; }
+        .btn-night { background: #222222; color: #fff; border-color: #444; }
+        .btn-warm { background: #fbf0db; color: #4a3b32; }
+
+        /* --- MAIN CONTENT & PAGES --- */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .page-section {
+            display: none; /* डिफ़ॉल्ट रूप से छुपे रहेंगे */
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .page-section.active-section {
+            display: block; /* केवल एक्टिव पेज दिखेगा */
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        /* --- HOME PAGE EXAM CARDS --- */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .hero p { font-size: 18px; margin-top: 10px; opacity: 0.8; }
+
+        .exam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .exam-card {
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 6px;
+            background: var(--bg-color);
+            text-align: center;
+        }
+
+        .exam-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .exam-btn:hover { background-color: var(--primary-hover); }
+
+        /* --- FORMS --- */
+        .contact-form {
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        [data-theme="night"] .contact-form input, 
+        [data-theme="night"] .contact-form textarea {
+            background: #2b2b2b;
+            color: #ffffff;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--footer-text);
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .footer-links a:hover { text-decoration: underline; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; gap: 15px; }
+            nav ul { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
 </head>
-<body class="bg-theme-bg text-theme-text transition-colors duration-300 font-sans flex flex-col min-h-screen">
+<body>
 
-  <!-- ==========================================
-       HEADER & NAVIGATION (Ultra Responsive)
-       ========================================== -->
-  <header class="sticky top-0 z-40 w-full glass border-b border-theme-border transition-colors duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 sm:h-20">
-        
-        <!-- Brand Logo -->
-        <a href="index.html" class="flex items-center space-x-2 group shrink-0">
-          <div class="w-9 h-9 sm:w-10 sm:h-10 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-all-custom">
-            <i data-lucide="graduation-cap" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-          </div>
-          <span class="text-lg sm:text-2xl font-bold tracking-tight font-heading">
-            Apex<span class="text-theme-primary">Exam</span>
-          </span>
-        </a>
-
-        <!-- Desktop Navigation Menu -->
-        <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 font-medium">
-          <a href="index.html" class="text-theme-primary hover:text-theme-primary border-b-2 border-theme-primary px-1 py-2 text-sm transition-all-custom">Home</a>
-          <a href="exams.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Exams</a>
-          <a href="dashboard.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Dashboard</a>
-        </nav>
-
-        <!-- Live Clock, Themes, & Profile (Desktop only) -->
-        <div class="hidden lg:flex items-center space-x-6">
-          
-          <!-- Live Date & Clock -->
-          <div class="flex items-center space-x-4 px-3 py-1.5 border border-theme-border rounded-xl bg-theme-surface text-xs font-semibold tracking-wide">
-            <span class="flex items-center text-theme-muted">
-              <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5 text-theme-primary"></i>
-              <span id="header-date">-- --- ----</span>
-            </span>
-            <span class="w-px h-3 bg-theme-border"></span>
-            <span class="flex items-center text-theme-primary font-mono">
-              <i data-lucide="clock" class="w-3.5 h-3.5 mr-1.5 animate-pulse"></i>
-              <span id="header-time">00:00:00 AM</span>
-            </span>
-          </div>
-
-          <!-- Theme Switcher Pills -->
-          <div class="flex items-center p-1 bg-theme-surface border border-theme-border rounded-xl">
-            <button data-theme-select="day" title="Day Mode" class="p-1.5 rounded-lg border transition-all-custom">
-              <i data-lucide="sun" class="w-4 h-4"></i>
-            </button>
-            <button data-theme-select="night" title="Night Mode" class="p-1.5 rounded-lg border transition-all-custom ml-1">
-              <i data-lucide="moon" class="w-4 h-4"></i>
-            </button>
-            <button data-theme-select="warm" title="Warm Mode" class="p-1.5 rounded-lg border transition-all-custom ml-1">
-              <i data-lucide="eye" class="w-4 h-4"></i>
-            </button>
-          </div>
-
-          <!-- Profile Thumbnail -->
-          <a href="dashboard.html" class="flex items-center space-x-3 pl-2 group">
-            <div id="header-avatar" class="w-9 h-9 rounded-xl overflow-hidden border border-theme-border group-hover:ring-2 group-hover:ring-theme-primary transition-all-custom">
-              <!-- Dynamically populated -->
-            </div>
-            <div class="flex flex-col text-left">
-              <span class="text-xs text-theme-muted font-medium">Welcome back,</span>
-              <span id="header-username" class="text-sm font-semibold tracking-tight">Amit</span>
-            </div>
-          </a>
-        </div>
-
-        <!-- Mobile Controls (Ultra Compact) -->
-        <div class="flex items-center lg:hidden">
-          <!-- Hamburger Toggle (Larger touch target) -->
-          <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="p-3 border border-theme-border rounded-xl bg-theme-surface text-theme-text hover:bg-theme-surface-hover focus-ring-custom min-w-[44px] min-h-[44px] flex items-center justify-center">
-            <i data-lucide="menu" class="w-6 h-6"></i>
-          </button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Mobile Dropdown Navigation Drawer -->
-    <div id="mobile-menu-container" class="hidden border-t border-theme-border bg-theme-bg md:hidden fade-in-slide-up">
-      <div class="px-4 py-6 space-y-4 font-semibold text-center shadow-lg">
-        <a href="index.html" class="block px-4 py-3 rounded-xl bg-theme-surface text-theme-primary border-l-4 border-theme-primary transition-all-custom text-left text-base">Home</a>
-        <a href="exams.html" class="block px-4 py-3 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Exams</a>
-        <a href="dashboard.html" class="block px-4 py-3 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Dashboard</a>
-        
-        <!-- Mobile Profile Quick View -->
-        <div class="pt-4 border-t border-theme-border flex items-center space-x-3 text-left">
-          <div id="header-avatar-mobile" class="w-10 h-10 rounded-xl overflow-hidden border border-theme-border">
-            <!-- Populated via JS -->
-          </div>
-          <div class="flex flex-col">
-            <span class="text-xs text-theme-muted">Candidate Dashboard</span>
-            <span id="header-username-mobile" class="text-sm font-bold tracking-tight">Amit Kumar</span>
-          </div>
-        </div>
-
-        <!-- Mobile Theme Switcher Pill (Moved inside menu for cleaner mobile header) -->
-        <div class="space-y-2 pt-2 text-left">
-          <span class="text-xs font-bold text-theme-muted uppercase tracking-wider block">Theme Mode</span>
-          <div class="grid grid-cols-3 gap-2 bg-theme-surface p-1.5 border border-theme-border rounded-xl">
-            <button data-theme-select="day" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
-              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
-              <span>Day</span>
-            </button>
-            <button data-theme-select="night" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
-              <i data-lucide="moon" class="w-3.5 h-3.5"></i>
-              <span>Night</span>
-            </button>
-            <button data-theme-select="warm" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
-              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
-              <span>Warm</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Mobile live clock -->
-        <div class="flex items-center justify-between px-4 py-3 bg-theme-surface border border-theme-border rounded-xl text-xs pt-2">
-          <span class="flex items-center text-theme-muted">
-            <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5 text-theme-primary"></i>
-            <span class="mobile-date font-semibold">Today</span>
-          </span>
-          <span class="flex items-center text-theme-primary font-mono font-semibold">
-            <i data-lucide="clock" class="w-3.5 h-3.5 mr-1.5 animate-pulse"></i>
-            <span class="mobile-time">00:00</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ==========================================
-       MAIN HERO SECTION
-       ========================================== -->
-  <main class="flex-grow">
-    
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden py-12 sm:py-24 border-b border-theme-border bg-gradient-to-b from-theme-bg via-theme-surface to-theme-bg">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
-          
-          <!-- Column 1: Typography + CTAs (Mobile First Text Centering) -->
-          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-            <div class="inline-flex items-center space-x-2 px-3 py-1.5 border border-theme-border bg-theme-bg rounded-full text-xs font-semibold tracking-wider text-theme-primary shadow-sm uppercase mx-auto lg:mx-0">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-              <span>100% Client-Side SaaS Engine</span>
+    <!-- HEADER SECTION WITH MENU -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>CCC Exam Portal</h1>
             </div>
             
-            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-heading leading-tight max-w-2xl mx-auto lg:mx-0">
-              Elevate Your Knowledge With <span class="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">ApexExam</span>
-            </h1>
+            <nav>
+                <ul>
+                    <li><a href="#home" id="nav-home" class="active">Home</a></li>
+                    <li><a href="#about" id="nav-about">About Us</a></li>
+                    <li><a href="#contact" id="nav-contact">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <div class="theme-selector">
+                <button class="theme-btn btn-day" onclick="setTheme('day')">Day</button>
+                <button class="theme-btn btn-night" onclick="setTheme('night')">Night</button>
+                <button class="theme-btn btn-warm" onclick="setTheme('warm')">Warm</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT SECTIONS -->
+    <main>
+        
+        <!-- 1. HOME PAGE -->
+        <section id="home" class="page-section active-section">
+            <div class="hero">
+                <h2>NIELIT CCC ऑनलाइन मॉक टेस्ट 2026</h2>
+                <p>अपनी तैयारी को मजबूत करें और पहले ही प्रयास में CCC परीक्षा पास करें।</p>
+            </div>
+            <div class="exam-grid">
+                <div class="exam-card">
+                    <h3>CCC Full Mock Test</h3>
+                    <p>100 प्रश्न | 90 मिनट (बिलकुल असली परीक्षा जैसा)</p>
+                    <a href="#exam-start" class="exam-btn">Start Test</a>
+                </div>
+                <div class="exam-card">
+                    <h3>Chapter-wise Test</h3>
+                    <p>कंप्यूटर फंडामेंटल, लिब्रेऑफिस, internet और सुरक्षा।</p>
+                    <a href="#chapters" class="exam-btn">Explore</a>
+                </div>
+                <div class="exam-card">
+                    <h3>Previous Year Papers</h3>
+                    <p>पिछले महीनों में पूछे गए जरूरी प्रश्नोत्तर।</p>
+                    <a href="#papers" class="exam-btn">View Papers</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXAM START PAGE -->
+        <section id="exam-start" class="page-section">
+            <h2>CCC Online Mock Test - Live</h2>
+            <p>यहाँ आपका CCC का लाइव टेस्ट शुरू होगा।</p>
+            <p style="margin-top:10px; opacity:0.8;">(अब आपके मोबाइल या ब्राउज़र का <b>Back Button</b> दबाने पर यह वापस होम पेज पर जाएगा)</p>
+            <br>
+            <a href="#home" class="exam-btn">← गो बैक टू होम</a>
+        </section>
+
+        <!-- CHAPTERS PAGE -->
+        <section id="chapters" class="page-section">
+            <h2>Chapters Wise Practice Sets</h2>
+            <p>यहाँ सभी कंप्यूटर चैप्टर्स की लिस्ट आएगी।</p>
+            <br>
+            <a href="#home" class="exam-btn">← गो बैक टू होम</a>
+        </section>
+
+        <!-- PAPERS PAGE -->
+        <section id="papers" class="page-section">
+            <h2>Previous Year Question Papers</h2>
+            <p>यहाँ पिछले सालों के साल्व्ड पेपर्स की लिस्ट आएगी।</p>
+            <br>
+            <a href="#home" class="exam-btn">← गो बैक टू होम</a>
+        </section>
+
+        <!-- 2. ABOUT US PAGE -->
+        <section id="about" class="page-section">
+            <h2>About Us (हमारे बारे में)</h2>
+            <p>हमारी वेबसाइट CCC (Course on Computer Concepts) की तैयारी करने वाले छात्रों के लिए एक बेहतरीन ऑनलाइन माध्यम है। हमारा मुख्य उद्देश्य छात्रों को नवीनतम पाठ्यक्रम (Syllabus) के आधार पर फ्री मॉक टेस्ट, प्रैक्टिस सेट और महत्वपूर्ण प्रश्न-उत्तर प्रदान करना है ताकि वे बिना किसी कठिनाई के ग्रेडिंग सिस्टम में सफलता हासिल कर सकें।</p>
+        </section>
+
+        <!-- 3. CONTACT US PAGE -->
+        <section id="contact" class="page-section">
+            <h2>Contact Us (संपर्क करें)</h2>
+            <p style="margin-bottom: 15px;">यदि आपके पास कोई प्रश्न या सुझाव है, तो नीचे दिए गए फॉर्म के माध्यम से हमसे संपर्क करें:</p>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('आपका संदेश भेज दिया गया है!');">
+                <input type="text" placeholder="आपका नाम" required>
+                <input type="email" placeholder="आपकी ईमेल आईडी" required>
+                <textarea rows="5" placeholder="आपका संदेश यहाँ लिखें..." required></textarea>
+                <button type="submit" class="exam-btn" style="border:none; cursor:pointer;">Send Message</button>
+            </form>
+        </section>
+
+        <!-- 4. PRIVACY POLICY PAGE -->
+        <section id="privacy" class="page-section">
+            <h2>Privacy Policy (गोपनीयता नीति)</h2>
+            <p>हम अपने यूजर्स की प्राइवेसी का पूरा सम्मान करते हैं। इस वेबसाइट पर आपकी कोई भी निजी जानकारी (जैसे नाम या ईमेल जो आप कांटेक्ट फॉर्म में भरते हैं) किसी भी तीसरे पक्ष (Third Party) के साथ साझा नहीं की जाती है। हम इस डेटा का उपयोग केवल आपसे संपर्क करने और वेबसाइट के अनुभव को बेहतर बनाने के लिए करते हैं।</p>
+        </section>
+
+        <!-- 5. DISCLAIMER PAGE -->
+        <section id="disclaimer" class="page-section">
+            <h2>Disclaimer (अस्वीकरण)</h2>
+            <p>यह वेबसाइट NIELIT (National Institute of Electronics & Information Technology) की आधिकारिक (Official) वेबसाइट नहीं है। यह केवल एक एजुकेशनल और प्रैक्टिस पोर्टल है जिसका उद्देश्य छात्रों को परीक्षा की तैयारी में मदद करना है। यहाँ दी गई जानकारी और मॉक टेस्ट के सवाल संभावित प्रश्नों पर आधारित होते हैं।</p>
+        </section>
+
+    </main>
+
+    <!-- FOOTER SECTION WITH LINKS -->
+    <footer>
+        <div class="footer-links">
+            <a href="#home">Home</a> | 
+            <a href="#about">About Us</a> | 
+            <a href="#contact">Contact Us</a> | 
+            <a href="#privacy">Privacy Policy</a> | 
+            <a href="#disclaimer">Disclaimer</a>
+        </div>
+        <p>&copy; 2026 CCC Exam Portal. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT FOR ROUTING, BACK BUTTON & THEMES -->
+    <script>
+        // 1. मुख्य फंक्शन: जो पेज को बदलता है
+        function showPage(pageId, updateHistory = true) {
+            if (!pageId) pageId = 'home';
+
+            // सभी सेक्शन्स को छुपाएं
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active-section');
+            });
+
+            // चुनी हुई आईडी वाले सेक्शन को एक्टिव करें
+            const activeSection = document.getElementById(pageId);
+            if (activeSection) {
+                activeSection.classList.add('active-section');
+            } else {
+                document.getElementById('home').classList.add('active-section');
+                pageId = 'home';
+            }
+
+            // मेनू लिंक्स एक्टिव क्लास अपडेट करें
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
             
-            <p class="text-sm sm:text-lg text-theme-muted max-w-xl mx-auto lg:mx-0 font-medium">
-              An elegantly crafted distraction-free examination platform. Test your capacities across core web structures, algorithmic complexities, quantitative aptitude, and bilingual assessments.
-            </p>
+            const currentNavLink = document.getElementById('nav-' + pageId);
+            if (currentNavLink) {
+                currentNavLink.classList.add('active');
+            }
 
-            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
-              <a href="exams.html" class="w-full sm:w-auto px-8 py-4 bg-theme-primary text-white font-semibold rounded-2xl hover:bg-theme-primary-hover shadow-lg shadow-theme-primary/25 hover:shadow-theme-primary/40 hover:-translate-y-0.5 transition-all-custom flex items-center justify-center min-h-[48px]">
-                Explore Exams
-                <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
-              </a>
-              <a href="dashboard.html" class="w-full sm:w-auto px-8 py-4 border border-theme-border bg-theme-bg font-semibold rounded-2xl hover:bg-theme-surface-hover hover:-translate-y-0.5 transition-all-custom flex items-center justify-center min-h-[48px]">
-                Student Terminal
-                <i data-lucide="layout-dashboard" class="w-5 h-5 ml-2 text-theme-primary"></i>
-              </a>
-            </div>
-          </div>
+            // ब्राउज़र के एड्रेस बार और हिस्ट्री को अपडेट करें ताकि बैक बटन काम करे
+            if (updateHistory) {
+                history.pushState({ page: pageId }, "", "#" + pageId);
+            }
 
-          <!-- Column 2: Dashboard SVG Illustration (Hides on extra small viewports for layouts cleaness) -->
-          <div class="lg:col-span-5 flex justify-center hidden sm:flex">
-            <div class="relative w-full max-w-xs sm:max-w-md aspect-square p-6 glass-card flex items-center justify-center select-none">
-              <svg class="w-full h-full text-theme-primary" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="100" cy="100" r="80" fill="var(--primary-color)" fill-opacity="0.05" />
-                <path d="M40 30h120a10 10 0 0110 10v120a10 10 0 01-10 10H40a10 10 0 01-10-10V40a10 10 0 0110-10z" fill="var(--surface-color)" stroke="var(--border-color)" stroke-width="2" />
-                <path d="M30 60h140" stroke="var(--border-color)" stroke-width="2" />
-                <circle cx="45" cy="45" r="4" fill="#ef4444" />
-                <circle cx="55" cy="45" r="4" fill="#eab308" />
-                <circle cx="65" cy="45" r="4" fill="#22c55e" />
-                <rect x="42" y="72" width="50" height="34" rx="4" fill="var(--bg-color)" stroke="var(--border-color)" stroke-width="1.5" />
-                <rect x="108" y="72" width="50" height="34" rx="4" fill="var(--bg-color)" stroke="var(--border-color)" stroke-width="1.5" />
-                <rect x="42" y="120" width="116" height="42" rx="4" fill="var(--bg-color)" stroke="var(--border-color)" stroke-width="1.5" />
-                <path d="M50 152 l20 -15 l20 8 l30 -20 l25 10" stroke="var(--primary-color)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                <circle cx="50" cy="152" r="3" fill="var(--primary-color)" />
-                <circle cx="70" cy="137" r="3" fill="var(--primary-color)" />
-                <circle cx="90" cy="145" r="3" fill="var(--primary-color)" />
-                <circle cx="120" cy="125" r="3" fill="var(--primary-color)" />
-                <circle cx="145" cy="135" r="3" fill="var(--primary-color)" />
-                <line x1="50" y1="82" x2="80" y2="82" stroke="var(--muted-color)" stroke-width="2" stroke-linecap="round" />
-                <line x1="50" y1="92" x2="70" y2="92" stroke="var(--primary-color)" stroke-width="3" stroke-linecap="round" />
-                <line x1="116" y1="82" x2="146" y2="82" stroke="var(--muted-color)" stroke-width="2" stroke-linecap="round" />
-                <line x1="116" y1="92" x2="136" y2="92" stroke="var(--primary-color)" stroke-width="3" stroke-linecap="round" />
-              </svg>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
-         STATISTICS COUNTERS
-         ========================================== -->
-    <section class="py-10 bg-theme-bg relative">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
-          
-          <div class="theme-card-static p-4 sm:p-6 text-center space-y-2 border border-theme-border">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/10 text-theme-primary rounded-xl flex items-center justify-center mx-auto mb-1">
-              <i data-lucide="check-square" class="w-5.5 h-5.5"></i>
-            </div>
-            <h3 class="text-2xl sm:text-3xl font-extrabold font-heading text-theme-text tracking-tight">15,000+</h3>
-            <p class="text-[10px] sm:text-xs font-bold text-theme-muted uppercase tracking-wider">Completed Tests</p>
-          </div>
-
-          <div class="theme-card-static p-4 sm:p-6 text-center space-y-2 border border-theme-border">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-500/10 text-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-1">
-              <i data-lucide="users" class="w-5.5 h-5.5"></i>
-            </div>
-            <h3 class="text-2xl sm:text-3xl font-extrabold font-heading text-theme-text tracking-tight">98.6%</h3>
-            <p class="text-[10px] sm:text-xs font-bold text-theme-muted uppercase tracking-wider">Completion Rate</p>
-          </div>
-
-          <div class="theme-card-static p-4 sm:p-6 text-center space-y-2 border border-theme-border">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-amber-500/10 text-amber-500 rounded-xl flex items-center justify-center mx-auto mb-1">
-              <i data-lucide="star" class="w-5.5 h-5.5"></i>
-            </div>
-            <h3 class="text-2xl sm:text-3xl font-extrabold font-heading text-theme-text tracking-tight">4.9 / 5.0</h3>
-            <p class="text-[10px] sm:text-xs font-bold text-theme-muted uppercase tracking-wider">Satisfaction</p>
-          </div>
-
-          <div class="theme-card-static p-4 sm:p-6 text-center space-y-2 border border-theme-border">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-500/10 text-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-1">
-              <i data-lucide="award" class="w-5.5 h-5.5"></i>
-            </div>
-            <h3 class="text-2xl sm:text-3xl font-extrabold font-heading text-theme-text tracking-tight">4 Topics</h3>
-            <p class="text-[10px] sm:text-xs font-bold text-theme-muted uppercase tracking-wider">Unique Categories</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
-         FEATURES EXPLANATION
-         ========================================== -->
-    <section class="py-12 sm:py-24 border-t border-theme-border bg-theme-surface">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="text-center max-w-3xl mx-auto space-y-4 mb-10 sm:mb-16">
-          <h2 class="text-2xl sm:text-4xl font-bold font-heading tracking-tight leading-tight">
-            Designed for Modern Academic Rigor
-          </h2>
-          <p class="text-sm sm:text-lg text-theme-muted">
-            ApexExam combines SaaS-dashboard performance trackers with sleek minimal assessment consoles to guarantee premium learning.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          
-          <!-- Feature 1 -->
-          <div class="theme-card p-6 sm:p-8 border border-theme-border flex flex-col space-y-4">
-            <div class="w-11 h-11 sm:w-12 sm:h-12 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-theme-primary/20 shrink-0">
-              <i data-lucide="zap" class="w-5.5 h-5.5"></i>
-            </div>
-            <div class="space-y-2">
-              <h3 class="text-lg sm:text-xl font-bold font-heading tracking-tight">Zero-Backend Performance</h3>
-              <p class="text-theme-muted text-xs sm:text-sm leading-relaxed">
-                Fully runs on the web browser client-side. Optimized for GitHub Pages hosting, offering loading speeds with zero delay.
-              </p>
-            </div>
-          </div>
-
-          <!-- Feature 2 -->
-          <div class="theme-card p-6 sm:p-8 border border-theme-border flex flex-col space-y-4">
-            <div class="w-11 h-11 sm:w-12 sm:h-12 bg-pink-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-pink-500/20 shrink-0">
-              <i data-lucide="eye-off" class="w-5.5 h-5.5"></i>
-            </div>
-            <div class="space-y-2">
-              <h3 class="text-lg sm:text-xl font-bold font-heading tracking-tight">State Auto-Saving</h3>
-              <p class="text-theme-muted text-xs sm:text-sm leading-relaxed">
-                Accidental closure? Browser refresh? Our state engine preserves answers and countdown timers in localStorage seamlessly.
-              </p>
-            </div>
-          </div>
-
-          <!-- Feature 3 -->
-          <div class="theme-card p-6 sm:p-8 border border-theme-border flex flex-col space-y-4">
-            <div class="w-11 h-11 sm:w-12 sm:h-12 bg-amber-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/20 shrink-0">
-              <i data-lucide="languages" class="w-5.5 h-5.5"></i>
-            </div>
-            <div class="space-y-2">
-              <h3 class="text-lg sm:text-xl font-bold font-heading tracking-tight">Robust Bilingual Engine</h3>
-              <p class="text-theme-muted text-xs sm:text-sm leading-relaxed">
-                Comprehensive support for Hindi & English languages, styled via native Noto Sans fonts for clean layout structures.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==========================================
-         POPULAR EXAMS CATALOG HIGHLIGHT
-         ========================================== -->
-    <section class="py-12 sm:py-24 bg-theme-bg border-t border-theme-border">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="flex flex-col sm:flex-row items-center justify-between mb-8 sm:mb-12 gap-4">
-          <div class="text-center sm:text-left space-y-1">
-            <h2 class="text-2xl sm:text-3xl font-bold font-heading tracking-tight">Featured Online Assessments</h2>
-            <p class="text-theme-muted text-xs sm:text-sm font-medium">Kickstart your education. Test your technical and language competence instantly.</p>
-          </div>
-          <a href="exams.html" class="w-full sm:w-auto px-5 py-3 border border-theme-border bg-theme-surface hover:bg-theme-surface-hover font-semibold text-sm rounded-xl transition-all-custom flex items-center justify-center min-h-[44px]">
-            View All Exams
-            <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
-          </a>
-        </div>
-
-        <div id="popular-exams-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          <!-- Dynamically filled with popular exams -->
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ==========================================
-       FOOTER
-       ========================================== -->
-  <footer class="bg-theme-surface border-t border-theme-border py-10 transition-colors duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 text-center md:text-left">
-        
-        <div class="md:col-span-5 space-y-4">
-          <a href="index.html" class="flex items-center space-x-2 justify-center md:justify-start">
-            <div class="w-8 h-8 bg-theme-primary text-white rounded-lg flex items-center justify-center">
-              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
-            </div>
-            <span class="text-lg font-bold font-heading">ApexExam</span>
-          </a>
-          <p class="text-xs sm:text-sm text-theme-muted max-w-sm mx-auto md:mx-0 leading-relaxed">
-            ApexExam is a modern, responsive, and completely client-side assessment terminal designed to provide distraction-free testing with instant reporting insights.
-          </p>
-        </div>
-
-        <div class="md:col-span-3 space-y-3">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Quick Links</h4>
-          <ul class="space-y-2 text-xs sm:text-sm text-theme-muted">
-            <li><a href="index.html" class="hover:text-theme-primary transition-all-custom">Home Page</a></li>
-            <li><a href="exams.html" class="hover:text-theme-primary transition-all-custom">Exams Catalog</a></li>
-            <li><a href="dashboard.html" class="hover:text-theme-primary transition-all-custom">Student Terminal</a></li>
-          </ul>
-        </div>
-
-        <div class="md:col-span-4 space-y-3">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Legal & Compliance</h4>
-          <ul class="space-y-2 text-xs sm:text-sm text-theme-muted">
-            <li><a href="#" class="hover:text-theme-primary transition-all-custom">Terms & Conditions</a></li>
-            <li><a href="#" class="hover:text-theme-primary transition-all-custom">Privacy & Security Policies</a></li>
-            <li><a href="#" class="hover:text-theme-primary transition-all-custom">Support desk</a></li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="mt-8 pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-xxs sm:text-xs text-theme-muted gap-4">
-        <span>© 2026 ApexExam Inc. All rights reserved.</span>
-        <span>Designed for outstanding performance. Fully browser static.</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="assets/js/db.js"></script>
-  <script src="assets/js/main.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const mobileTime = document.querySelector(".mobile-time");
-      const mobileDate = document.querySelector(".mobile-date");
-      
-      if (mobileTime && mobileDate) {
-        function updateMobileClock() {
-          const now = new Date();
-          mobileTime.textContent = now.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
-          mobileDate.textContent = now.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
-        updateMobileClock();
-        setInterval(updateMobileClock, 1000);
-      }
 
-      if (window.ExamDB) {
-        const exams = window.ExamDB.getExams().slice(0, 3);
-        const grid = document.getElementById("popular-exams-grid");
-        
-        if (grid && exams.length > 0) {
-          grid.innerHTML = exams.map(exam => {
-            let difficultyColor = "bg-emerald-500/10 text-emerald-600";
-            if (exam.difficulty === "Intermediate") difficultyColor = "bg-blue-500/10 text-theme-primary";
-            if (exam.difficulty === "Advanced") difficultyColor = "bg-orange-500/10 text-orange-600";
+        // 2. जब यूजर मोबाइल या ब्राउज़र का BACK या FORWARD बटन दबाए (पूरी तरह फिक्स)
+        window.onpopstate = function(event) {
+            if (event.state && event.state.page) {
+                showPage(event.state.page, false);
+            } else {
+                const hash = window.location.hash.replace('#', '');
+                showPage(hash || 'home', false);
+            }
+        };
 
-            const tagBadges = exam.tags.map(t => `<span class="px-2 py-0.5 border border-theme-border bg-theme-bg rounded text-[10px] font-semibold text-theme-muted">${t}</span>`).join(" ");
+        // 3. लिंक्स पर क्लिक हैंडल करने का अचूक तरीका
+        document.body.addEventListener('click', function(e) {
+            const target = e.target.closest('a'); 
+            
+            if (target && target.getAttribute('href') && target.getAttribute('href').startsWith('#')) {
+                e.preventDefault(); 
+                const pageId = target.getAttribute('href').replace('#', '');
+                showPage(pageId, true); // हिस्ट्री अपडेट ट्रू रखेंगे ताकि बैक बटन इनेबल हो
+            }
+        });
 
-            return `
-              <div class="theme-card p-6 border border-theme-border flex flex-col justify-between h-full">
-                <div class="space-y-4">
-                  <div class="flex items-center justify-between">
-                    <span class="px-2.5 py-1 text-xxs font-extrabold rounded-lg ${difficultyColor} uppercase tracking-wider">${exam.difficulty}</span>
-                    <span class="flex items-center text-xs font-semibold text-theme-muted">
-                      <i data-lucide="clock" class="w-3.5 h-3.5 mr-1 text-theme-primary"></i>
-                      ${exam.duration} mins
-                    </span>
-                  </div>
-
-                  <div class="space-y-2">
-                    <h3 class="text-base sm:text-lg font-bold font-heading leading-snug tracking-tight text-theme-text">${exam.title}</h3>
-                    <p class="text-xs sm:text-sm text-theme-muted line-clamp-2 leading-relaxed font-semibold">${exam.description}</p>
-                  </div>
-                  
-                  <div class="flex flex-wrap gap-1.5 pt-1">
-                    ${tagBadges}
-                  </div>
-                </div>
-
-                <div class="pt-6 mt-6 border-t border-theme-border flex items-center justify-between">
-                  <span class="text-xs text-theme-muted font-bold flex items-center">
-                    <i data-lucide="help-circle" class="w-4 h-4 mr-1 text-theme-primary"></i>
-                    ${exam.questionsCount} MCQs
-                  </span>
-                  <a href="instructions.html?id=${exam.id}" class="px-4 py-2.5 bg-theme-primary hover:bg-theme-primary-hover text-white font-bold text-xs rounded-xl shadow-md transition-all-custom flex items-center min-h-[40px]">
-                    Open Exam
-                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 ml-1"></i>
-                  </a>
-                </div>
-              </div>
-            `;
-          }).join("");
-          
-          lucide.createIcons();
+        // 4. थीम स्विचर लॉजिक
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('selectedTheme', themeName);
         }
-      }
-      
-      // Update Mobile avatar greeting inside hamburger
-      const avMob = document.getElementById("header-avatar-mobile");
-      const nameMob = document.getElementById("header-username-mobile");
-      if (avMob && nameMob && window.ExamDB) {
-        const profile = window.ExamDB.getUserProfile();
-        nameMob.textContent = profile.name;
-        avMob.innerHTML = window.getAvatarSvg(profile.avatar);
-      }
-      
-      lucide.createIcons();
-    });
-  </script>
-<div style="margin-top: 50px;"><h2>Latest Pages</h2>
-    <div class="post-item"><a href="dashboard.html">Dashboard</a> <span class="date">May 31, 2026</span></div>
-    <div class="post-item"><a href="exam.html">Exam</a> <span class="date">May 31, 2026</span></div>
-    <div class="post-item"><a href="exams.html">Exams</a> <span class="date">May 31, 2026</span></div>
-    <div class="post-item"><a href="instructions.html">Instructions</a> <span class="date">May 31, 2026</span></div>
-    <div class="post-item"><a href="result.html">Result</a> <span class="date">May 31, 2026</span></div></div>
+
+        // 5. पेज लोड होने पर इनिशियलाइज करने के लिए कोड
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('selectedTheme') || 'day';
+            setTheme(savedTheme);
+
+            const initialHash = window.location.hash.replace('#', '') || 'home';
+            history.replaceState({ page: initialHash }, "", window.location.hash || "#home");
+            showPage(initialHash, false);
+        };
+    </script>
 </body>
 </html>
