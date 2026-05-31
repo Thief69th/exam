@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="day">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCC MS Office Mock Test</title>
+    <style>
+        /* थिम्स और बेसिक स्टाइल (पिछले कोड के अनुसार) */
+        [data-theme="day"] { --bg-color: #f4f6f9; --text-color: #333333; --card-bg: #ffffff; --primary-color: #0056b3; --border-color: #dddddd; }
+        [data-theme="night"] { --bg-color: #121212; --text-color: #ffffff; --card-bg: #1e1e1e; --primary-color: #bb86fc; --border-color: #333333; }
+        [data-theme="warm"] { --bg-color: #fbf0db; --text-color: #4a3b32; --card-bg: #fff9ed; --primary-color: #8b5a2b; --border-color: #e6d5bc; }
+
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: sans-serif; padding: 20px; }
+        [data-theme="night"] p, [data-theme="night"] h2, [data-theme="night"] label { color: #ffffff !important; }
+
+        .test-container { max-width: 800px; margin: 0 auto; background: var(--card-bg); padding: 30px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .question-block { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed var(--border-color); }
+        .question-text { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+        .options-list { list-style: none; padding-left: 0; }
+        .options-list li { margin-bottom: 8px; }
+        
+        label { cursor: pointer; display: inline-block; margin-left: 8px; }
+        .btn { background: var(--primary-color); color: white; border: none; padding: 12px 25px; font-size: 16px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        
+        /* रिजल्ट सेक्शन */
+        .result-section { display: none; margin-top: 30px; padding: 20px; border-radius: 6px; background: rgba(0, 128, 0, 0.1); border: 1px solid green; }
+        .score-text { font-size: 22px; font-weight: bold; color: green; margin-bottom: 15px; }
+        [data-theme="night"] .score-text { color: #00ff00; }
+        .wrong-ans { color: red; font-weight: bold; }
+        .correct-ans { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="test-container">
+    <h2>CCC MS Office (Word, Excel, PPT) Mock Test</h2>
+    <p>सभी प्रश्नों के उत्तर दें और अंत में "Submit Test" बटन पर क्लिक करके अपना रिजल्ट देखें।</p>
+    <hr style="margin: 20px 0; border-color: var(--border-color);"><br>
+
+    <form id="quizForm">
+        <div class="question-block">
+            <p class="question-text">1. MS Word में डिफ़ॉल्ट फ़ॉन्ट आकार (Default Font Size) क्या होता है?</p>
+            <ul class="options-list">
+                <li><input type="radio" name="q1" value="A" id="q1a"> <label for="q1a">10</label></li>
+                <li><input type="radio" name="q1" value="B" id="q1b"> <label for="q1b">11</label></li>
+                <li><input type="radio" name="q1" value="C" id="q1c"> <label for="q1c">12</label></li>
+                <li><input type="radio" name="q1" value="D" id="q1d"> <label for="q1d">14</label></li>
+            </ul>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">2. MS Excel में एक वर्कबुक (Workbook) डिफ़ॉल्ट रूप से किसका संग्रह होती है?</p>
+            <ul class="options-list">
+                <li><input type="radio" name="q2" value="A" id="q2a"> <label for="q2a">Worksheets (वर्कशीट)</label></li>
+                <li><input type="radio" name="q2" value="B" id="q2b"> <label for="q2b">Charts (चार्ट)</label></li>
+                <li><input type="radio" name="q2" value="C" id="q2c"> <label for="q2c">Pages (पेज)</label></li>
+                <li><input type="radio" name="q2" value="D" id="q2d"> <label for="q2d">Documents (दस्तावेज़)</label></li>
+            </ul>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">3. MS PowerPoint में स्लाइड शो (Slide Show) शुरू करने के लिए किस शॉर्टकट कुंजी का उपयोग किया जाता है?</p>
+            <ul class="options-list">
+                <li><input type="radio" name="q3" value="A" id="q3a"> <label for="q3a">F3</label></li>
+                <li><input type="radio" name="q3" value="B" id="q3b"> <label for="q3b">F5</label></li>
+                <li><input type="radio" name="q3" value="C" id="q3c"> <label for="q3c">F7</label></li>
+                <li><input type="radio" name="q3" value="D" id="q3d"> <label for="q3d">Ctrl + S</label></li>
+            </ul>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">4. MS Word में 'Hyperlink' इन्सर्ट करने की शॉर्टकट कुंजी क्या है?</p>
+            <ul class="options-list">
+                <li><input type="radio" name="q4" value="A" id="q4a"> <label for="q4a">Ctrl + H</label></li>
+                <li><input type="radio" name="q4" value="B" id="q4b"> <label for="q4b">Ctrl + L</label></li>
+                <li><input type="radio" name="q4" value="C" id="q4c"> <label for="q4c">Ctrl + K</label></li>
+                <li><input type="radio" name="q4" value="D" id="q4d"> <label for="q4d">Ctrl + M</label></li>
+            </ul>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">5. MS Excel में किसी फॉर्मूले (Formula) की शुरुआत हमेशा किस चिह्न से होती है?</p>
+            <ul class="options-list">
+                <li><input type="radio" name="q5" value="A" id="q5a"> <label for="q5a">+</label></li>
+                <li><input type="radio" name="q5" value="B" id="q5b"> <label for="q5b">%</label></li>
+                <li><input type="radio" name="q5" value="C" id="q5c"> <label for="q5c">=</label></li>
+                <li><input type="radio" name="q5" value="D" id="q5d"> <label for="q5d">#</label></li>
+            </ul>
+        </div>
+
+        <button type="button" class="btn" onclick="checkAnswers()">Submit Test</button>
+    </form>
+
+    <div id="resultSection" class="result-section">
+        <div id="scoreDisplay" class="score-text"></div>
+        <h3>Answer Key (उत्तर तालिका):</h3>
+        <br>
+        <div id="answersReview"></div>
+    </div>
+</div>
+
+<script>
+    // सही उत्तरों की लिस्ट (Answer Key)
+    const correctAnswers = {
+        q1: { ans: "B", text: "11" },
+        q2: { ans: "A", text: "Worksheets (वर्कशीट)" },
+        q3: { ans: "B", text: "F5" },
+        q4: { ans: "C", text: "Ctrl + K" },
+        q5: { ans: "C", text: "=" }
+    };
+
+    function checkAnswers() {
+        const form = document.getElementById('quizForm');
+        let score = 0;
+        let totalQuestions = Object.keys(correctAnswers).length;
+        let reviewHTML = "";
+
+        // हर प्रश्न को चेक करने के लिए लूप
+        for (let i = 1; i <= totalQuestions; i++) {
+            let qName = 'q' + i;
+            let selectedOpt = form.elements[qName].value; // यूजर द्वारा चुना गया उत्तर
+            let qText = document.querySelectorAll('.question-text')[i-1].innerText;
+            
+            let statusText = "";
+            
+            if (selectedOpt === correctAnswers[qName].ans) {
+                score++;
+                statusText = `<span class="correct-ans">✓ आपका उत्तर सही है!</span>`;
+            } else if (selectedOpt === "") {
+                statusText = `<span class="wrong-ans">✗ आपने इस प्रश्न का उत्तर नहीं दिया।</span>`;
+            } else {
+                statusText = `<span class="wrong-ans">✗ आपका उत्तर गलत है।</span>`;
+            }
+
+            // लास्ट में दिखाने के लिए आंसर शीट का ढांचा तैयार करना
+            reviewHTML += `
+                <div style="margin-bottom: 15px; border-left: 4px solid var(--primary-color); padding-left: 10px;">
+                    <p><strong>${qText}</strong></p>
+                    <p>सही उत्तर: <span class="correct-ans">${correctAnswers[qName].text}</span></p>
+                    <p>${statusText}</p>
+                </div>
+            `;
+        }
+
+        // रिजल्ट दिखाना
+        document.getElementById('scoreDisplay').innerText = `आपका स्कोर: ${score} / ${totalQuestions}`;
+        document.getElementById('answersReview').innerHTML = reviewHTML;
+        
+        // रिजल्ट वाले बॉक्स को अन-हाइड (Show) करना
+        document.getElementById('resultSection').style.display = "block";
+        
+        // स्क्रीन को स्क्रॉल करके नीचे रिजल्ट पर ले जाना
+        document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
