@@ -32,36 +32,36 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link class="stylesheet" rel="stylesheet" href="assets/css/style.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="bg-theme-bg text-theme-text transition-colors duration-300 font-sans flex flex-col min-h-screen">
 
   <!-- ==========================================
-       HEADER & NAVIGATION
+       HEADER & NAVIGATION (Ultra Responsive)
        ========================================== -->
   <header class="sticky top-0 z-40 w-full glass border-b border-theme-border transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 sm:h-20">
         
         <!-- Brand Logo -->
-        <a href="index.html" class="flex items-center space-x-2 group">
-          <div class="w-10 h-10 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-all-custom">
-            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+        <a href="index.html" class="flex items-center space-x-2 group shrink-0">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-all-custom">
+            <i data-lucide="graduation-cap" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </div>
-          <span class="text-xl sm:text-2xl font-bold tracking-tight font-heading">
+          <span class="text-lg sm:text-2xl font-bold tracking-tight font-heading">
             Apex<span class="text-theme-primary">Exam</span>
           </span>
         </a>
 
         <!-- Desktop Navigation Menu -->
-        <nav class="hidden md:flex items-center space-x-8 font-medium">
+        <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 font-medium">
           <a href="index.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Home</a>
           <a href="exams.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Exams</a>
           <a href="dashboard.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Dashboard</a>
         </nav>
 
-        <!-- Live Clock, Themes, & Profile -->
+        <!-- Live Clock, Themes, & Profile (Desktop only) -->
         <div class="hidden lg:flex items-center space-x-6">
           
           <!-- Live Date & Clock -->
@@ -102,36 +102,55 @@
           </a>
         </div>
 
-        <!-- Mobile Controls Wrapper -->
-        <div class="flex items-center space-x-3 md:space-x-4 lg:hidden">
-          <div class="flex items-center p-0.5 bg-theme-surface border border-theme-border rounded-lg text-xs">
-            <button data-theme-select="day" class="p-1 rounded-md border text-theme-text transition-all-custom">
-              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
-            </button>
-            <button data-theme-select="night" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
-              <i data-lucide="moon" class="w-3.5 h-3.5"></i>
-            </button>
-            <button data-theme-select="warm" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
-              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-
-          <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="p-2 border border-theme-border rounded-xl bg-theme-surface text-theme-text hover:bg-theme-surface-hover focus-ring-custom">
-            <i data-lucide="menu" class="w-5.5 h-5.5"></i>
+        <!-- Mobile Controls (Ultra Compact) -->
+        <div class="flex items-center lg:hidden">
+          <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="p-3 border border-theme-border rounded-xl bg-theme-surface text-theme-text hover:bg-theme-surface-hover focus-ring-custom min-w-[44px] min-h-[44px] flex items-center justify-center">
+            <i data-lucide="menu" class="w-6 h-6"></i>
           </button>
         </div>
 
       </div>
     </div>
 
-    <!-- Mobile Dropdown Drawer -->
+    <!-- Mobile Dropdown Navigation Drawer -->
     <div id="mobile-menu-container" class="hidden border-t border-theme-border bg-theme-bg md:hidden fade-in-slide-up">
-      <div class="px-4 pt-2 pb-6 space-y-3 font-semibold text-center shadow-lg">
-        <a href="index.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Home</a>
-        <a href="exams.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Exams</a>
-        <a href="dashboard.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Dashboard</a>
+      <div class="px-4 py-6 space-y-4 font-semibold text-center shadow-lg">
+        <a href="index.html" class="block px-4 py-3 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Home</a>
+        <a href="exams.html" class="block px-4 py-3 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Exams</a>
+        <a href="dashboard.html" class="block px-4 py-3 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Dashboard</a>
         
-        <div class="flex items-center justify-between px-3 py-2 bg-theme-surface border border-theme-border rounded-xl text-xs mt-4">
+        <!-- Mobile Profile Quick View -->
+        <div class="pt-4 border-t border-theme-border flex items-center space-x-3 text-left">
+          <div id="header-avatar-mobile" class="w-10 h-10 rounded-xl overflow-hidden border border-theme-border">
+            <!-- Populated via JS -->
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xs text-theme-muted">Candidate Dashboard</span>
+            <span id="header-username-mobile" class="text-sm font-bold tracking-tight">Amit Kumar</span>
+          </div>
+        </div>
+
+        <!-- Mobile Theme Switcher Pill -->
+        <div class="space-y-2 pt-2 text-left">
+          <span class="text-xs font-bold text-theme-muted uppercase tracking-wider block">Theme Mode</span>
+          <div class="grid grid-cols-3 gap-2 bg-theme-surface p-1.5 border border-theme-border rounded-xl">
+            <button data-theme-select="day" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
+              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
+              <span>Day</span>
+            </button>
+            <button data-theme-select="night" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
+              <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+              <span>Night</span>
+            </button>
+            <button data-theme-select="warm" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+              <span>Warm</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile live clock -->
+        <div class="flex items-center justify-between px-4 py-3 bg-theme-surface border border-theme-border rounded-xl text-xs pt-2">
           <span class="flex items-center text-theme-muted">
             <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5 text-theme-primary"></i>
             <span class="mobile-date font-semibold">Today</span>
@@ -148,73 +167,73 @@
   <!-- ==========================================
        MAIN CONTENT - PRE-EXAM PANEL
        ========================================== -->
-  <main class="flex-grow py-12 bg-gradient-to-b from-theme-bg via-theme-surface to-theme-bg">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8" id="briefing-container">
+  <main class="flex-grow py-8 sm:py-12 bg-gradient-to-b from-theme-bg via-theme-surface to-theme-bg">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8" id="briefing-container">
       
-      <!-- Error Loading state (Hidden) -->
+      <!-- Error Loading state -->
       <div id="briefing-error" class="hidden theme-card-static p-8 border-red-200 text-center space-y-6">
         <div class="w-16 h-16 bg-red-100 border border-red-300 text-red-500 rounded-2xl flex items-center justify-center mx-auto shadow-sm">
           <i data-lucide="alert-triangle" class="w-8 h-8"></i>
         </div>
         <div class="space-y-2">
           <h2 class="text-xl font-bold font-heading text-theme-text">Invalid Exam Session</h2>
-          <p class="text-sm text-theme-muted max-w-sm mx-auto">The requested exam identifier is missing or no longer exists in our catalog.</p>
+          <p class="text-sm text-theme-muted max-w-sm mx-auto font-semibold">The requested exam identifier is missing or no longer exists in our catalog.</p>
         </div>
-        <a href="exams.html" class="px-5 py-2.5 bg-theme-primary hover:bg-theme-primary-hover text-white text-xs font-semibold rounded-lg shadow inline-flex items-center">
+        <a href="exams.html" class="px-5 py-3 bg-theme-primary hover:bg-theme-primary-hover text-white text-xs font-bold rounded-xl shadow inline-flex items-center min-h-[44px]">
           <i data-lucide="chevron-left" class="w-4 h-4 mr-1"></i>
           Back to Exams Catalog
         </a>
       </div>
 
       <!-- Main Instruction details shell -->
-      <div id="briefing-content" class="space-y-8">
+      <div id="briefing-content" class="space-y-6 sm:space-y-8">
         
-        <!-- Header -->
-        <div class="space-y-3 pb-6 border-b border-theme-border">
-          <div class="flex items-center space-x-2">
-            <button class="btn-back p-1.5 border border-theme-border rounded-lg bg-theme-surface hover:bg-theme-surface-hover text-theme-muted hover:text-theme-primary transition-all-custom">
+        <!-- Header (Centered on Mobile) -->
+        <div class="space-y-3 pb-4 sm:pb-6 border-b border-theme-border text-center md:text-left">
+          <div class="flex items-center space-x-2 justify-center md:justify-start">
+            <button class="btn-back p-2 border border-theme-border rounded-lg bg-theme-surface hover:bg-theme-surface-hover text-theme-muted hover:text-theme-primary transition-all-custom min-w-[36px] min-h-[36px] flex items-center justify-center">
               <i data-lucide="arrow-left" class="w-4 h-4"></i>
             </button>
-            <span class="text-xs font-bold text-theme-primary uppercase tracking-wider">Candidate Terminal Verification</span>
+            <span class="text-xxs sm:text-xs font-bold text-theme-primary uppercase tracking-wider">Candidate Terminal Verification</span>
           </div>
-          <h1 id="exam-title" class="text-3xl font-extrabold tracking-tight font-heading leading-tight text-theme-text">
+          <h1 id="exam-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight font-heading leading-tight text-theme-text">
             Exam Registration Overview
           </h1>
-          <p class="text-sm text-theme-muted font-semibold">Please review the compliance rules, duration details, and execute preflight safety checks.</p>
+          <p class="text-xs sm:text-sm text-theme-muted font-semibold">Please review the compliance rules, duration details, and execute preflight safety checks.</p>
         </div>
 
-        <!-- Metric Details grid -->
+        <!-- Metric Details grid (Responsive 2x2 or 4x1) -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div class="theme-card-static p-4 border border-theme-border text-center space-y-1">
+          <div class="theme-card-static p-4 border border-theme-border text-center space-y-1 bg-theme-surface">
             <i data-lucide="activity" class="w-5 h-5 mx-auto text-theme-primary"></i>
-            <span class="text-xxs font-bold text-theme-muted uppercase tracking-wider block">Complexity</span>
-            <span id="exam-difficulty" class="text-sm font-bold text-theme-text font-heading block">Beginner</span>
+            <span class="text-[10px] font-bold text-theme-muted uppercase tracking-wider block">Complexity</span>
+            <span id="exam-difficulty" class="text-xs sm:text-sm font-bold text-theme-text font-heading block">Beginner</span>
           </div>
           
-          <div class="theme-card-static p-4 border border-theme-border text-center space-y-1">
+          <div class="theme-card-static p-4 border border-theme-border text-center space-y-1 bg-theme-surface">
             <i data-lucide="clock" class="w-5 h-5 mx-auto text-theme-primary"></i>
-            <span class="text-xxs font-bold text-theme-muted uppercase tracking-wider block">Duration</span>
-            <span id="exam-duration" class="text-sm font-bold text-theme-text font-heading block">10 Mins</span>
+            <span class="text-[10px] font-bold text-theme-muted uppercase tracking-wider block">Duration</span>
+            <span id="exam-duration" class="text-xs sm:text-sm font-bold text-theme-text font-heading block">10 Mins</span>
           </div>
 
-          <div class="theme-card-static p-4 border border-theme-border text-center space-y-1">
+          <div class="theme-card-static p-4 border border-theme-border text-center space-y-1 bg-theme-surface">
             <i data-lucide="help-circle" class="w-5 h-5 mx-auto text-theme-primary"></i>
-            <span class="text-xxs font-bold text-theme-muted uppercase tracking-wider block">Total Items</span>
-            <span id="exam-questions" class="text-sm font-bold text-theme-text font-heading block">5 MCQs</span>
+            <span class="text-[10px] font-bold text-theme-muted uppercase tracking-wider block">Total Items</span>
+            <span id="exam-questions" class="text-xs sm:text-sm font-bold text-theme-text font-heading block">5 MCQs</span>
           </div>
 
-          <div class="theme-card-static p-4 border border-theme-border text-center space-y-1">
+          <div class="theme-card-static p-4 border border-theme-border text-center space-y-1 bg-theme-surface">
             <i data-lucide="globe" class="w-5 h-5 mx-auto text-theme-primary"></i>
-            <span class="text-xxs font-bold text-theme-muted uppercase tracking-wider block">Languages</span>
-            <span id="exam-lang" class="text-sm font-bold text-theme-text font-heading block">Bilingual</span>
+            <span class="text-[10px] font-bold text-theme-muted uppercase tracking-wider block">Languages</span>
+            <span id="exam-lang" class="text-xs sm:text-sm font-bold text-theme-text font-heading block">Bilingual</span>
           </div>
         </div>
 
-        <!-- Rules Accordion Panel -->
-        <div class="theme-card-static p-6 sm:p-8 border border-theme-border space-y-6">
-          <h3 class="text-lg font-bold font-heading">Rules & Compliance Guidelines</h3>
+        <!-- Rules Panel -->
+        <div class="theme-card-static p-5 sm:p-8 border border-theme-border space-y-5">
+          <h3 class="text-base sm:text-lg font-bold font-heading text-center sm:text-left">Rules & Compliance Guidelines</h3>
           
-          <div class="space-y-4 text-sm text-theme-muted leading-relaxed font-semibold">
+          <div class="space-y-4 text-xs sm:text-sm text-theme-muted leading-relaxed font-semibold">
             <div class="flex items-start">
               <span class="w-6 h-6 rounded-full bg-theme-primary/10 text-theme-primary text-xs font-bold flex items-center justify-center shrink-0 mr-3 mt-0.5">1</span>
               <div>
@@ -244,44 +263,34 @@
                 </p>
               </div>
             </div>
-
-            <div class="flex items-start">
-              <span class="w-6 h-6 rounded-full bg-theme-primary/10 text-theme-primary text-xs font-bold flex items-center justify-center shrink-0 mr-3 mt-0.5">4</span>
-              <div>
-                <h4 class="text-sm font-bold text-theme-text font-heading">Distraction-Free Environment</h4>
-                <p class="text-xs text-theme-muted mt-1 leading-normal">
-                  To maintain academic credibility, candidates are strictly advised to avoid switching browser tab targets or opening devtools consoles.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
 
         <!-- Compliance Checklists and Start Triggers -->
-        <div class="theme-card-static p-6 border border-theme-border space-y-5">
-          <h3 class="text-sm font-bold uppercase tracking-wider text-theme-text font-heading">Preflight Acknowledgement</h3>
+        <div class="theme-card-static p-5 sm:p-6 border border-theme-border space-y-4">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Preflight Acknowledgement</h3>
           
           <div class="space-y-3 font-semibold text-xs text-theme-muted">
             <!-- Box 1 -->
-            <label class="flex items-start p-3 border border-theme-border bg-theme-surface rounded-xl cursor-pointer hover:bg-theme-surface-hover/80 transition-colors">
-              <input type="checkbox" id="check-rules" class="mt-0.5 mr-3 w-4.5 h-4.5 border-theme-border text-theme-primary focus-ring-custom rounded transition" />
-              <span>I confirm that I have carefully read and understood all the above compliance and scoring policies for this assessment.</span>
+            <label class="flex items-start p-3.5 border border-theme-border bg-theme-surface rounded-xl cursor-pointer hover:bg-theme-surface-hover/80 transition-colors">
+              <input type="checkbox" id="check-rules" class="mt-0.5 mr-3 w-5 h-5 border-theme-border text-theme-primary focus-ring-custom rounded transition shrink-0" />
+              <span class="text-xs sm:text-sm font-semibold text-theme-text">I confirm that I have carefully read and understood all the above compliance and scoring policies for this assessment.</span>
             </label>
 
             <!-- Box 2 -->
-            <label class="flex items-start p-3 border border-theme-border bg-theme-surface rounded-xl cursor-pointer hover:bg-theme-surface-hover/80 transition-colors">
-              <input type="checkbox" id="check-device" class="mt-0.5 mr-3 w-4.5 h-4.5 border-theme-border text-theme-primary focus-ring-custom rounded transition" />
-              <span>I verify that my browser configuration operates smoothly and I am prepared to begin the distraction-free exam session now.</span>
+            <label class="flex items-start p-3.5 border border-theme-border bg-theme-surface rounded-xl cursor-pointer hover:bg-theme-surface-hover/80 transition-colors">
+              <input type="checkbox" id="check-device" class="mt-0.5 mr-3 w-5 h-5 border-theme-border text-theme-primary focus-ring-custom rounded transition shrink-0" />
+              <span class="text-xs sm:text-sm font-semibold text-theme-text">I verify that my browser configuration operates smoothly and I am prepared to begin the distraction-free exam session now.</span>
             </label>
           </div>
 
-          <!-- Triggers -->
-          <div class="pt-4 border-t border-theme-border flex flex-col sm:flex-row items-center gap-4">
-            <button id="btn-start-exam" disabled class="w-full sm:w-auto px-8 py-4 bg-theme-primary text-white font-bold rounded-2xl shadow-lg transition-all-custom flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none hover:bg-theme-primary-hover">
+          <!-- Triggers (Full Width Stack on mobile) -->
+          <div class="pt-4 border-t border-theme-border flex flex-col sm:flex-row items-center gap-3">
+            <button id="btn-start-exam" disabled class="w-full sm:w-auto px-8 py-4 bg-theme-primary text-white font-bold text-sm rounded-2xl shadow-lg transition-all-custom flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none hover:bg-theme-primary-hover min-h-[48px]">
               <i data-lucide="play" class="w-4.5 h-4.5 mr-2"></i>
               Start Online Exam
             </button>
-            <button class="btn-back w-full sm:w-auto px-6 py-4 border border-theme-border bg-theme-bg hover:bg-theme-surface-hover font-semibold text-sm rounded-2xl transition-all-custom">
+            <button class="btn-back w-full sm:w-auto px-6 py-4 border border-theme-border bg-theme-bg hover:bg-theme-surface-hover font-bold text-xs rounded-2xl transition-all-custom min-h-[48px]">
               Cancel & Go Back
             </button>
           </div>
@@ -296,38 +305,38 @@
   <!-- ==========================================
        FOOTER
        ========================================== -->
-  <footer class="bg-theme-surface border-t border-theme-border py-12 transition-colors duration-300">
+  <footer class="bg-theme-surface border-t border-theme-border py-10 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 text-center md:text-left">
         <div class="md:col-span-5 space-y-4">
-          <a href="index.html" class="flex items-center space-x-2">
+          <a href="index.html" class="flex items-center space-x-2 justify-center md:justify-start">
             <div class="w-8 h-8 bg-theme-primary text-white rounded-lg flex items-center justify-center">
               <i data-lucide="graduation-cap" class="w-5 h-5"></i>
             </div>
             <span class="text-lg font-bold font-heading">ApexExam</span>
           </a>
-          <p class="text-sm text-theme-muted max-w-sm leading-relaxed">
+          <p class="text-xs sm:text-sm text-theme-muted max-w-sm mx-auto md:mx-0 leading-relaxed font-semibold">
             ApexExam is a modern, responsive, and completely client-side assessment terminal designed to provide distraction-free testing with instant reporting insights.
           </p>
         </div>
         <div class="md:col-span-3 space-y-3">
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-theme-text font-heading">Quick Links</h4>
-          <ul class="space-y-2 text-sm text-theme-muted">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Quick Links</h4>
+          <ul class="space-y-2 text-xs sm:text-sm text-theme-muted">
             <li><a href="index.html" class="hover:text-theme-primary transition-all-custom">Home Page</a></li>
             <li><a href="exams.html" class="hover:text-theme-primary transition-all-custom">Exams Catalog</a></li>
             <li><a href="dashboard.html" class="hover:text-theme-primary transition-all-custom">Student Terminal</a></li>
           </ul>
         </div>
         <div class="md:col-span-4 space-y-3">
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-theme-text font-heading">Legal & Compliance</h4>
-          <ul class="space-y-2 text-sm text-theme-muted">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Legal & Compliance</h4>
+          <ul class="space-y-2 text-xs sm:text-sm text-theme-muted">
             <li><a href="#" class="hover:text-theme-primary transition-all-custom">Terms & Conditions</a></li>
             <li><a href="#" class="hover:text-theme-primary transition-all-custom">Privacy & Security Policies</a></li>
             <li><a href="#" class="hover:text-theme-primary transition-all-custom">Support desk</a></li>
           </ul>
         </div>
       </div>
-      <div class="mt-8 pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-xs text-theme-muted gap-4">
+      <div class="mt-8 pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-xxs sm:text-xs text-theme-muted gap-4">
         <span>© 2026 ApexExam Inc. All rights reserved.</span>
         <span>Designed for outstanding performance. Fully browser static.</span>
       </div>
@@ -339,7 +348,6 @@
   <script src="assets/js/main.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Mobile clocks
       const mobileTime = document.querySelector(".mobile-time");
       const mobileDate = document.querySelector(".mobile-date");
       if (mobileTime && mobileDate) {
@@ -370,14 +378,12 @@
         return;
       }
 
-      // Populate details dynamically
       document.getElementById("exam-title").textContent = `${exam.title} Details`;
       document.getElementById("exam-difficulty").textContent = exam.difficulty;
       document.getElementById("exam-duration").textContent = `${exam.duration} Mins`;
       document.getElementById("exam-questions").textContent = `${exam.questionsCount} MCQs`;
       document.getElementById("exam-lang").textContent = exam.language;
 
-      // Handle Checklist validation to unlock start trigger
       function evaluateCheckboxes() {
         const validated = checkRules.checked && checkDevice.checked;
         startBtn.disabled = !validated;
@@ -386,11 +392,17 @@
       checkRules.addEventListener("change", evaluateCheckboxes);
       checkDevice.addEventListener("change", evaluateCheckboxes);
 
-      // Execute start trigger
       startBtn.addEventListener("click", () => {
-        // Redirect candidate directly to exam console terminal
         window.location.href = `exam.html?id=${exam.id}`;
       });
+
+      const avMob = document.getElementById("header-avatar-mobile");
+      const nameMob = document.getElementById("header-username-mobile");
+      if (avMob && nameMob && window.ExamDB) {
+        const profile = window.ExamDB.getUserProfile();
+        nameMob.textContent = profile.name;
+        avMob.innerHTML = window.getAvatarSvg(profile.avatar);
+      }
 
       lucide.createIcons();
     });

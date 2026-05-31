@@ -45,23 +45,23 @@
       <div class="flex items-center justify-between h-16 sm:h-20">
         
         <!-- Brand Logo -->
-        <a href="index.html" class="flex items-center space-x-2 group">
-          <div class="w-10 h-10 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-all-custom">
-            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+        <a href="index.html" class="flex items-center space-x-2 group shrink-0">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-all-custom">
+            <i data-lucide="graduation-cap" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </div>
-          <span class="text-xl sm:text-2xl font-bold tracking-tight font-heading">
+          <span class="text-lg sm:text-2xl font-bold tracking-tight font-heading">
             Apex<span class="text-theme-primary">Exam</span>
           </span>
         </a>
 
         <!-- Desktop Navigation Menu -->
-        <nav class="hidden md:flex items-center space-x-8 font-medium">
+        <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 font-medium">
           <a href="index.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Home</a>
           <a href="exams.html" class="text-theme-primary hover:text-theme-primary border-b-2 border-theme-primary px-1 py-2 text-sm transition-all-custom">Exams</a>
           <a href="dashboard.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Dashboard</a>
         </nav>
 
-        <!-- Live Clock, Themes, & Profile -->
+        <!-- Live Clock, Themes, & Profile (Desktop only) -->
         <div class="hidden lg:flex items-center space-x-6">
           
           <!-- Live Date & Clock -->
@@ -102,22 +102,10 @@
           </a>
         </div>
 
-        <!-- Mobile Controls Wrapper -->
-        <div class="flex items-center space-x-3 md:space-x-4 lg:hidden">
-          <div class="flex items-center p-0.5 bg-theme-surface border border-theme-border rounded-lg text-xs">
-            <button data-theme-select="day" class="p-1 rounded-md border text-theme-text transition-all-custom">
-              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
-            </button>
-            <button data-theme-select="night" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
-              <i data-lucide="moon" class="w-3.5 h-3.5"></i>
-            </button>
-            <button data-theme-select="warm" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
-              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-
-          <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="p-2 border border-theme-border rounded-xl bg-theme-surface text-theme-text hover:bg-theme-surface-hover focus-ring-custom">
-            <i data-lucide="menu" class="w-5.5 h-5.5"></i>
+        <!-- Mobile Controls (Ultra Compact) -->
+        <div class="flex items-center lg:hidden">
+          <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="p-3 border border-theme-border rounded-xl bg-theme-surface text-theme-text hover:bg-theme-surface-hover focus-ring-custom min-w-[44px] min-h-[44px] flex items-center justify-center">
+            <i data-lucide="menu" class="w-6 h-6"></i>
           </button>
         </div>
 
@@ -126,13 +114,43 @@
 
     <!-- Mobile Dropdown Navigation Drawer -->
     <div id="mobile-menu-container" class="hidden border-t border-theme-border bg-theme-bg md:hidden fade-in-slide-up">
-      <div class="px-4 pt-2 pb-6 space-y-3 font-semibold text-center shadow-lg">
-        <a href="index.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Home</a>
-        <a href="exams.html" class="block px-3 py-2.5 rounded-xl bg-theme-surface text-theme-primary border-l-4 border-theme-primary transition-all-custom text-left text-base">Exams</a>
-        <a href="dashboard.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Dashboard</a>
+      <div class="px-4 py-6 space-y-4 font-semibold text-center shadow-lg">
+        <a href="index.html" class="block px-4 py-3 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Home</a>
+        <a href="exams.html" class="block px-4 py-3 rounded-xl bg-theme-surface text-theme-primary border-l-4 border-theme-primary transition-all-custom text-left text-base">Exams</a>
+        <a href="dashboard.html" class="block px-4 py-3 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Dashboard</a>
         
+        <!-- Mobile Profile Quick View -->
+        <div class="pt-4 border-t border-theme-border flex items-center space-x-3 text-left">
+          <div id="header-avatar-mobile" class="w-10 h-10 rounded-xl overflow-hidden border border-theme-border">
+            <!-- Populated via JS -->
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xs text-theme-muted">Candidate Dashboard</span>
+            <span id="header-username-mobile" class="text-sm font-bold tracking-tight">Amit Kumar</span>
+          </div>
+        </div>
+
+        <!-- Mobile Theme Switcher Pill -->
+        <div class="space-y-2 pt-2 text-left">
+          <span class="text-xs font-bold text-theme-muted uppercase tracking-wider block">Theme Mode</span>
+          <div class="grid grid-cols-3 gap-2 bg-theme-surface p-1.5 border border-theme-border rounded-xl">
+            <button data-theme-select="day" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
+              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
+              <span>Day</span>
+            </button>
+            <button data-theme-select="night" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
+              <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+              <span>Night</span>
+            </button>
+            <button data-theme-select="warm" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+              <span>Warm</span>
+            </button>
+          </div>
+        </div>
+
         <!-- Mobile live clock -->
-        <div class="flex items-center justify-between px-3 py-2 bg-theme-surface border border-theme-border rounded-xl text-xs mt-4">
+        <div class="flex items-center justify-between px-4 py-3 bg-theme-surface border border-theme-border rounded-xl text-xs pt-2">
           <span class="flex items-center text-theme-muted">
             <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5 text-theme-primary"></i>
             <span class="mobile-date font-semibold">Today</span>
@@ -149,54 +167,54 @@
   <!-- ==========================================
        MAIN CONTENT - CATALOG EXPLORER
        ========================================== -->
-  <main class="flex-grow py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+  <main class="flex-grow py-8 sm:py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
       
       <!-- Catalog Page Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-theme-border">
-        <div class="space-y-2">
-          <div class="flex items-center space-x-2">
-            <button class="btn-back p-1.5 border border-theme-border rounded-lg bg-theme-surface hover:bg-theme-surface-hover text-theme-muted hover:text-theme-primary transition-all-custom">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 sm:pb-6 border-b border-theme-border">
+        <div class="space-y-2 text-center md:text-left">
+          <div class="flex items-center space-x-2 justify-center md:justify-start">
+            <button class="btn-back p-2 border border-theme-border rounded-lg bg-theme-surface hover:bg-theme-surface-hover text-theme-muted hover:text-theme-primary transition-all-custom min-w-[36px] min-h-[36px] flex items-center justify-center">
               <i data-lucide="arrow-left" class="w-4 h-4"></i>
             </button>
-            <span class="text-xs font-semibold text-theme-primary uppercase tracking-wider">Apex Assessment Catalog</span>
+            <span class="text-xxs sm:text-xs font-bold text-theme-primary uppercase tracking-wider">Apex Assessment Catalog</span>
           </div>
-          <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight font-heading">Explore Examinations</h1>
-          <p class="text-sm text-theme-muted font-medium max-w-xl">
+          <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight font-heading">Explore Examinations</h1>
+          <p class="text-xs sm:text-sm text-theme-muted font-semibold max-w-xl">
             Filter our premium assessments dynamically to test your logical, linguistic, and software development capabilities.
           </p>
         </div>
       </div>
 
-      <!-- Search & Filters Toolbar -->
-      <div class="flex flex-col lg:flex-row items-center justify-between gap-4 p-4 bg-theme-surface border border-theme-border rounded-2xl shadow-sm">
+      <!-- Search & Filters Toolbar (Responsive Columns) -->
+      <div class="flex flex-col xl:flex-row items-center justify-between gap-4 p-4 bg-theme-surface border border-theme-border rounded-2xl shadow-sm">
         
         <!-- Search bar input -->
-        <div class="relative w-full lg:max-w-md">
+        <div class="relative w-full xl:max-w-md">
           <i data-lucide="search" class="absolute left-4 top-3.5 w-5 h-5 text-theme-muted"></i>
-          <input id="catalog-search" type="text" placeholder="Search exams by title, topics or tags..." class="w-full pl-12 pr-4 py-3 bg-theme-bg border border-theme-border rounded-xl text-sm font-medium focus-ring-custom transition-all-custom text-theme-text" />
+          <input id="catalog-search" type="text" placeholder="Search exams..." class="w-full pl-12 pr-4 py-3 bg-theme-bg border border-theme-border rounded-xl text-sm font-medium focus-ring-custom transition-all-custom text-theme-text min-h-[44px]" />
         </div>
 
-        <!-- Filter category tabs / pills -->
-        <div class="flex flex-wrap items-center gap-2 w-full lg:w-auto">
-          <button data-cat-filter="All" class="px-4 py-2 border border-theme-primary bg-theme-primary text-white font-semibold text-xs rounded-xl shadow-md shadow-theme-primary/10 transition-all-custom hover:-translate-y-0.5">
+        <!-- Filter category tabs (Scrollable Row on Mobile) -->
+        <div class="flex items-center gap-2 w-full xl:w-auto overflow-x-auto pb-1 sm:pb-0 scrollbar-none select-none shrink-0">
+          <button data-cat-filter="All" class="px-4 py-2.5 border border-theme-primary bg-theme-primary text-white font-bold text-xs rounded-xl shadow-md transition-all-custom hover:-translate-y-0.5 whitespace-nowrap min-h-[38px]">
             All Categories
           </button>
-          <button data-cat-filter="Tech" class="px-4 py-2 border border-theme-border bg-theme-bg font-semibold text-xs text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover rounded-xl transition-all-custom hover:-translate-y-0.5">
+          <button data-cat-filter="Tech" class="px-4 py-2.5 border border-theme-border bg-theme-bg font-bold text-xs text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover rounded-xl transition-all-custom hover:-translate-y-0.5 whitespace-nowrap min-h-[38px]">
             Tech Syllabus
           </button>
-          <button data-cat-filter="Language" class="px-4 py-2 border border-theme-border bg-theme-bg font-semibold text-xs text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover rounded-xl transition-all-custom hover:-translate-y-0.5">
+          <button data-cat-filter="Language" class="px-4 py-2.5 border border-theme-border bg-theme-bg font-bold text-xs text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover rounded-xl transition-all-custom hover:-translate-y-0.5 whitespace-nowrap min-h-[38px]">
             Language GK
           </button>
-          <button data-cat-filter="Aptitude" class="px-4 py-2 border border-theme-border bg-theme-bg font-semibold text-xs text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover rounded-xl transition-all-custom hover:-translate-y-0.5">
+          <button data-cat-filter="Aptitude" class="px-4 py-2.5 border border-theme-border bg-theme-bg font-bold text-xs text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover rounded-xl transition-all-custom hover:-translate-y-0.5 whitespace-nowrap min-h-[38px]">
             Aptitude & Logic
           </button>
         </div>
 
       </div>
 
-      <!-- Exam Catalog Grid (Target) -->
-      <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Exam Catalog Grid -->
+      <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         <!-- Dynamically rendered by JS -->
       </div>
 
@@ -207,7 +225,7 @@
         </div>
         <div class="space-y-1">
           <h3 class="text-lg font-bold font-heading text-theme-text">No Exams Found</h3>
-          <p class="text-sm text-theme-muted max-w-xs mx-auto">Try refining your search keyword or selected category filter.</p>
+          <p class="text-xs sm:text-sm text-theme-muted max-w-xs mx-auto">Try refining your search keyword or selected category filter.</p>
         </div>
       </div>
 
@@ -215,64 +233,65 @@
   </main>
 
   <!-- ==========================================
-       SIDE DRAWER DETAIL PREVIEW (Premium Modal)
+       SIDE DRAWER DETAIL PREVIEW (Responsive Bottom-Sheet & Side Drawer hybrid)
        ========================================== -->
   <div id="preview-drawer-overlay" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden transition-all-custom">
-    <div class="fixed right-0 top-0 bottom-0 w-full sm:max-w-md bg-theme-bg border-l border-theme-border shadow-2xl p-6 sm:p-8 flex flex-col justify-between overflow-y-auto transform translate-x-full transition-transform duration-300 ease-in-out" id="preview-drawer-content">
+    <!-- Hybrid Container: bottom-0 rounded-t-3xl on Mobile | top-0 right-0 sm:rounded-none on Desktop -->
+    <div class="fixed z-50 bg-theme-bg shadow-2xl p-6 sm:p-8 flex flex-col justify-between overflow-y-auto transform transition-all duration-300 ease-in-out bottom-0 left-0 right-0 top-auto w-full h-[80vh] rounded-t-3xl translate-y-full sm:top-0 sm:bottom-0 sm:right-0 sm:left-auto sm:h-full sm:w-full sm:max-w-md sm:rounded-none sm:translate-x-full sm:translate-y-0 sm:border-l sm:border-theme-border" id="preview-drawer-content">
       
       <!-- Drawer Body -->
-      <div class="space-y-6">
+      <div class="space-y-5">
         <!-- Close/Back header -->
         <div class="flex items-center justify-between pb-4 border-b border-theme-border">
           <div class="flex items-center space-x-2">
-            <button id="drawer-back-btn" class="p-1.5 border border-theme-border rounded-lg bg-theme-surface text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom" title="Back to catalog">
+            <button id="drawer-back-btn" class="p-2 border border-theme-border rounded-lg bg-theme-surface text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom min-w-[36px] min-h-[36px] flex items-center justify-center" title="Back to catalog">
               <i data-lucide="chevron-left" class="w-4 h-4"></i>
             </button>
-            <span class="text-xs font-semibold text-theme-muted uppercase tracking-wider">Exam Details</span>
+            <span class="text-xxs sm:text-xs font-bold text-theme-muted uppercase tracking-wider">Exam Details</span>
           </div>
-          <button id="drawer-close-btn" class="p-1.5 hover:bg-theme-surface rounded-lg text-theme-muted hover:text-theme-text transition-all" title="Close details">
+          <button id="drawer-close-btn" class="p-2 hover:bg-theme-surface rounded-lg text-theme-muted hover:text-theme-text transition-all min-w-[36px] min-h-[36px] flex items-center justify-center" title="Close details">
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
 
         <!-- Meta Overview -->
-        <div class="space-y-4">
+        <div class="space-y-3">
           <div class="flex items-center justify-between">
-            <span id="drawer-difficulty" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-500/10 text-emerald-600">Intermediate</span>
-            <span id="drawer-category" class="text-xs font-semibold tracking-wider text-theme-primary bg-theme-surface border border-theme-border px-2.5 py-1 rounded-lg">Tech</span>
+            <span id="drawer-difficulty" class="px-2.5 py-1 text-xxs font-extrabold rounded-lg bg-emerald-500/10 text-emerald-600 uppercase tracking-wider">Intermediate</span>
+            <span id="drawer-category" class="text-xxs font-extrabold tracking-wider text-theme-primary bg-theme-surface border border-theme-border px-2.5 py-1 rounded-lg uppercase">Tech</span>
           </div>
-          <h2 id="drawer-title" class="text-2xl font-bold font-heading text-theme-text leading-tight">Exam Title</h2>
-          <p id="drawer-desc" class="text-sm text-theme-muted leading-relaxed font-medium">Exam Description goes here.</p>
+          <h2 id="drawer-title" class="text-xl sm:text-2xl font-bold font-heading text-theme-text leading-tight">Exam Title</h2>
+          <p id="drawer-desc" class="text-xs sm:text-sm text-theme-muted leading-relaxed font-semibold">Exam Description.</p>
         </div>
 
-        <!-- KPI Grid details -->
-        <div class="grid grid-cols-2 gap-4">
-          <div class="p-4 bg-theme-surface border border-theme-border rounded-xl text-center space-y-1">
+        <!-- KPI Grid details (Highly Responsive) -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="p-3 bg-theme-surface border border-theme-border rounded-xl text-center space-y-1">
             <i data-lucide="clock" class="w-5 h-5 mx-auto text-theme-primary"></i>
-            <span class="text-xs font-semibold text-theme-muted block">Duration</span>
-            <span id="drawer-duration" class="text-sm font-bold text-theme-text font-heading">15 Mins</span>
+            <span class="text-[10px] font-bold text-theme-muted uppercase tracking-wider block">Duration</span>
+            <span id="drawer-duration" class="text-xs sm:text-sm font-bold text-theme-text font-heading">15 Mins</span>
           </div>
-          <div class="p-4 bg-theme-surface border border-theme-border rounded-xl text-center space-y-1">
+          <div class="p-3 bg-theme-surface border border-theme-border rounded-xl text-center space-y-1">
             <i data-lucide="help-circle" class="w-5 h-5 mx-auto text-theme-primary"></i>
-            <span class="text-xs font-semibold text-theme-muted block">Questions</span>
-            <span id="drawer-questions" class="text-sm font-bold text-theme-text font-heading">5 MCQs</span>
+            <span class="text-[10px] font-bold text-theme-muted uppercase tracking-wider block">Questions</span>
+            <span id="drawer-questions" class="text-xs sm:text-sm font-bold text-theme-text font-heading">5 MCQs</span>
           </div>
-          <div class="p-4 bg-theme-surface border border-theme-border rounded-xl text-center space-y-1">
+          <div class="p-3 bg-theme-surface border border-theme-border rounded-xl text-center space-y-1">
             <i data-lucide="globe" class="w-5 h-5 mx-auto text-theme-primary"></i>
-            <span class="text-xs font-semibold text-theme-muted block">Language</span>
-            <span id="drawer-language" class="text-sm font-bold text-theme-text font-heading">English</span>
+            <span class="text-[10px] font-bold text-theme-muted uppercase tracking-wider block">Language</span>
+            <span id="drawer-language" class="text-xs sm:text-sm font-bold text-theme-text font-heading">English</span>
           </div>
-          <div class="p-4 bg-theme-surface border border-theme-border rounded-xl text-center space-y-1">
+          <div class="p-3 bg-theme-surface border border-theme-border rounded-xl text-center space-y-1">
             <i data-lucide="check-circle" class="w-5 h-5 mx-auto text-theme-primary"></i>
-            <span class="text-xs font-semibold text-theme-muted block">Passing Mark</span>
-            <span class="text-sm font-bold text-theme-text font-heading">60%</span>
+            <span class="text-[10px] font-bold text-theme-muted uppercase tracking-wider block">Passing Mark</span>
+            <span class="text-xs sm:text-sm font-bold text-theme-text font-heading">60%</span>
           </div>
         </div>
 
         <!-- Pre-requisites & Rules Brief -->
-        <div class="space-y-3">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Exam Syllabus & Rules</h4>
-          <ul class="space-y-2.5 text-xs text-theme-muted leading-relaxed font-semibold">
+        <div class="space-y-2 pt-2">
+          <h4 class="text-xxs font-extrabold uppercase tracking-wider text-theme-text font-heading">Exam Syllabus & Rules</h4>
+          <ul class="space-y-2 text-[11px] sm:text-xs text-theme-muted leading-relaxed font-bold">
             <li class="flex items-start">
               <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-2 shrink-0"></i>
               Multiple-Choice Questions with single selection.
@@ -283,23 +302,19 @@
             </li>
             <li class="flex items-start">
               <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-2 shrink-0"></i>
-              Real-time countdown timer with auto-submit on completion.
-            </li>
-            <li class="flex items-start">
-              <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-2 shrink-0"></i>
-              Bilingual support (English and Hindi versions) included.
+              Real-time countdown timer with auto-submit.
             </li>
           </ul>
         </div>
       </div>
 
       <!-- Action Footer -->
-      <div class="pt-6 border-t border-theme-border flex flex-col gap-3 mt-8">
-        <a id="drawer-start-btn" href="#" class="w-full py-4 bg-theme-primary hover:bg-theme-primary-hover text-white text-center font-bold rounded-2xl shadow-lg shadow-theme-primary/20 transition-all-custom flex items-center justify-center">
+      <div class="pt-4 border-t border-theme-border flex flex-col gap-2.5 mt-6">
+        <a id="drawer-start-btn" href="#" class="w-full py-3.5 bg-theme-primary hover:bg-theme-primary-hover text-white text-center font-bold text-sm rounded-xl shadow-lg transition-all-custom flex items-center justify-center min-h-[44px]">
           Proceed to Registration
           <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
         </a>
-        <button id="drawer-cancel-btn" class="w-full py-4 border border-theme-border bg-theme-bg hover:bg-theme-surface-hover font-semibold text-sm rounded-2xl transition-all-custom">
+        <button id="drawer-cancel-btn" class="w-full py-3.5 border border-theme-border bg-theme-bg hover:bg-theme-surface-hover font-bold text-xs rounded-xl transition-all-custom min-h-[44px]">
           Back to Catalog
         </button>
       </div>
@@ -310,38 +325,38 @@
   <!-- ==========================================
        FOOTER
        ========================================== -->
-  <footer class="bg-theme-surface border-t border-theme-border py-12 transition-colors duration-300">
+  <footer class="bg-theme-surface border-t border-theme-border py-10 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 text-center md:text-left">
         <div class="md:col-span-5 space-y-4">
-          <a href="index.html" class="flex items-center space-x-2">
+          <a href="index.html" class="flex items-center space-x-2 justify-center md:justify-start">
             <div class="w-8 h-8 bg-theme-primary text-white rounded-lg flex items-center justify-center">
               <i data-lucide="graduation-cap" class="w-5 h-5"></i>
             </div>
             <span class="text-lg font-bold font-heading">ApexExam</span>
           </a>
-          <p class="text-sm text-theme-muted max-w-sm leading-relaxed">
+          <p class="text-xs sm:text-sm text-theme-muted max-w-sm mx-auto md:mx-0 leading-relaxed font-semibold">
             ApexExam is a modern, responsive, and completely client-side assessment terminal designed to provide distraction-free testing with instant reporting insights.
           </p>
         </div>
         <div class="md:col-span-3 space-y-3">
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-theme-text font-heading">Quick Links</h4>
-          <ul class="space-y-2 text-sm text-theme-muted">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Quick Links</h4>
+          <ul class="space-y-2 text-xs sm:text-sm text-theme-muted">
             <li><a href="index.html" class="hover:text-theme-primary transition-all-custom">Home Page</a></li>
             <li><a href="exams.html" class="hover:text-theme-primary transition-all-custom">Exams Catalog</a></li>
             <li><a href="dashboard.html" class="hover:text-theme-primary transition-all-custom">Student Terminal</a></li>
           </ul>
         </div>
         <div class="md:col-span-4 space-y-3">
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-theme-text font-heading">Legal & Compliance</h4>
-          <ul class="space-y-2 text-sm text-theme-muted">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Legal & Compliance</h4>
+          <ul class="space-y-2 text-xs sm:text-sm text-theme-muted">
             <li><a href="#" class="hover:text-theme-primary transition-all-custom">Terms & Conditions</a></li>
             <li><a href="#" class="hover:text-theme-primary transition-all-custom">Privacy & Security Policies</a></li>
             <li><a href="#" class="hover:text-theme-primary transition-all-custom">Support desk</a></li>
           </ul>
         </div>
       </div>
-      <div class="mt-8 pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-xs text-theme-muted gap-4">
+      <div class="mt-8 pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-xxs sm:text-xs text-theme-muted gap-4">
         <span>© 2026 ApexExam Inc. All rights reserved.</span>
         <span>Designed for outstanding performance. Fully browser static.</span>
       </div>
@@ -353,7 +368,6 @@
   <script src="assets/js/main.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Setup mobile clocks
       const mobileTime = document.querySelector(".mobile-time");
       const mobileDate = document.querySelector(".mobile-date");
       if (mobileTime && mobileDate) {
@@ -414,13 +428,13 @@
           if (exam.difficulty === "Intermediate") difficultyColor = "bg-blue-500/10 text-theme-primary";
           if (exam.difficulty === "Advanced") difficultyColor = "bg-orange-500/10 text-orange-600";
 
-          const tagBadges = exam.tags.map(t => `<span class="px-2 py-0.5 border border-theme-border bg-theme-bg rounded text-xxs font-medium text-theme-muted">${t}</span>`).join(" ");
+          const tagBadges = exam.tags.map(t => `<span class="px-2 py-0.5 border border-theme-border bg-theme-bg rounded text-[10px] font-semibold text-theme-muted">${t}</span>`).join(" ");
 
           return `
-            <div class="theme-card p-6 border border-theme-border flex flex-col justify-between h-full">
+            <div class="theme-card p-5 sm:p-6 border border-theme-border flex flex-col justify-between h-full">
               <div class="space-y-4">
                 <div class="flex items-center justify-between">
-                  <span class="px-2.5 py-1 text-xs font-semibold rounded-lg ${difficultyColor}">${exam.difficulty}</span>
+                  <span class="px-2.5 py-1 text-xxs font-extrabold rounded-lg ${difficultyColor} uppercase tracking-wider">${exam.difficulty}</span>
                   <span class="flex items-center text-xs font-semibold text-theme-muted">
                     <i data-lucide="clock" class="w-3.5 h-3.5 mr-1 text-theme-primary"></i>
                     ${exam.duration} mins
@@ -428,8 +442,8 @@
                 </div>
 
                 <div class="space-y-2">
-                  <h3 class="text-lg font-bold font-heading leading-snug tracking-tight text-theme-text">${exam.title}</h3>
-                  <p class="text-sm text-theme-muted line-clamp-2 leading-relaxed">${exam.description}</p>
+                  <h3 class="text-base sm:text-lg font-bold font-heading leading-snug tracking-tight text-theme-text">${exam.title}</h3>
+                  <p class="text-xs sm:text-sm text-theme-muted line-clamp-2 leading-relaxed font-semibold">${exam.description}</p>
                 </div>
                 
                 <div class="flex flex-wrap gap-1.5 pt-1">
@@ -438,11 +452,11 @@
               </div>
 
               <div class="pt-6 mt-6 border-t border-theme-border flex items-center justify-between">
-                <span class="text-xs text-theme-muted font-semibold flex items-center">
+                <span class="text-xs text-theme-muted font-bold flex items-center">
                   <i data-lucide="help-circle" class="w-4 h-4 mr-1 text-theme-primary"></i>
                   ${exam.questionsCount} MCQs
                 </span>
-                <button onclick="openExamPreview('${exam.id}')" class="px-4 py-2 bg-theme-primary hover:bg-theme-primary-hover text-white font-semibold text-xs rounded-xl shadow-md shadow-theme-primary/10 hover:shadow-theme-primary/20 transition-all-custom flex items-center">
+                <button onclick="openExamPreview('${exam.id}')" class="px-4 py-2.5 bg-theme-primary hover:bg-theme-primary-hover text-white font-bold text-xs rounded-xl shadow-md transition-all-custom flex items-center min-h-[40px]">
                   Open Exam
                   <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 ml-1"></i>
                 </button>
@@ -454,16 +468,13 @@
         lucide.createIcons();
       }
 
-      // Live search typing listener
       searchInput.addEventListener("input", (e) => {
         searchKeyword = e.target.value;
         renderCatalog();
       });
 
-      // Category Pill Click Handlers
       catFilters.forEach(btn => {
         btn.addEventListener("click", () => {
-          // Sync visually
           catFilters.forEach(b => {
             b.classList.remove("border-theme-primary", "bg-theme-primary", "text-white");
             b.classList.add("border-theme-border", "bg-theme-bg", "text-theme-muted");
@@ -476,12 +487,11 @@
         });
       });
 
-      // DRAWER INTERACTION ENGINE
+      // HYBRID PREVIEW DRAWER TRIGGER ENGINE
       window.openExamPreview = function(examId) {
         const exam = window.ExamDB.getExam(examId);
         if (!exam) return;
 
-        // Populate drawer contents
         dTitle.textContent = exam.title;
         dDesc.textContent = exam.description;
         dCategory.textContent = exam.category;
@@ -493,24 +503,24 @@
         if (exam.difficulty === "Intermediate") difficultyColor = "bg-blue-500/10 text-theme-primary";
         if (exam.difficulty === "Advanced") difficultyColor = "bg-orange-500/10 text-orange-600";
         
-        dDifficulty.className = `px-2.5 py-1 text-xs font-semibold rounded-lg ${difficultyColor}`;
-        
-        // Map proceed link
+        dDifficulty.className = `px-2.5 py-1 text-xxs font-extrabold rounded-lg uppercase tracking-wider ${difficultyColor}`;
         drawerStartBtn.setAttribute("href", `instructions.html?id=${exam.id}`);
 
-        // Open visually with smooth animations
+        // Open with smooth slide in
         drawerOverlay.classList.remove("hidden");
-        // Trigger reflow to initiate transition
         setTimeout(() => {
-          drawerContent.classList.remove("translate-x-full");
+          // Open both mobile translate-y and desktop translate-x
+          drawerContent.classList.remove("translate-y-full", "sm:translate-x-full");
+          drawerContent.classList.add("translate-y-0", "sm:translate-x-0");
         }, 10);
       };
 
       function closeDrawer() {
-        drawerContent.classList.add("translate-x-full");
+        drawerContent.classList.remove("translate-y-0", "sm:translate-x-0");
+        drawerContent.classList.add("translate-y-full", "sm:translate-x-full");
         setTimeout(() => {
           drawerOverlay.classList.add("hidden");
-        }, 300); // Wait for transition out
+        }, 300);
       }
 
       drawerCloseBtn.addEventListener("click", closeDrawer);
@@ -520,7 +530,14 @@
         if (e.target === drawerOverlay) closeDrawer();
       });
 
-      // Initialize Catalog Render
+      const avMob = document.getElementById("header-avatar-mobile");
+      const nameMob = document.getElementById("header-username-mobile");
+      if (avMob && nameMob && window.ExamDB) {
+        const profile = window.ExamDB.getUserProfile();
+        nameMob.textContent = profile.name;
+        avMob.innerHTML = window.getAvatarSvg(profile.avatar);
+      }
+
       renderCatalog();
     });
   </script>

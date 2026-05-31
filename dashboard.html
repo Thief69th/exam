@@ -45,23 +45,23 @@
       <div class="flex items-center justify-between h-16 sm:h-20">
         
         <!-- Brand Logo -->
-        <a href="index.html" class="flex items-center space-x-2 group">
-          <div class="w-10 h-10 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-all-custom">
-            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+        <a href="index.html" class="flex items-center space-x-2 group shrink-0">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-all-custom">
+            <i data-lucide="graduation-cap" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </div>
-          <span class="text-xl sm:text-2xl font-bold tracking-tight font-heading">
+          <span class="text-lg sm:text-2xl font-bold tracking-tight font-heading">
             Apex<span class="text-theme-primary">Exam</span>
           </span>
         </a>
 
         <!-- Desktop Navigation Menu -->
-        <nav class="hidden md:flex items-center space-x-8 font-medium">
+        <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 font-medium">
           <a href="index.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Home</a>
           <a href="exams.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Exams</a>
           <a href="dashboard.html" class="text-theme-primary hover:text-theme-primary border-b-2 border-theme-primary px-1 py-2 text-sm transition-all-custom">Dashboard</a>
         </nav>
 
-        <!-- Live Clock, Themes, & Profile -->
+        <!-- Live Clock, Themes, & Profile (Desktop only) -->
         <div class="hidden lg:flex items-center space-x-6">
           
           <!-- Live Date & Clock -->
@@ -102,36 +102,55 @@
           </a>
         </div>
 
-        <!-- Mobile Controls Wrapper -->
-        <div class="flex items-center space-x-3 md:space-x-4 lg:hidden">
-          <div class="flex items-center p-0.5 bg-theme-surface border border-theme-border rounded-lg text-xs">
-            <button data-theme-select="day" class="p-1 rounded-md border text-theme-text transition-all-custom">
-              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
-            </button>
-            <button data-theme-select="night" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
-              <i data-lucide="moon" class="w-3.5 h-3.5"></i>
-            </button>
-            <button data-theme-select="warm" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
-              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-
-          <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="p-2 border border-theme-border rounded-xl bg-theme-surface text-theme-text hover:bg-theme-surface-hover focus-ring-custom">
-            <i data-lucide="menu" class="w-5.5 h-5.5"></i>
+        <!-- Mobile Controls (Ultra Compact) -->
+        <div class="flex items-center lg:hidden">
+          <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="p-3 border border-theme-border rounded-xl bg-theme-surface text-theme-text hover:bg-theme-surface-hover focus-ring-custom min-w-[44px] min-h-[44px] flex items-center justify-center">
+            <i data-lucide="menu" class="w-6 h-6"></i>
           </button>
         </div>
 
       </div>
     </div>
 
-    <!-- Mobile Dropdown Drawer -->
+    <!-- Mobile Dropdown Navigation Drawer -->
     <div id="mobile-menu-container" class="hidden border-t border-theme-border bg-theme-bg md:hidden fade-in-slide-up">
-      <div class="px-4 pt-2 pb-6 space-y-3 font-semibold text-center shadow-lg">
-        <a href="index.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Home</a>
-        <a href="exams.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Exams</a>
-        <a href="dashboard.html" class="block px-3 py-2.5 rounded-xl bg-theme-surface text-theme-primary border-l-4 border-theme-primary transition-all-custom text-left text-base">Dashboard</a>
+      <div class="px-4 py-6 space-y-4 font-semibold text-center shadow-lg">
+        <a href="index.html" class="block px-4 py-3 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Home</a>
+        <a href="exams.html" class="block px-4 py-3 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Exams</a>
+        <a href="dashboard.html" class="block px-4 py-3 rounded-xl bg-theme-surface text-theme-primary border-l-4 border-theme-primary transition-all-custom text-left text-base">Dashboard</a>
         
-        <div class="flex items-center justify-between px-3 py-2 bg-theme-surface border border-theme-border rounded-xl text-xs mt-4">
+        <!-- Mobile Profile Quick View -->
+        <div class="pt-4 border-t border-theme-border flex items-center space-x-3 text-left">
+          <div id="header-avatar-mobile" class="w-10 h-10 rounded-xl overflow-hidden border border-theme-border">
+            <!-- Populated via JS -->
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xs text-theme-muted">Candidate Dashboard</span>
+            <span id="header-username-mobile" class="text-sm font-bold tracking-tight">Amit Kumar</span>
+          </div>
+        </div>
+
+        <!-- Mobile Theme Switcher Pill -->
+        <div class="space-y-2 pt-2 text-left">
+          <span class="text-xs font-bold text-theme-muted uppercase tracking-wider block">Theme Mode</span>
+          <div class="grid grid-cols-3 gap-2 bg-theme-surface p-1.5 border border-theme-border rounded-xl">
+            <button data-theme-select="day" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
+              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
+              <span>Day</span>
+            </button>
+            <button data-theme-select="night" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
+              <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+              <span>Night</span>
+            </button>
+            <button data-theme-select="warm" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+              <span>Warm</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile live clock -->
+        <div class="flex items-center justify-between px-4 py-3 bg-theme-surface border border-theme-border rounded-xl text-xs pt-2">
           <span class="flex items-center text-theme-muted">
             <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5 text-theme-primary"></i>
             <span class="mobile-date font-semibold">Today</span>
@@ -148,84 +167,84 @@
   <!-- ==========================================
        MAIN CONTENT - STUDENT WORKSPACE
        ========================================== -->
-  <main class="flex-grow py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+  <main class="flex-grow py-8 sm:py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
       
-      <!-- Greeting and Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-theme-border">
-        <div class="space-y-2">
-          <div class="flex items-center space-x-2">
-            <button class="btn-back p-1.5 border border-theme-border rounded-lg bg-theme-surface hover:bg-theme-surface-hover text-theme-muted hover:text-theme-primary transition-all-custom">
+      <!-- Greeting and Header (Centered on Mobile) -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 sm:pb-6 border-b border-theme-border">
+        <div class="space-y-2 text-center md:text-left">
+          <div class="flex items-center space-x-2 justify-center md:justify-start">
+            <button class="btn-back p-2 border border-theme-border rounded-lg bg-theme-surface hover:bg-theme-surface-hover text-theme-muted hover:text-theme-primary transition-all-custom min-w-[36px] min-h-[36px] flex items-center justify-center">
               <i data-lucide="arrow-left" class="w-4 h-4"></i>
             </button>
-            <span class="text-xs font-semibold text-theme-primary uppercase tracking-wider">Student Terminal Panel</span>
+            <span class="text-xs font-bold text-theme-primary uppercase tracking-wider">Student Terminal Panel</span>
           </div>
-          <h1 class="text-3xl font-extrabold tracking-tight font-heading">
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight font-heading">
             Hello, <span id="dash-greeting-name" class="text-theme-primary">Student</span>!
           </h1>
-          <p class="text-sm text-theme-muted font-medium">
+          <p class="text-xs sm:text-sm text-theme-muted font-semibold">
             Monitor your exam performance aggregates, evaluate trends, and manage your localized student configurations.
           </p>
         </div>
-        <a href="exams.html" class="px-5 py-3 bg-theme-primary hover:bg-theme-primary-hover text-white font-bold rounded-xl shadow-lg shadow-theme-primary/25 hover:shadow-theme-primary/35 hover:-translate-y-0.5 transition-all-custom flex items-center justify-center">
+        <a href="exams.html" class="px-5 py-3 bg-theme-primary hover:bg-theme-primary-hover text-white font-bold text-sm rounded-xl shadow-lg transition-all-custom flex items-center justify-center min-h-[44px]">
           <i data-lucide="book-open" class="w-4.5 h-4.5 mr-2"></i>
           Take a New Test
         </a>
       </div>
 
       <!-- Main Layout Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
         
         <!-- ==========================================
-             LEFT COLUMN - PROFILE CARD & BADGES
+             LEFT COLUMN - PROFILE CARD & BADGES (Responsive banner layout on mobile)
              ========================================== -->
-        <div class="lg:col-span-4 space-y-8">
+        <div class="lg:col-span-4 space-y-6 sm:space-y-8">
           
-          <!-- Static Profile Card -->
-          <div class="theme-card-static p-6 border border-theme-border flex flex-col items-center text-center space-y-4" id="profile-container-view">
-            <div id="dash-profile-avatar" class="w-24 h-24 rounded-2xl border-2 border-theme-primary overflow-hidden shadow-lg">
+          <!-- Profile Card: Horizontal Flex on Mobile | Vertical Card on Desktop -->
+          <div class="theme-card-static p-5 border border-theme-border flex flex-col sm:flex-row lg:flex-col items-center sm:items-start lg:items-center text-center sm:text-left lg:text-center gap-4" id="profile-container-view">
+            
+            <div id="dash-profile-avatar" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl border-2 border-theme-primary overflow-hidden shadow-lg shrink-0">
               <!-- Avatar Render -->
             </div>
             
-            <div class="space-y-1">
-              <h3 id="dash-profile-name" class="text-xl font-bold font-heading">Amit Kumar</h3>
-              <p id="dash-profile-email" class="text-xs font-semibold text-theme-muted">amit.kumar@education.in</p>
-            </div>
+            <div class="space-y-3 flex-grow w-full">
+              <div class="space-y-0.5">
+                <h3 id="dash-profile-name" class="text-lg sm:text-xl font-bold font-heading">Amit Kumar</h3>
+                <p id="dash-profile-email" class="text-xs font-semibold text-theme-muted">amit.kumar@education.in</p>
+              </div>
 
-            <div class="w-full pt-4 border-t border-theme-border flex justify-between items-center text-xs text-theme-muted font-semibold">
-              <span>Member Since:</span>
-              <span id="dash-profile-joined" class="text-theme-text font-bold">May 2026</span>
-            </div>
+              <div class="pt-2 border-t border-theme-border flex justify-between items-center text-xxs sm:text-xs text-theme-muted font-semibold w-full">
+                <span>Member Since:</span>
+                <span id="dash-profile-joined" class="text-theme-text font-bold">May 2026</span>
+              </div>
 
-            <button id="profile-edit-trigger" class="w-full py-2.5 border border-theme-border hover:border-theme-primary hover:text-theme-primary rounded-xl font-semibold text-sm transition-all flex items-center justify-center bg-theme-surface hover:bg-theme-surface-hover">
-              <i data-lucide="edit-3" class="w-4 h-4 mr-2"></i>
-              Modify Profile Details
-            </button>
+              <button id="profile-edit-trigger" class="w-full py-2.5 border border-theme-border hover:border-theme-primary hover:text-theme-primary rounded-xl font-bold text-xs transition-all flex items-center justify-center bg-theme-surface hover:bg-theme-surface-hover min-h-[38px]">
+                <i data-lucide="edit-3" class="w-4 h-4 mr-1.5"></i>
+                Modify Profile
+              </button>
+            </div>
           </div>
 
-          <!-- Interactive Profile Editing Form (Hidden initially) -->
-          <div class="theme-card-static p-6 border border-theme-border hidden space-y-4" id="profile-container-edit">
+          <!-- Interactive Profile Editing Form -->
+          <div class="theme-card-static p-5 border border-theme-border hidden space-y-4" id="profile-container-edit">
             <div class="flex items-center justify-between pb-3 border-b border-theme-border">
-              <h3 class="text-sm font-bold uppercase tracking-wider text-theme-text font-heading">Edit Profile</h3>
-              <button id="profile-edit-cancel" class="text-xs text-theme-muted hover:text-theme-primary font-semibold transition-all">Cancel</button>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Edit Profile</h3>
+              <button id="profile-edit-cancel" class="text-xs text-theme-muted hover:text-theme-primary font-bold transition-all">Cancel</button>
             </div>
             
-            <form id="profile-update-form" class="space-y-4">
-              <!-- Name -->
+            <form id="profile-update-form" class="space-y-3.5">
               <div class="space-y-1.5">
-                <label class="text-xs font-bold text-theme-muted uppercase tracking-wider">Full Name</label>
-                <input id="edit-input-name" type="text" class="w-full px-3 py-2 bg-theme-bg border border-theme-border rounded-xl text-sm focus-ring-custom text-theme-text font-medium" required />
+                <label class="text-[10px] font-bold text-theme-muted uppercase tracking-wider block">Full Name</label>
+                <input id="edit-input-name" type="text" class="w-full px-3 py-2 bg-theme-bg border border-theme-border rounded-xl text-sm focus-ring-custom text-theme-text font-medium min-h-[38px]" required />
               </div>
               
-              <!-- Email -->
               <div class="space-y-1.5">
-                <label class="text-xs font-bold text-theme-muted uppercase tracking-wider">Email Address</label>
-                <input id="edit-input-email" type="email" class="w-full px-3 py-2 bg-theme-bg border border-theme-border rounded-xl text-sm focus-ring-custom text-theme-text font-medium" required />
+                <label class="text-[10px] font-bold text-theme-muted uppercase tracking-wider block">Email Address</label>
+                <input id="edit-input-email" type="email" class="w-full px-3 py-2 bg-theme-bg border border-theme-border rounded-xl text-sm focus-ring-custom text-theme-text font-medium min-h-[38px]" required />
               </div>
 
-              <!-- Avatar Selection -->
               <div class="space-y-2">
-                <label class="text-xs font-bold text-theme-muted uppercase tracking-wider block">Choose Avatar</label>
+                <label class="text-[10px] font-bold text-theme-muted uppercase tracking-wider block">Choose Avatar</label>
                 <div class="grid grid-cols-5 gap-2">
                   <button type="button" data-avatar-select="avatar-1" class="aspect-square border-2 border-transparent rounded-xl overflow-hidden transition-all focus:outline-none"></button>
                   <button type="button" data-avatar-select="avatar-2" class="aspect-square border-2 border-transparent rounded-xl overflow-hidden transition-all focus:outline-none"></button>
@@ -235,88 +254,87 @@
                 </div>
               </div>
 
-              <!-- Action button -->
-              <button type="submit" class="w-full py-3 bg-theme-primary hover:bg-theme-primary-hover text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center">
-                <i data-lucide="check" class="w-4.5 h-4.5 mr-2"></i>
+              <button type="submit" class="w-full py-3 bg-theme-primary hover:bg-theme-primary-hover text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center min-h-[40px]">
+                <i data-lucide="check" class="w-4.5 h-4.5 mr-1.5"></i>
                 Save Changes
               </button>
             </form>
           </div>
 
           <!-- Achievements Module -->
-          <div class="theme-card-static p-6 border border-theme-border space-y-4">
+          <div class="theme-card-static p-5 border border-theme-border space-y-4">
             <h3 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Achievements Unlocked</h3>
             <div id="achievements-list" class="space-y-3">
-              <!-- Dynamically populated badges depending on history count -->
+              <!-- Unlocked badges -->
             </div>
           </div>
 
         </div>
 
         <!-- ==========================================
-             RIGHT COLUMN - KPIS, SVG METRICS, HISTORY LOGS
+             RIGHT COLUMN - KPIS, SVG METRICS, HISTORY
              ========================================== -->
-        <div class="lg:col-span-8 space-y-8">
+        <div class="lg:col-span-8 space-y-6 sm:space-y-8">
           
-          <!-- KPI Statistics Cards Grid -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <!-- KPI Statistics Cards Grid (Strict responsive grids) -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
             
-            <div class="theme-card-static p-4 border border-theme-border text-center space-y-1.5 bg-theme-surface">
-              <span class="text-xxs font-bold uppercase text-theme-muted tracking-wider block">Exams Taken</span>
-              <span id="kpi-taken" class="text-2xl font-bold font-heading text-theme-text block">0</span>
+            <div class="theme-card-static p-3 sm:p-4 border border-theme-border text-center space-y-1 bg-theme-surface">
+              <span class="text-[10px] font-bold uppercase text-theme-muted tracking-wider block">Exams Taken</span>
+              <span id="kpi-taken" class="text-xl sm:text-2xl font-bold font-heading text-theme-text block">0</span>
             </div>
 
-            <div class="theme-card-static p-4 border border-theme-border text-center space-y-1.5 bg-theme-surface">
-              <span class="text-xxs font-bold uppercase text-theme-muted tracking-wider block">Average Score</span>
-              <span id="kpi-score" class="text-2xl font-bold font-heading text-theme-primary block">0%</span>
+            <div class="theme-card-static p-3 sm:p-4 border border-theme-border text-center space-y-1 bg-theme-surface">
+              <span class="text-[10px] font-bold uppercase text-theme-muted tracking-wider block">Average Score</span>
+              <span id="kpi-score" class="text-xl sm:text-2xl font-bold font-heading text-theme-primary block">0%</span>
             </div>
 
-            <div class="theme-card-static p-4 border border-theme-border text-center space-y-1.5 bg-theme-surface">
-              <span class="text-xxs font-bold uppercase text-theme-muted tracking-wider block">Study Time</span>
-              <span id="kpi-time" class="text-2xl font-bold font-heading text-theme-text block">0m</span>
+            <div class="theme-card-static p-3 sm:p-4 border border-theme-border text-center space-y-1 bg-theme-surface">
+              <span class="text-[10px] font-bold uppercase text-theme-muted tracking-wider block">Study Time</span>
+              <span id="kpi-time" class="text-xl sm:text-2xl font-bold font-heading text-theme-text block">0m</span>
             </div>
 
-            <div class="theme-card-static p-4 border border-theme-border text-center space-y-1.5 bg-theme-surface">
-              <span class="text-xxs font-bold uppercase text-theme-muted tracking-wider block">Passing Rate</span>
-              <span id="kpi-passing" class="text-2xl font-bold font-heading text-emerald-500 block">0%</span>
+            <div class="theme-card-static p-3 sm:p-4 border border-theme-border text-center space-y-1 bg-theme-surface">
+              <span class="text-[10px] font-bold uppercase text-theme-muted tracking-wider block">Passing Rate</span>
+              <span id="kpi-passing" class="text-xl sm:text-2xl font-bold font-heading text-emerald-500 block">0%</span>
             </div>
 
           </div>
 
           <!-- Dynamic SVG Trend Progress Chart -->
-          <div class="theme-card-static p-6 border border-theme-border space-y-6">
-            <div class="flex items-center justify-between pb-2">
-              <div class="space-y-1">
-                <h3 class="text-lg font-bold font-heading">Performance Progress Trend</h3>
-                <p class="text-xs text-theme-muted font-semibold">Graphing your latest 10 examination score percentages chronologically.</p>
+          <div class="theme-card-static p-5 sm:p-6 border border-theme-border space-y-5">
+            <div class="flex items-center justify-between pb-1">
+              <div class="space-y-0.5 text-left">
+                <h3 class="text-base sm:text-lg font-bold font-heading">Performance Progress Trend</h3>
+                <p class="text-[10px] sm:text-xs text-theme-muted font-semibold">Graphing your latest 10 exam attempts chronologically.</p>
               </div>
-              <span class="text-xxs font-bold uppercase border border-theme-border px-2 py-1 rounded bg-theme-surface text-theme-muted">Interactive</span>
+              <span class="text-[9px] font-bold border border-theme-border px-2 py-0.5 rounded bg-theme-surface text-theme-muted tracking-wider uppercase">Interactive</span>
             </div>
 
             <!-- Dynamic SVG Container -->
-            <div class="relative w-full aspect-[2.2/1] sm:aspect-[2.8/1] border border-theme-border rounded-xl p-4 bg-theme-surface" id="svg-chart-wrapper">
-              <!-- Handled in javascript -->
+            <div class="relative w-full aspect-[2.2/1] sm:aspect-[2.8/1] border border-theme-border rounded-xl p-3 sm:p-4 bg-theme-surface" id="svg-chart-wrapper">
+              <!-- Handled in JS -->
             </div>
           </div>
 
-          <!-- History Attempt Log -->
-          <div class="theme-card-static border border-theme-border overflow-hidden space-y-4 py-6">
-            <h3 class="text-lg font-bold font-heading px-6">Examination History Log</h3>
+          <!-- History Table (horizontal swipe enabled on Mobile) -->
+          <div class="theme-card-static border border-theme-border overflow-hidden py-5 space-y-3.5">
+            <h3 class="text-base sm:text-lg font-bold font-heading px-5 sm:px-6">Examination History Log</h3>
             
-            <div class="overflow-x-auto w-full">
-              <table class="w-full text-left text-sm border-collapse">
+            <div class="overflow-x-auto w-full scrollbar-thin">
+              <table class="w-full text-left text-xs sm:text-sm border-collapse min-w-[600px]">
                 <thead>
-                  <tr class="border-b border-theme-border text-xxs font-bold uppercase text-theme-muted tracking-wider bg-theme-surface select-none">
-                    <th class="py-3.5 px-6">Assessment</th>
-                    <th class="py-3.5 px-6">Date Taken</th>
-                    <th class="py-3.5 px-6 text-center">Correct</th>
-                    <th class="py-3.5 px-6 text-center">Score</th>
-                    <th class="py-3.5 px-6 text-center">Status</th>
-                    <th class="py-3.5 px-6 text-right">Actions</th>
+                  <tr class="border-b border-theme-border text-[10px] font-bold uppercase text-theme-muted tracking-wider bg-theme-surface select-none">
+                    <th class="py-3.5 px-5 sm:px-6">Assessment</th>
+                    <th class="py-3.5 px-5 sm:px-6">Date Taken</th>
+                    <th class="py-3.5 px-5 sm:px-6 text-center">Correct</th>
+                    <th class="py-3.5 px-5 sm:px-6 text-center">Score</th>
+                    <th class="py-3.5 px-5 sm:px-6 text-center">Status</th>
+                    <th class="py-3.5 px-5 sm:px-6 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody id="history-table-body" class="divide-y divide-theme-border font-medium">
-                  <!-- Dynamically generated rows -->
+                <tbody id="history-table-body" class="divide-y divide-theme-border font-semibold">
+                  <!-- Dynamically populated rows -->
                 </tbody>
               </table>
             </div>
@@ -339,38 +357,38 @@
   <!-- ==========================================
        FOOTER
        ========================================== -->
-  <footer class="bg-theme-surface border-t border-theme-border py-12 transition-colors duration-300">
+  <footer class="bg-theme-surface border-t border-theme-border py-10 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 text-center md:text-left">
         <div class="md:col-span-5 space-y-4">
-          <a href="index.html" class="flex items-center space-x-2">
+          <a href="index.html" class="flex items-center space-x-2 justify-center md:justify-start">
             <div class="w-8 h-8 bg-theme-primary text-white rounded-lg flex items-center justify-center">
               <i data-lucide="graduation-cap" class="w-5 h-5"></i>
             </div>
             <span class="text-lg font-bold font-heading">ApexExam</span>
           </a>
-          <p class="text-sm text-theme-muted max-w-sm leading-relaxed">
+          <p class="text-xs sm:text-sm text-theme-muted max-w-sm mx-auto md:mx-0 leading-relaxed font-semibold">
             ApexExam is a modern, responsive, and completely client-side assessment terminal designed to provide distraction-free testing with instant reporting insights.
           </p>
         </div>
         <div class="md:col-span-3 space-y-3">
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-theme-text font-heading">Quick Links</h4>
-          <ul class="space-y-2 text-sm text-theme-muted">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Quick Links</h4>
+          <ul class="space-y-2 text-xs sm:text-sm text-theme-muted">
             <li><a href="index.html" class="hover:text-theme-primary transition-all-custom">Home Page</a></li>
             <li><a href="exams.html" class="hover:text-theme-primary transition-all-custom">Exams Catalog</a></li>
             <li><a href="dashboard.html" class="hover:text-theme-primary transition-all-custom">Student Terminal</a></li>
           </ul>
         </div>
         <div class="md:col-span-4 space-y-3">
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-theme-text font-heading">Legal & Compliance</h4>
-          <ul class="space-y-2 text-sm text-theme-muted">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Legal & Compliance</h4>
+          <ul class="space-y-2 text-xs sm:text-sm text-theme-muted">
             <li><a href="#" class="hover:text-theme-primary transition-all-custom">Terms & Conditions</a></li>
             <li><a href="#" class="hover:text-theme-primary transition-all-custom">Privacy & Security Policies</a></li>
             <li><a href="#" class="hover:text-theme-primary transition-all-custom">Support desk</a></li>
           </ul>
         </div>
       </div>
-      <div class="mt-8 pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-xs text-theme-muted gap-4">
+      <div class="mt-8 pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-xxs sm:text-xs text-theme-muted gap-4">
         <span>© 2026 ApexExam Inc. All rights reserved.</span>
         <span>Designed for outstanding performance. Fully browser static.</span>
       </div>
@@ -382,7 +400,6 @@
   <script src="assets/js/main.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Mobile ticking clock
       const mobileTime = document.querySelector(".mobile-time");
       const mobileDate = document.querySelector(".mobile-date");
       if (mobileTime && mobileDate) {
@@ -407,28 +424,21 @@
       const inputEmail = document.getElementById("edit-input-email");
       let selectedAvatarId = "";
 
-      // Load Profile Views
       function loadProfile() {
         const profile = window.ExamDB.getUserProfile();
         
-        // Populate text details
         document.getElementById("dash-profile-name").textContent = profile.name;
         document.getElementById("dash-profile-email").textContent = profile.email;
         document.getElementById("dash-greeting-name").textContent = profile.name.split(" ")[0];
         
-        // Member since rendering
         const dObj = new Date(profile.registeredAt);
         document.getElementById("dash-profile-joined").textContent = dObj.toLocaleDateString(undefined, { month: "long", year: "numeric" });
-        
-        // Avatar visual rendering
         document.getElementById("dash-profile-avatar").innerHTML = window.getAvatarSvg(profile.avatar);
         
-        // Populate edit inputs
         inputName.value = profile.name;
         inputEmail.value = profile.email;
         selectedAvatarId = profile.avatar;
         
-        // Update edit avatar highlights
         document.querySelectorAll("[data-avatar-select]").forEach(btn => {
           const id = btn.getAttribute("data-avatar-select");
           btn.innerHTML = window.getAvatarSvg(id);
@@ -443,7 +453,6 @@
         });
       }
 
-      // Profile Switch toggles
       editTrigger.addEventListener("click", () => {
         profileView.classList.add("hidden");
         profileEdit.classList.remove("hidden");
@@ -454,12 +463,10 @@
         profileView.classList.remove("hidden");
       });
 
-      // Avatar selection click mapping
       document.querySelectorAll("[data-avatar-select]").forEach(btn => {
         btn.addEventListener("click", () => {
           selectedAvatarId = btn.getAttribute("data-avatar-select");
           
-          // Re-highlight visually
           document.querySelectorAll("[data-avatar-select]").forEach(b => {
             b.classList.remove("border-theme-primary", "scale-105");
             b.classList.add("border-transparent");
@@ -469,7 +476,6 @@
         });
       });
 
-      // Form Submission
       updateForm.addEventListener("submit", (e) => {
         e.preventDefault();
         
@@ -479,34 +485,26 @@
           avatar: selectedAvatarId
         });
 
-        // Hide, reload, and sync visually
         profileEdit.classList.add("hidden");
         profileView.classList.remove("hidden");
         
         loadProfile();
-        // Force sync shared header avatars via the main script
         if (window.updateHeaderProfile) window.updateHeaderProfile();
       });
 
-      // ==========================================
-      // STATISTICS & TABLES RENDERING
-      // ==========================================
       function loadStatsAndHistory() {
         const stats = window.ExamDB.getDashboardStats();
         const attempts = window.ExamDB.getAttempts();
 
-        // 1. KPI cards population
         document.getElementById("kpi-taken").textContent = stats.totalExamsTaken;
         document.getElementById("kpi-score").textContent = `${stats.averageScore}%`;
         
-        // Study Time human readable formatting
         const mins = Math.floor(stats.totalTimeSpent / 60);
         const secs = stats.totalTimeSpent % 60;
         document.getElementById("kpi-time").textContent = mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
         
         document.getElementById("kpi-passing").textContent = `${stats.passingRate}%`;
 
-        // 2. Achievements Rendering
         const badgesContainer = document.getElementById("achievements-list");
         const badges = [
           { key: 1, title: "First Ascent", desc: "Completed your initial online exam.", icon: "zap", color: "bg-blue-500/10 text-theme-primary" },
@@ -515,7 +513,6 @@
           { key: 4, title: "High Diligence", desc: "Accumulated over 10 minutes testing time.", icon: "clock", color: "bg-amber-500/10 text-amber-600" }
         ];
 
-        // Unlock logic
         const unlockedKeys = [];
         if (stats.totalExamsTaken >= 1) unlockedKeys.push(1);
         if (stats.averageScore >= 80) unlockedKeys.push(2);
@@ -524,30 +521,29 @@
 
         if (unlockedKeys.length === 0) {
           badgesContainer.innerHTML = `
-            <div class="text-xs text-theme-muted font-bold text-center py-4 bg-theme-surface border border-theme-border rounded-xl">
+            <div class="text-[10px] text-theme-muted font-bold text-center py-4 bg-theme-surface border border-theme-border rounded-xl uppercase tracking-wider">
               No achievements unlocked yet. Finish tests to earn!
             </div>
           `;
         } else {
           badgesContainer.innerHTML = badges.map(badge => {
             const isUnlocked = unlockedKeys.includes(badge.key);
-            if (!isUnlocked) return ""; // Only render unlocked achievements
+            if (!isUnlocked) return "";
             
             return `
               <div class="flex items-center space-x-3 p-3 bg-theme-surface border border-theme-border rounded-xl text-left fade-in-slide-up">
-                <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${badge.color}">
-                  <i data-lucide="${badge.icon}" class="w-5.5 h-5.5"></i>
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${badge.color}">
+                  <i data-lucide="${badge.icon}" class="w-5 h-5"></i>
                 </div>
                 <div class="space-y-0.5">
                   <h4 class="text-xs font-bold text-theme-text font-heading">${badge.title}</h4>
-                  <p class="text-xxs text-theme-muted leading-tight font-semibold">${badge.desc}</p>
+                  <p class="text-[10px] text-theme-muted leading-tight font-semibold">${badge.desc}</p>
                 </div>
               </div>
             `;
           }).join("");
         }
 
-        // 3. Render Historical Table attempts
         const tableBody = document.getElementById("history-table-body");
         const emptyHistory = document.getElementById("history-empty-state");
 
@@ -572,17 +568,17 @@
 
             return `
               <tr class="hover:bg-theme-surface-hover/50 transition-colors">
-                <td class="py-4 px-6 font-semibold text-theme-text max-w-xs truncate">${attempt.examTitle}</td>
-                <td class="py-4 px-6 text-xs text-theme-muted font-bold">${dStr}</td>
-                <td class="py-4 px-6 text-center font-bold text-theme-muted">${attempt.correctCount} / ${attempt.totalQuestions}</td>
-                <td class="py-4 px-6 text-center font-extrabold font-heading text-theme-text">${attempt.score}%</td>
-                <td class="py-4 px-6 text-center">
-                  <span class="px-2.5 py-0.5 rounded-full text-xxs font-extrabold tracking-wide uppercase ${statusClass}">
+                <td class="py-4 px-5 sm:px-6 font-semibold text-theme-text max-w-[160px] truncate">${attempt.examTitle}</td>
+                <td class="py-4 px-5 sm:px-6 text-[10px] text-theme-muted font-bold">${dStr}</td>
+                <td class="py-4 px-5 sm:px-6 text-center font-bold text-theme-muted">${attempt.correctCount} / ${attempt.totalQuestions}</td>
+                <td class="py-4 px-5 sm:px-6 text-center font-extrabold font-heading text-theme-text">${attempt.score}%</td>
+                <td class="py-4 px-5 sm:px-6 text-center">
+                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-extrabold tracking-wide uppercase ${statusClass}">
                     ${statusLabel}
                   </span>
                 </td>
-                <td class="py-4 px-6 text-right">
-                  <a href="result.html?attemptId=${attempt.id}" class="px-3.5 py-1.5 bg-theme-bg hover:bg-theme-surface border border-theme-border text-theme-primary font-bold text-xs rounded-lg shadow-sm hover:shadow transition-all-custom inline-flex items-center">
+                <td class="py-4 px-5 sm:px-6 text-right">
+                  <a href="result.html?attemptId=${attempt.id}" class="px-3 py-1.5 bg-theme-bg hover:bg-theme-surface border border-theme-border text-theme-primary font-bold text-xs rounded-lg shadow-sm transition-all-custom inline-flex items-center min-h-[30px]">
                     Review
                     <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
                   </a>
@@ -592,15 +588,10 @@
           }).join("");
         }
 
-        // 4. Render Dynamic SVG chart progress trend
         renderProgressChart(stats.recentTrends);
-        
         lucide.createIcons();
       }
 
-      // ==========================================
-      // SVG PROGRESS CHART GRAPH GENERATOR
-      // ==========================================
       function renderProgressChart(trendsData) {
         const wrapper = document.getElementById("svg-chart-wrapper");
         
@@ -613,7 +604,6 @@
           return;
         }
 
-        // Setup sizes matching bounding ratios
         const width = 600;
         const height = 180;
         const paddingLeft = 40;
@@ -624,25 +614,20 @@
         const plotWidth = width - paddingLeft - paddingRight;
         const plotHeight = height - paddingTop - paddingBottom;
 
-        // If single data point is present, clone it to draw a straight line
         const data = trendsData.length === 1 ? [
           { score: trendsData[0].score, date: "Start" }, 
           { score: trendsData[0].score, date: trendsData[0].date }
         ] : trendsData;
 
-        // Math mapping points to x,y coords
         const pointsCount = data.length;
         const xStep = plotWidth / (pointsCount - 1);
         
         const coords = data.map((item, index) => {
           const x = paddingLeft + index * xStep;
-          // Percentage coordinates invert (100% score is at Y=paddingTop, 0% is at plotHeight + paddingTop)
           const y = paddingTop + plotHeight - (item.score / 100) * plotHeight;
           return { x, y, score: item.score, date: item.date };
         });
 
-        // Construct SVG tags
-        // Dynamic Gridlines
         let gridLinesSvg = "";
         for (let pct = 0; pct <= 100; pct += 20) {
           const yGrid = paddingTop + plotHeight - (pct / 100) * plotHeight;
@@ -652,33 +637,28 @@
           `;
         }
 
-        // SVG Path Curve coordinates
         let pathD = `M ${coords[0].x} ${coords[0].y}`;
         let areaD = `M ${coords[0].x} ${paddingTop + plotHeight} L ${coords[0].x} ${coords[0].y}`;
         
         for (let i = 1; i < coords.length; i++) {
-          // Linear plotting
           pathD += ` L ${coords[i].x} ${coords[i].y}`;
           areaD += ` L ${coords[i].x} ${coords[i].y}`;
         }
         areaD += ` L ${coords[coords.length - 1].x} ${paddingTop + plotHeight} Z`;
 
-        // SVG Nodes circles
         let dotsSvg = "";
         let tooltipsSvg = "";
         coords.forEach((c, idx) => {
           dotsSvg += `
-            <circle cx="${c.x}" cy="${c.y}" r="4" fill="var(--bg-color)" stroke="var(--primary-color)" stroke-width="2.5" class="transition-all duration-300 hover:r-6 cursor-pointer" />
+            <circle cx="${c.x}" cy="${c.y}" r="4" fill="var(--bg-color)" stroke="var(--primary-color)" stroke-width="2.5" />
           `;
           
-          // Micro-tooltip rendering
           tooltipsSvg += `
             <text x="${c.x}" y="${c.y - 8}" fill="var(--primary-color)" font-size="9" font-weight="extrabold" text-anchor="middle">${c.score}%</text>
             <text x="${c.x}" y="${height - 6}" fill="var(--muted-color)" font-size="8" font-weight="bold" text-anchor="middle">${c.date}</text>
           `;
         });
 
-        // Core compilation
         wrapper.innerHTML = `
           <svg class="w-full h-full" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -687,21 +667,23 @@
                 <stop offset="100%" stop-color="var(--primary-color)" stop-opacity="0" />
               </linearGradient>
             </defs>
-            <!-- Dynamic Grid -->
             ${gridLinesSvg}
-            <!-- Shaded Area Under Path -->
             <path d="${areaD}" fill="url(#chart-area-grad)" />
-            <!-- Glowing Line path -->
             <path d="${pathD}" fill="none" stroke="var(--primary-color)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-            <!-- Node circles -->
             ${dotsSvg}
-            <!-- Label values and tooltip text -->
             ${tooltipsSvg}
           </svg>
         `;
       }
 
-      // Initialize Loaders
+      const avMob = document.getElementById("header-avatar-mobile");
+      const nameMob = document.getElementById("header-username-mobile");
+      if (avMob && nameMob && window.ExamDB) {
+        const profile = window.ExamDB.getUserProfile();
+        nameMob.textContent = profile.name;
+        avMob.innerHTML = window.getAvatarSvg(profile.avatar);
+      }
+
       loadProfile();
       loadStatsAndHistory();
     });

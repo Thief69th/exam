@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ApexExam | Premium Online Examination Platform</title>
   
-  <!-- SEO Metadata -->
   <meta name="description" content="Take your online assessments on ApexExam, a state-of-the-art client-side exam terminal featuring robust bilingual support, analytics tracker dashboards, and state-preserving test instances.">
   <meta name="keywords" content="Online Exams, Student Portal, Web Development Test, DSA exam, Sepia Dark Theme, Bilingual Examination">
   
-  <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -37,39 +35,36 @@
     }
   </script>
   
-  <!-- Custom CSS style overrides -->
   <link rel="stylesheet" href="assets/css/style.css">
-  
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="bg-theme-bg text-theme-text transition-colors duration-300 font-sans flex flex-col min-h-screen">
 
   <!-- ==========================================
-       HEADER & NAVIGATION
-       ========================================== */ -->
+       HEADER & NAVIGATION (Ultra Responsive)
+       ========================================== -->
   <header class="sticky top-0 z-40 w-full glass border-b border-theme-border transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 sm:h-20">
         
         <!-- Brand Logo -->
-        <a href="index.html" class="flex items-center space-x-2 group">
-          <div class="w-10 h-10 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-all-custom">
-            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+        <a href="index.html" class="flex items-center space-x-2 group shrink-0">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-all-custom">
+            <i data-lucide="graduation-cap" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </div>
-          <span class="text-xl sm:text-2xl font-bold tracking-tight font-heading">
+          <span class="text-lg sm:text-2xl font-bold tracking-tight font-heading">
             Apex<span class="text-theme-primary">Exam</span>
           </span>
         </a>
 
         <!-- Desktop Navigation Menu -->
-        <nav class="hidden md:flex items-center space-x-8 font-medium">
+        <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 font-medium">
           <a href="index.html" class="text-theme-primary hover:text-theme-primary border-b-2 border-theme-primary px-1 py-2 text-sm transition-all-custom">Home</a>
           <a href="exams.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Exams</a>
           <a href="dashboard.html" class="text-theme-muted hover:text-theme-primary px-1 py-2 text-sm transition-all-custom">Dashboard</a>
         </nav>
 
-        <!-- Live Clock, Themes, & Profile -->
+        <!-- Live Clock, Themes, & Profile (Desktop only) -->
         <div class="hidden lg:flex items-center space-x-6">
           
           <!-- Live Date & Clock -->
@@ -98,7 +93,7 @@
             </button>
           </div>
 
-          <!-- Profile Thumbnail (direct link to dashboard) -->
+          <!-- Profile Thumbnail -->
           <a href="dashboard.html" class="flex items-center space-x-3 pl-2 group">
             <div id="header-avatar" class="w-9 h-9 rounded-xl overflow-hidden border border-theme-border group-hover:ring-2 group-hover:ring-theme-primary transition-all-custom">
               <!-- Dynamically populated -->
@@ -110,24 +105,11 @@
           </a>
         </div>
 
-        <!-- Mobile Controls Wrapper (Hamburguer + Theme trigger) -->
-        <div class="flex items-center space-x-3 md:space-x-4 lg:hidden">
-          <!-- Mobile Theme Switcher Pill (Cycle toggle in JS or mini selector) -->
-          <div class="flex items-center p-0.5 bg-theme-surface border border-theme-border rounded-lg text-xs">
-            <button data-theme-select="day" class="p-1 rounded-md border text-theme-text transition-all-custom">
-              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
-            </button>
-            <button data-theme-select="night" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
-              <i data-lucide="moon" class="w-3.5 h-3.5"></i>
-            </button>
-            <button data-theme-select="warm" class="p-1 rounded-md border text-theme-text transition-all-custom ml-0.5">
-              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-
-          <!-- Menu Hamburger Toggle -->
-          <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="p-2 border border-theme-border rounded-xl bg-theme-surface text-theme-text hover:bg-theme-surface-hover focus-ring-custom">
-            <i data-lucide="menu" class="w-5.5 h-5.5"></i>
+        <!-- Mobile Controls (Ultra Compact) -->
+        <div class="flex items-center lg:hidden">
+          <!-- Hamburger Toggle (Larger touch target) -->
+          <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="p-3 border border-theme-border rounded-xl bg-theme-surface text-theme-text hover:bg-theme-surface-hover focus-ring-custom min-w-[44px] min-h-[44px] flex items-center justify-center">
+            <i data-lucide="menu" class="w-6 h-6"></i>
           </button>
         </div>
 
@@ -136,13 +118,43 @@
 
     <!-- Mobile Dropdown Navigation Drawer -->
     <div id="mobile-menu-container" class="hidden border-t border-theme-border bg-theme-bg md:hidden fade-in-slide-up">
-      <div class="px-4 pt-2 pb-6 space-y-3 font-semibold text-center shadow-lg">
-        <a href="index.html" class="block px-3 py-2.5 rounded-xl bg-theme-surface text-theme-primary border-l-4 border-theme-primary transition-all-custom text-left text-base">Home</a>
-        <a href="exams.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Exams</a>
-        <a href="dashboard.html" class="block px-3 py-2.5 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Dashboard</a>
+      <div class="px-4 py-6 space-y-4 font-semibold text-center shadow-lg">
+        <a href="index.html" class="block px-4 py-3 rounded-xl bg-theme-surface text-theme-primary border-l-4 border-theme-primary transition-all-custom text-left text-base">Home</a>
+        <a href="exams.html" class="block px-4 py-3 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Exams</a>
+        <a href="dashboard.html" class="block px-4 py-3 rounded-xl text-theme-muted hover:text-theme-primary hover:bg-theme-surface-hover transition-all-custom text-left text-base">Dashboard</a>
         
+        <!-- Mobile Profile Quick View -->
+        <div class="pt-4 border-t border-theme-border flex items-center space-x-3 text-left">
+          <div id="header-avatar-mobile" class="w-10 h-10 rounded-xl overflow-hidden border border-theme-border">
+            <!-- Populated via JS -->
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xs text-theme-muted">Candidate Dashboard</span>
+            <span id="header-username-mobile" class="text-sm font-bold tracking-tight">Amit Kumar</span>
+          </div>
+        </div>
+
+        <!-- Mobile Theme Switcher Pill (Moved inside menu for cleaner mobile header) -->
+        <div class="space-y-2 pt-2 text-left">
+          <span class="text-xs font-bold text-theme-muted uppercase tracking-wider block">Theme Mode</span>
+          <div class="grid grid-cols-3 gap-2 bg-theme-surface p-1.5 border border-theme-border rounded-xl">
+            <button data-theme-select="day" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
+              <i data-lucide="sun" class="w-3.5 h-3.5"></i>
+              <span>Day</span>
+            </button>
+            <button data-theme-select="night" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
+              <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+              <span>Night</span>
+            </button>
+            <button data-theme-select="warm" class="py-2.5 rounded-lg border text-theme-text transition-all-custom text-xs font-bold flex items-center justify-center space-x-1">
+              <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+              <span>Warm</span>
+            </button>
+          </div>
+        </div>
+
         <!-- Mobile live clock -->
-        <div class="flex items-center justify-between px-3 py-2 bg-theme-surface border border-theme-border rounded-xl text-xs mt-4">
+        <div class="flex items-center justify-between px-4 py-3 bg-theme-surface border border-theme-border rounded-xl text-xs pt-2">
           <span class="flex items-center text-theme-muted">
             <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5 text-theme-primary"></i>
             <span class="mobile-date font-semibold">Today</span>
@@ -157,68 +169,61 @@
   </header>
 
   <!-- ==========================================
-       MAIN HERO BANNER SECTION
-       ========================================== */ -->
+       MAIN HERO SECTION
+       ========================================== -->
   <main class="flex-grow">
     
     <!-- Hero Section -->
-    <section class="relative overflow-hidden py-16 sm:py-24 border-b border-theme-border bg-gradient-to-b from-theme-bg via-theme-surface to-theme-bg">
+    <section class="relative overflow-hidden py-12 sm:py-24 border-b border-theme-border bg-gradient-to-b from-theme-bg via-theme-surface to-theme-bg">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           
-          <!-- Column 1: Typography + CTAs -->
+          <!-- Column 1: Typography + CTAs (Mobile First Text Centering) -->
           <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-            <div class="inline-flex items-center space-x-2 px-3 py-1.5 border border-theme-border bg-theme-bg rounded-full text-xs font-semibold tracking-wider text-theme-primary shadow-sm uppercase">
+            <div class="inline-flex items-center space-x-2 px-3 py-1.5 border border-theme-border bg-theme-bg rounded-full text-xs font-semibold tracking-wider text-theme-primary shadow-sm uppercase mx-auto lg:mx-0">
               <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
               <span>100% Client-Side SaaS Engine</span>
             </div>
             
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-heading leading-tight max-w-2xl mx-auto lg:mx-0">
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-heading leading-tight max-w-2xl mx-auto lg:mx-0">
               Elevate Your Knowledge With <span class="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">ApexExam</span>
             </h1>
             
-            <p class="text-base sm:text-lg text-theme-muted max-w-xl mx-auto lg:mx-0 font-medium">
+            <p class="text-sm sm:text-lg text-theme-muted max-w-xl mx-auto lg:mx-0 font-medium">
               An elegantly crafted distraction-free examination platform. Test your capacities across core web structures, algorithmic complexities, quantitative aptitude, and bilingual assessments.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-              <a href="exams.html" class="w-full sm:w-auto px-8 py-4 bg-theme-primary text-white font-semibold rounded-2xl hover:bg-theme-primary-hover shadow-lg shadow-theme-primary/25 hover:shadow-theme-primary/40 hover:-translate-y-0.5 transition-all-custom flex items-center justify-center">
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
+              <a href="exams.html" class="w-full sm:w-auto px-8 py-4 bg-theme-primary text-white font-semibold rounded-2xl hover:bg-theme-primary-hover shadow-lg shadow-theme-primary/25 hover:shadow-theme-primary/40 hover:-translate-y-0.5 transition-all-custom flex items-center justify-center min-h-[48px]">
                 Explore Exams
                 <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
               </a>
-              <a href="dashboard.html" class="w-full sm:w-auto px-8 py-4 border border-theme-border bg-theme-bg font-semibold rounded-2xl hover:bg-theme-surface-hover hover:-translate-y-0.5 transition-all-custom flex items-center justify-center">
+              <a href="dashboard.html" class="w-full sm:w-auto px-8 py-4 border border-theme-border bg-theme-bg font-semibold rounded-2xl hover:bg-theme-surface-hover hover:-translate-y-0.5 transition-all-custom flex items-center justify-center min-h-[48px]">
                 Student Terminal
                 <i data-lucide="layout-dashboard" class="w-5 h-5 ml-2 text-theme-primary"></i>
               </a>
             </div>
           </div>
 
-          <!-- Column 2: Dashboard Visual SVG Illustration -->
-          <div class="lg:col-span-5 flex justify-center">
-            <div class="relative w-full max-w-md aspect-square p-6 glass-card flex items-center justify-center select-none">
-              <!-- Beautiful Modern Vector Art Mockup representing Dashboard -->
+          <!-- Column 2: Dashboard SVG Illustration (Hides on extra small viewports for layouts cleaness) -->
+          <div class="lg:col-span-5 flex justify-center hidden sm:flex">
+            <div class="relative w-full max-w-xs sm:max-w-md aspect-square p-6 glass-card flex items-center justify-center select-none">
               <svg class="w-full h-full text-theme-primary" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Background Glowing Orbs -->
                 <circle cx="100" cy="100" r="80" fill="var(--primary-color)" fill-opacity="0.05" />
                 <path d="M40 30h120a10 10 0 0110 10v120a10 10 0 01-10 10H40a10 10 0 01-10-10V40a10 10 0 0110-10z" fill="var(--surface-color)" stroke="var(--border-color)" stroke-width="2" />
-                <!-- Header -->
                 <path d="M30 60h140" stroke="var(--border-color)" stroke-width="2" />
                 <circle cx="45" cy="45" r="4" fill="#ef4444" />
                 <circle cx="55" cy="45" r="4" fill="#eab308" />
                 <circle cx="65" cy="45" r="4" fill="#22c55e" />
-                <!-- Grid Card lines -->
                 <rect x="42" y="72" width="50" height="34" rx="4" fill="var(--bg-color)" stroke="var(--border-color)" stroke-width="1.5" />
                 <rect x="108" y="72" width="50" height="34" rx="4" fill="var(--bg-color)" stroke="var(--border-color)" stroke-width="1.5" />
-                <!-- Chart line inside dynamic dashboard representation -->
                 <rect x="42" y="120" width="116" height="42" rx="4" fill="var(--bg-color)" stroke="var(--border-color)" stroke-width="1.5" />
                 <path d="M50 152 l20 -15 l20 8 l30 -20 l25 10" stroke="var(--primary-color)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                <!-- Decorative Circles -->
                 <circle cx="50" cy="152" r="3" fill="var(--primary-color)" />
                 <circle cx="70" cy="137" r="3" fill="var(--primary-color)" />
                 <circle cx="90" cy="145" r="3" fill="var(--primary-color)" />
                 <circle cx="120" cy="125" r="3" fill="var(--primary-color)" />
                 <circle cx="145" cy="135" r="3" fill="var(--primary-color)" />
-                <!-- Text lines mock -->
                 <line x1="50" y1="82" x2="80" y2="82" stroke="var(--muted-color)" stroke-width="2" stroke-linecap="round" />
                 <line x1="50" y1="92" x2="70" y2="92" stroke="var(--primary-color)" stroke-width="3" stroke-linecap="round" />
                 <line x1="116" y1="82" x2="146" y2="82" stroke="var(--muted-color)" stroke-width="2" stroke-linecap="round" />
@@ -233,41 +238,41 @@
 
     <!-- ==========================================
          STATISTICS COUNTERS
-         ========================================== */ -->
-    <section class="py-12 bg-theme-bg relative">
+         ========================================== -->
+    <section class="py-10 bg-theme-bg relative">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
           
-          <div class="theme-card-static p-6 text-center space-y-2 border border-theme-border">
-            <div class="w-12 h-12 bg-blue-500/10 text-theme-primary rounded-xl flex items-center justify-center mx-auto mb-2">
-              <i data-lucide="check-square" class="w-6 h-6"></i>
+          <div class="theme-card-static p-4 sm:p-6 text-center space-y-2 border border-theme-border">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/10 text-theme-primary rounded-xl flex items-center justify-center mx-auto mb-1">
+              <i data-lucide="check-square" class="w-5.5 h-5.5"></i>
             </div>
-            <h3 class="text-3xl font-extrabold font-heading text-theme-text tracking-tight">15,000+</h3>
-            <p class="text-xs sm:text-sm font-semibold text-theme-muted uppercase tracking-wider">Completed Tests</p>
+            <h3 class="text-2xl sm:text-3xl font-extrabold font-heading text-theme-text tracking-tight">15,000+</h3>
+            <p class="text-[10px] sm:text-xs font-bold text-theme-muted uppercase tracking-wider">Completed Tests</p>
           </div>
 
-          <div class="theme-card-static p-6 text-center space-y-2 border border-theme-border">
-            <div class="w-12 h-12 bg-emerald-500/10 text-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-2">
-              <i data-lucide="users" class="w-6 h-6"></i>
+          <div class="theme-card-static p-4 sm:p-6 text-center space-y-2 border border-theme-border">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-500/10 text-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-1">
+              <i data-lucide="users" class="w-5.5 h-5.5"></i>
             </div>
-            <h3 class="text-3xl font-extrabold font-heading text-theme-text tracking-tight">98.6%</h3>
-            <p class="text-xs sm:text-sm font-semibold text-theme-muted uppercase tracking-wider">Completion Rate</p>
+            <h3 class="text-2xl sm:text-3xl font-extrabold font-heading text-theme-text tracking-tight">98.6%</h3>
+            <p class="text-[10px] sm:text-xs font-bold text-theme-muted uppercase tracking-wider">Completion Rate</p>
           </div>
 
-          <div class="theme-card-static p-6 text-center space-y-2 border border-theme-border">
-            <div class="w-12 h-12 bg-amber-500/10 text-amber-500 rounded-xl flex items-center justify-center mx-auto mb-2">
-              <i data-lucide="star" class="w-6 h-6"></i>
+          <div class="theme-card-static p-4 sm:p-6 text-center space-y-2 border border-theme-border">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-amber-500/10 text-amber-500 rounded-xl flex items-center justify-center mx-auto mb-1">
+              <i data-lucide="star" class="w-5.5 h-5.5"></i>
             </div>
-            <h3 class="text-3xl font-extrabold font-heading text-theme-text tracking-tight">4.9 / 5.0</h3>
-            <p class="text-xs sm:text-sm font-semibold text-theme-muted uppercase tracking-wider">Satisfaction rating</p>
+            <h3 class="text-2xl sm:text-3xl font-extrabold font-heading text-theme-text tracking-tight">4.9 / 5.0</h3>
+            <p class="text-[10px] sm:text-xs font-bold text-theme-muted uppercase tracking-wider">Satisfaction</p>
           </div>
 
-          <div class="theme-card-static p-6 text-center space-y-2 border border-theme-border">
-            <div class="w-12 h-12 bg-indigo-500/10 text-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-2">
-              <i data-lucide="award" class="w-6 h-6"></i>
+          <div class="theme-card-static p-4 sm:p-6 text-center space-y-2 border border-theme-border">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-500/10 text-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-1">
+              <i data-lucide="award" class="w-5.5 h-5.5"></i>
             </div>
-            <h3 class="text-3xl font-extrabold font-heading text-theme-text tracking-tight">4 Categories</h3>
-            <p class="text-xs sm:text-sm font-semibold text-theme-muted uppercase tracking-wider">Unique Exam Topics</p>
+            <h3 class="text-2xl sm:text-3xl font-extrabold font-heading text-theme-text tracking-tight">4 Topics</h3>
+            <p class="text-[10px] sm:text-xs font-bold text-theme-muted uppercase tracking-wider">Unique Categories</p>
           </div>
 
         </div>
@@ -276,52 +281,58 @@
 
     <!-- ==========================================
          FEATURES EXPLANATION
-         ========================================== */ -->
-    <section class="py-16 sm:py-24 border-t border-theme-border bg-theme-surface">
+         ========================================== -->
+    <section class="py-12 sm:py-24 border-t border-theme-border bg-theme-surface">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <h2 class="text-3xl sm:text-4xl font-bold font-heading tracking-tight leading-tight">
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-10 sm:mb-16">
+          <h2 class="text-2xl sm:text-4xl font-bold font-heading tracking-tight leading-tight">
             Designed for Modern Academic Rigor
           </h2>
-          <p class="text-base sm:text-lg text-theme-muted">
+          <p class="text-sm sm:text-lg text-theme-muted">
             ApexExam combines SaaS-dashboard performance trackers with sleek minimal assessment consoles to guarantee premium learning.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           
           <!-- Feature 1 -->
-          <div class="theme-card p-8 border border-theme-border flex flex-col space-y-4">
-            <div class="w-12 h-12 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-theme-primary/20">
-              <i data-lucide="zap" class="w-6 h-6"></i>
+          <div class="theme-card p-6 sm:p-8 border border-theme-border flex flex-col space-y-4">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 bg-theme-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-theme-primary/20 shrink-0">
+              <i data-lucide="zap" class="w-5.5 h-5.5"></i>
             </div>
-            <h3 class="text-xl font-bold font-heading tracking-tight">Zero-Backend Performance</h3>
-            <p class="text-theme-muted text-sm leading-relaxed">
-              Fully runs on the web browser client-side. Optimized for GitHub Pages hosting, offering loading speeds with zero delay.
-            </p>
+            <div class="space-y-2">
+              <h3 class="text-lg sm:text-xl font-bold font-heading tracking-tight">Zero-Backend Performance</h3>
+              <p class="text-theme-muted text-xs sm:text-sm leading-relaxed">
+                Fully runs on the web browser client-side. Optimized for GitHub Pages hosting, offering loading speeds with zero delay.
+              </p>
+            </div>
           </div>
 
           <!-- Feature 2 -->
-          <div class="theme-card p-8 border border-theme-border flex flex-col space-y-4">
-            <div class="w-12 h-12 bg-pink-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-pink-500/20">
-              <i data-lucide="eye-off" class="w-6 h-6"></i>
+          <div class="theme-card p-6 sm:p-8 border border-theme-border flex flex-col space-y-4">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 bg-pink-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-pink-500/20 shrink-0">
+              <i data-lucide="eye-off" class="w-5.5 h-5.5"></i>
             </div>
-            <h3 class="text-xl font-bold font-heading tracking-tight">State Auto-Saving</h3>
-            <p class="text-theme-muted text-sm leading-relaxed">
-              Accidental closure? Browser refresh? Our state engine preserves answers and countdown timers in localStorage seamlessly.
-            </p>
+            <div class="space-y-2">
+              <h3 class="text-lg sm:text-xl font-bold font-heading tracking-tight">State Auto-Saving</h3>
+              <p class="text-theme-muted text-xs sm:text-sm leading-relaxed">
+                Accidental closure? Browser refresh? Our state engine preserves answers and countdown timers in localStorage seamlessly.
+              </p>
+            </div>
           </div>
 
           <!-- Feature 3 -->
-          <div class="theme-card p-8 border border-theme-border flex flex-col space-y-4">
-            <div class="w-12 h-12 bg-amber-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/20">
-              <i data-lucide="languages" class="w-6 h-6"></i>
+          <div class="theme-card p-6 sm:p-8 border border-theme-border flex flex-col space-y-4">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 bg-amber-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/20 shrink-0">
+              <i data-lucide="languages" class="w-5.5 h-5.5"></i>
             </div>
-            <h3 class="text-xl font-bold font-heading tracking-tight">Robust Bilingual Engine</h3>
-            <p class="text-theme-muted text-sm leading-relaxed">
-              Comprehensive support for Hindi & English languages, styled via native Noto Sans fonts for clean layout structures.
-            </p>
+            <div class="space-y-2">
+              <h3 class="text-lg sm:text-xl font-bold font-heading tracking-tight">Robust Bilingual Engine</h3>
+              <p class="text-theme-muted text-xs sm:text-sm leading-relaxed">
+                Comprehensive support for Hindi & English languages, styled via native Noto Sans fonts for clean layout structures.
+              </p>
+            </div>
           </div>
 
         </div>
@@ -331,84 +342,61 @@
 
     <!-- ==========================================
          POPULAR EXAMS CATALOG HIGHLIGHT
-         ========================================== */ -->
-    <section class="py-16 sm:py-24 bg-theme-bg border-t border-theme-border">
+         ========================================== -->
+    <section class="py-12 sm:py-24 bg-theme-bg border-t border-theme-border">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="flex flex-col sm:flex-row items-center justify-between mb-12 gap-4">
-          <div class="text-center sm:text-left space-y-2">
-            <h2 class="text-3xl font-bold font-heading tracking-tight">Featured Online Assessments</h2>
-            <p class="text-theme-muted text-sm font-medium">Kickstart your education. Test your technical and language competence instantly.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-between mb-8 sm:mb-12 gap-4">
+          <div class="text-center sm:text-left space-y-1">
+            <h2 class="text-2xl sm:text-3xl font-bold font-heading tracking-tight">Featured Online Assessments</h2>
+            <p class="text-theme-muted text-xs sm:text-sm font-medium">Kickstart your education. Test your technical and language competence instantly.</p>
           </div>
-          <a href="exams.html" class="px-5 py-2.5 border border-theme-border bg-theme-surface hover:bg-theme-surface-hover font-semibold text-sm rounded-xl transition-all-custom flex items-center">
+          <a href="exams.html" class="w-full sm:w-auto px-5 py-3 border border-theme-border bg-theme-surface hover:bg-theme-surface-hover font-semibold text-sm rounded-xl transition-all-custom flex items-center justify-center min-h-[44px]">
             View All Exams
             <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
           </a>
         </div>
 
-        <div id="popular-exams-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Dynamically filled with popular exams from javascript -->
+        <div id="popular-exams-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <!-- Dynamically filled with popular exams -->
         </div>
 
-      </div>
-    </section>
-
-    <!-- ==========================================
-         BOTTOM CALL-TO-ACTION (CTA)
-         ========================================== */ -->
-    <section class="py-16 sm:py-20 border-t border-theme-border bg-gradient-to-r from-blue-600/10 via-indigo-600/5 to-transparent text-center relative overflow-hidden">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
-        <h2 class="text-3xl sm:text-4xl font-bold font-heading tracking-tight leading-tight">
-          Ready to Challenge Yourself?
-        </h2>
-        <p class="text-base text-theme-muted max-w-xl mx-auto">
-          Sign up is fully handled locally. Create your custom profile, review and configure exams, and start tracking your real-time analytics reports.
-        </p>
-        <div class="pt-2">
-          <a href="exams.html" class="inline-flex items-center px-8 py-4 bg-theme-primary text-white font-semibold rounded-2xl hover:bg-theme-primary-hover shadow-lg shadow-theme-primary/20 transition-all-custom hover:-translate-y-0.5">
-            Get Started Now
-            <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
-          </a>
-        </div>
       </div>
     </section>
 
   </main>
 
   <!-- ==========================================
-       FOOTER REQUIREMENTS
-       ========================================== */ -->
-  <footer class="bg-theme-surface border-t border-theme-border py-12 transition-colors duration-300">
+       FOOTER
+       ========================================== -->
+  <footer class="bg-theme-surface border-t border-theme-border py-10 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 text-center md:text-left">
         
-        <!-- Column 1: Info -->
         <div class="md:col-span-5 space-y-4">
-          <a href="index.html" class="flex items-center space-x-2">
+          <a href="index.html" class="flex items-center space-x-2 justify-center md:justify-start">
             <div class="w-8 h-8 bg-theme-primary text-white rounded-lg flex items-center justify-center">
               <i data-lucide="graduation-cap" class="w-5 h-5"></i>
             </div>
             <span class="text-lg font-bold font-heading">ApexExam</span>
           </a>
-          <p class="text-sm text-theme-muted max-w-sm leading-relaxed">
+          <p class="text-xs sm:text-sm text-theme-muted max-w-sm mx-auto md:mx-0 leading-relaxed">
             ApexExam is a modern, responsive, and completely client-side assessment terminal designed to provide distraction-free testing with instant reporting insights.
           </p>
         </div>
 
-        <!-- Column 2: Quick Navigation -->
         <div class="md:col-span-3 space-y-3">
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-theme-text font-heading">Quick Links</h4>
-          <ul class="space-y-2 text-sm text-theme-muted">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Quick Links</h4>
+          <ul class="space-y-2 text-xs sm:text-sm text-theme-muted">
             <li><a href="index.html" class="hover:text-theme-primary transition-all-custom">Home Page</a></li>
             <li><a href="exams.html" class="hover:text-theme-primary transition-all-custom">Exams Catalog</a></li>
             <li><a href="dashboard.html" class="hover:text-theme-primary transition-all-custom">Student Terminal</a></li>
           </ul>
         </div>
 
-        <!-- Column 3: Guidelines -->
         <div class="md:col-span-4 space-y-3">
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-theme-text font-heading">Legal & Compliance</h4>
-          <ul class="space-y-2 text-sm text-theme-muted">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-theme-text font-heading">Legal & Compliance</h4>
+          <ul class="space-y-2 text-xs sm:text-sm text-theme-muted">
             <li><a href="#" class="hover:text-theme-primary transition-all-custom">Terms & Conditions</a></li>
             <li><a href="#" class="hover:text-theme-primary transition-all-custom">Privacy & Security Policies</a></li>
             <li><a href="#" class="hover:text-theme-primary transition-all-custom">Support desk</a></li>
@@ -417,20 +405,18 @@
 
       </div>
 
-      <div class="mt-8 pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-xs text-theme-muted gap-4">
+      <div class="mt-8 pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-xxs sm:text-xs text-theme-muted gap-4">
         <span>© 2026 ApexExam Inc. All rights reserved.</span>
         <span>Designed for outstanding performance. Fully browser static.</span>
       </div>
     </div>
   </footer>
 
-  <!-- Core Javascript files -->
+  <!-- Scripts -->
   <script src="assets/js/db.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
-    // Populating Featured Exams Cards on the Home Page
     document.addEventListener("DOMContentLoaded", () => {
-      // Setup live date details for mobile as well
       const mobileTime = document.querySelector(".mobile-time");
       const mobileDate = document.querySelector(".mobile-date");
       
@@ -445,7 +431,7 @@
       }
 
       if (window.ExamDB) {
-        const exams = window.ExamDB.getExams().slice(0, 3); // Take popular 3
+        const exams = window.ExamDB.getExams().slice(0, 3);
         const grid = document.getElementById("popular-exams-grid");
         
         if (grid && exams.length > 0) {
@@ -454,38 +440,35 @@
             if (exam.difficulty === "Intermediate") difficultyColor = "bg-blue-500/10 text-theme-primary";
             if (exam.difficulty === "Advanced") difficultyColor = "bg-orange-500/10 text-orange-600";
 
-            const tagBadges = exam.tags.map(t => `<span class="px-2 py-0.5 border border-theme-border bg-theme-bg rounded text-xxs font-medium text-theme-muted">${t}</span>`).join(" ");
+            const tagBadges = exam.tags.map(t => `<span class="px-2 py-0.5 border border-theme-border bg-theme-bg rounded text-[10px] font-semibold text-theme-muted">${t}</span>`).join(" ");
 
             return `
               <div class="theme-card p-6 border border-theme-border flex flex-col justify-between h-full">
                 <div class="space-y-4">
-                  <!-- Header metrics -->
                   <div class="flex items-center justify-between">
-                    <span class="px-2.5 py-1 text-xs font-semibold rounded-lg ${difficultyColor}">${exam.difficulty}</span>
+                    <span class="px-2.5 py-1 text-xxs font-extrabold rounded-lg ${difficultyColor} uppercase tracking-wider">${exam.difficulty}</span>
                     <span class="flex items-center text-xs font-semibold text-theme-muted">
                       <i data-lucide="clock" class="w-3.5 h-3.5 mr-1 text-theme-primary"></i>
                       ${exam.duration} mins
                     </span>
                   </div>
 
-                  <!-- Details -->
                   <div class="space-y-2">
-                    <h3 class="text-lg font-bold font-heading leading-snug tracking-tight text-theme-text">${exam.title}</h3>
-                    <p class="text-sm text-theme-muted line-clamp-2 leading-relaxed">${exam.description}</p>
+                    <h3 class="text-base sm:text-lg font-bold font-heading leading-snug tracking-tight text-theme-text">${exam.title}</h3>
+                    <p class="text-xs sm:text-sm text-theme-muted line-clamp-2 leading-relaxed font-semibold">${exam.description}</p>
                   </div>
                   
-                  <!-- Tags -->
                   <div class="flex flex-wrap gap-1.5 pt-1">
                     ${tagBadges}
                   </div>
                 </div>
 
                 <div class="pt-6 mt-6 border-t border-theme-border flex items-center justify-between">
-                  <span class="text-xs text-theme-muted font-semibold flex items-center">
+                  <span class="text-xs text-theme-muted font-bold flex items-center">
                     <i data-lucide="help-circle" class="w-4 h-4 mr-1 text-theme-primary"></i>
                     ${exam.questionsCount} MCQs
                   </span>
-                  <a href="instructions.html?id=${exam.id}" class="px-4 py-2 bg-theme-primary hover:bg-theme-primary-hover text-white font-semibold text-xs rounded-xl shadow-md shadow-theme-primary/10 hover:shadow-theme-primary/20 transition-all-custom flex items-center">
+                  <a href="instructions.html?id=${exam.id}" class="px-4 py-2.5 bg-theme-primary hover:bg-theme-primary-hover text-white font-bold text-xs rounded-xl shadow-md transition-all-custom flex items-center min-h-[40px]">
                     Open Exam
                     <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 ml-1"></i>
                   </a>
@@ -494,12 +477,19 @@
             `;
           }).join("");
           
-          // Recreate icons inside dynamically generated components
           lucide.createIcons();
         }
       }
       
-      // Initialize icons
+      // Update Mobile avatar greeting inside hamburger
+      const avMob = document.getElementById("header-avatar-mobile");
+      const nameMob = document.getElementById("header-username-mobile");
+      if (avMob && nameMob && window.ExamDB) {
+        const profile = window.ExamDB.getUserProfile();
+        nameMob.textContent = profile.name;
+        avMob.innerHTML = window.getAvatarSvg(profile.avatar);
+      }
+      
       lucide.createIcons();
     });
   </script>
